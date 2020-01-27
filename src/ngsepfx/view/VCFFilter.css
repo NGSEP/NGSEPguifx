@@ -1,0 +1,12 @@
+.hbox-t-l {
+	-fx-alignment: top-left;
+}
+
+.vbox-ss {
+	-fx-spacing: 5;
+}
+ 
+.button-hbox {
+	-fx-padding:10;
+} 
+ 

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="root" styleClass="analysis-area">
+	<Text> File name:</Text>
+	<Text fx:id="fileNameText"> Name</Text>
+	<Text> Number of lines:</Text>
+	<Text fx:id="numberLinesText"> Lines</Text>
+</VBox>
+

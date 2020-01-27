@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="ngsepfx.controller.fileexplorer.FileExplorerController">
+	<MenuBar>
+		<Menu text="Explorer">
+			<MenuItem text="Change folder" 
+			onAction="#changeDir"/>
+			<MenuItem text="Refresh" 
+			onAction="#refresh"/>
+		</Menu>
+	</MenuBar>
+	<TreeView fx:id="treeviewFileBrowse"  id="tree-view" VBox.vgrow="ALWAYS"/>
+</VBox>
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" 
+fx:controller="ngsepfx.controller.MainController"
+fx:id="rootBorderPane">
+	<left>
+		<fx:include source="FileExplorer.fxml" fx:id="fileExplorer"/>
+	</left>
+	<center>
+		<BorderPane>
+			<bottom>
+				<fx:include source="ProgressBarArea.fxml" fx:id="progressBarArea"/>
+			</bottom>
+		</BorderPane>
+	</center>
+</BorderPane>
+
