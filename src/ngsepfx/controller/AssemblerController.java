@@ -110,7 +110,7 @@ public class AssemblerController extends AnalysisAreaController {
     				instance.setLog(log);
     				instance.setProgressNotifier(this);
     				
-    				instance.run(inputFileTextField.getText(), outputFileTextField.getText());
+    				instance.run();
     			} catch (Exception e) {
     				e.printStackTrace();
     				showExecutionErrorDialog(Thread.currentThread().getName(), e);

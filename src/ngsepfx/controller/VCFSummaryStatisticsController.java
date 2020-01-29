@@ -20,7 +20,6 @@
 package ngsepfx.controller;
 
 import java.io.File;
-import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.FileHandler;
@@ -98,16 +97,16 @@ public class VCFSummaryStatisticsController extends AnalysisAreaController {
     			updateMessage(inputFileTextField.getText());
 				updateTitle(TASK_NAME);
     			FileHandler logHandler = null;
-    			try (PrintStream out = new PrintStream(outputFileTextField.getText().trim())) {
+    			try {
     				VCFSummaryStatisticsCalculator instance = new VCFSummaryStatisticsCalculator();
     				fillAttributes(instance);
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
-    				logHandler = createLogHandler(instance.getOutputFile(), "SummaryStats");
+    				logHandler = createLogHandler(instance.getOutputFile(), "");
     				log.addHandler(logHandler);
     				instance.setLog(log);
     				instance.setProgressNotifier(this);
-    				instance.runStatistics(inputFileTextField.getText(), out);
+    				instance.run();
     			} catch (Exception e) {
     				e.printStackTrace();
     				showExecutionErrorDialog(Thread.currentThread().getName(), e);

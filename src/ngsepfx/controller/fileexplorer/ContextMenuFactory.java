@@ -50,12 +50,12 @@ public final class ContextMenuFactory {
 	    ContextMenu contextMenu = new ContextMenu();
 	    // TODO Build menu based on file type.
 	    if(true) {
-	    	addSimpleMenuItem(contextMenu, cell, "Test analysis","ngsepfx.controller.TestAnalysisController");
-	    	addSimpleMenuItem(contextMenu, cell, "Count lines","ngsepfx.controller.CountFileLinesController");
+	    	//addSimpleMenuItem(contextMenu, cell, "Test analysis","ngsepfx.controller.TestAnalysisController");
+	    	//addSimpleMenuItem(contextMenu, cell, "Count lines","ngsepfx.controller.CountFileLinesController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Summary Statistics", "ngsepfx.controller.VCFSummaryStatisticsController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Filter", "ngsepfx.controller.VCFFilterController");
 	    	addSimpleMenuItem(contextMenu, cell, "Assembler", "ngsepfx.controller.AssemblerController");
-	    	addTest2(contextMenu, cell);
+	    	//addTest2(contextMenu, cell);
 	    }
 	    return contextMenu;
 	}
