@@ -32,6 +32,18 @@ public class ReadsAlignerController extends AnalysisAreaController {
 	@FXML
 	private ValidatedTextField knownSTRsFileTextField;
 	
+	@FXML
+	private ValidatedTextField kmerLengthTextField;
+	
+	@FXML
+	private ValidatedTextField minProportionKmersTextField;
+	
+	@FXML
+	private ValidatedTextField minInsertLengthTextField;
+	
+	@FXML
+	private ValidatedTextField maxInsertLengthTextField;
+	
 	@Override
 	public String getFXMLResourcePath() {
 		return "/ngsepfx/view/ReadsAligner.fxml";
@@ -45,6 +57,10 @@ public class ReadsAlignerController extends AnalysisAreaController {
 		textFields.put("fmIndexFile", fmIndexFileTextField);
 		textFields.put("knownSTRsFile", knownSTRsFileTextField);
 		textFields.put("outputFile", outputFileTextField);
+		textFields.put("kmerLength", kmerLengthTextField);
+		textFields.put("minProportionKmers", minProportionKmersTextField);
+		textFields.put("minInsertLength", minInsertLengthTextField);
+		textFields.put("maxInsertLength", maxInsertLengthTextField);
 		return textFields;
 	}
 
@@ -69,6 +85,10 @@ public class ReadsAlignerController extends AnalysisAreaController {
     			updateMessage(inputFileTextField.getText());
     			updateMessage(inputFile2TextField.getText());
     			updateMessage(knownSTRsFileTextField.getText());
+    			updateMessage(kmerLengthTextField.getText());
+    			updateMessage(minProportionKmersTextField.getText());
+    			updateMessage(minInsertLengthTextField.getText());
+    			updateMessage(maxInsertLengthTextField.getText());
 				updateTitle(TASK_NAME);
     			FileHandler logHandler = null;
     			try {

@@ -43,6 +43,27 @@
 		<Button onAction="#changeOutputFile" userData="$outputFileTextField" text="..." GridPane.rowIndex="4" GridPane.columnIndex="4" />	
 	
 	</GridPane>
+	
+	<HBox styleClass="hbox">
+		<Label fx:id="kmerLengthLabel">Kmer length:</Label>
+		<ValidatedTextField fx:id="kmerLengthTextField" label="$kmerLengthLabel"
+							validators="POSITIVE_NUMBER, INT"/>
+							
+		<Label fx:id="minProportionKmersLabel">Minimum proportion of k-mers:</Label>
+		<ValidatedTextField fx:id="minProportionKmersTextField" label="$minProportionKmersLabel"
+							validators="PROPORTION"/>
+	</HBox>
+	
+	<HBox styleClass="hbox">				
+		<Label fx:id="minInsertLengthLabel">Minimum predicted insert length:</Label>
+		<ValidatedTextField fx:id="minInsertLengthTextField" label="$kmerLengthLabel"
+							validators="POSITIVE_NUMBER, INT"/>
+
+		<Label fx:id="maxInsertLengthLabel">Maximum predicted insert length:</Label>
+		<ValidatedTextField fx:id="maxInsertLengthTextField" label="$maxInsertLengthLabel"
+							validators="POSITIVE_NUMBER, INT"/>							
+	</HBox>
+	
 	<HBox >
 		<Button onAction="#submitTask" text="Reads Aligner" />
 	</HBox>
