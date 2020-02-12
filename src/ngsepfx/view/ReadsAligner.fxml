@@ -34,7 +34,7 @@
 		<ValidatedTextField fx:id="knownSTRsFileTextField" label="$knownSTRsFileLabel"
 							GridPane.rowIndex="3" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
 							validators="INPUT_FILE" />
-		<Button onAction="#changeInputFile" userData="$inputFile2TextField" text="..." GridPane.rowIndex="3" GridPane.columnIndex="4" />
+		<Button onAction="#changeInputFile" userData="$knownSTRsFileTextField" text="..." GridPane.rowIndex="3" GridPane.columnIndex="4" />
 
 		<Label fx:id="outputFileLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">(*) Output File:</Label>
 		<ValidatedTextField fx:id="outputFileTextField" label="$outputFileLabel"

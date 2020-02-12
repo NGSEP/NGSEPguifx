@@ -79,8 +79,6 @@ public class ReadsAlignerController extends AnalysisAreaController {
 		return new NGSEPTask<Void>() {	
     		@Override 
     		public Void call() {
-    			System.out.println(inputFile2TextField.getText());
-    			System.out.println(knownSTRsFileTextField.getText());
     			updateMessage(fmIndexFileTextField.getText());
     			updateMessage(inputFileTextField.getText());
     			updateMessage(inputFile2TextField.getText());
