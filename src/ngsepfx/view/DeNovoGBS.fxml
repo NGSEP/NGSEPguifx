@@ -18,7 +18,7 @@
 							validators="INPUT_FILE, MANDATORY" />
 		<Button onAction="#changeInputFile" userData="$inputDirectoryTextField" text="..." GridPane.rowIndex="0" GridPane.columnIndex="4" />
 
-		<Label fx:id="filesDescriptor" GridPane.rowIndex="1" GridPane.columnIndex="0">Sample Files Descriptor:</Label>
+		<Label fx:id="filesDescriptorLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Sample Files Descriptor:</Label>
 		<ValidatedTextField fx:id="filesDescriptorTextField" label="$filesDescriptorLabel"
 							GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
 							validators="INPUT_FILE" />
