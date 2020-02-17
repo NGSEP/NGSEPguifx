@@ -57,6 +57,7 @@ public final class ContextMenuFactory {
 	    	addSimpleMenuItem(contextMenu, cell, "Assembler", "ngsepfx.controller.AssemblerController");
 	    	addSimpleMenuItem(contextMenu, cell, "Genome Indexer", "ngsepfx.controller.GenomeIndexerController");
 	    	addSimpleMenuItem(contextMenu, cell, "Reads Aligner", "ngsepfx.controller.ReadsAlignerController");
+	    	addSimpleMenuItem(contextMenu, cell, "GBS DeNovo", "ngsepfx.controller.DeNovoGBSController");
 	    	//addTest2(contextMenu, cell);
 	    }
 	    return contextMenu;
