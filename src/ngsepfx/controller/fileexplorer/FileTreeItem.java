@@ -62,12 +62,9 @@ import javafx.scene.image.ImageView;
  *
  */
 public class FileTreeItem extends TreeItem<String> {
-	public static Image folderCollapseImage = new Image(
-			ClassLoader.getSystemResourceAsStream("ngsepfx/view/images/folder.png"));
-	public static Image folderExpandImage = new Image(
-			ClassLoader.getSystemResourceAsStream("ngsepfx/view/images/folder-open.png"));
-	public static Image fileImage = new Image(
-			ClassLoader.getSystemResourceAsStream("ngsepfx/view/images/text-x-generic.png"));
+	public static Image folderCollapseImage = new Image(ClassLoader.getSystemResourceAsStream("ngsepfx/view/images/folder.png"));
+	public static Image folderExpandImage = new Image(ClassLoader.getSystemResourceAsStream("ngsepfx/view/images/folder-open.png"));
+	public static Image fileImage = new Image(ClassLoader.getSystemResourceAsStream("ngsepfx/view/images/text-x-generic.png"));
 	// https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/TreeItem.html
 	// We cache whether the File is a leaf or not. A File is a leaf if
 	// it is not a directory and does not have any files contained within
@@ -112,7 +109,7 @@ public class FileTreeItem extends TreeItem<String> {
 							if (!source.isExpanded()) {
 								ImageView iv = (ImageView) source.getGraphic();
 								iv.setImage(folderCollapseImage);
-								System.out.println(source.getValue());
+								//System.out.println(source.getValue());
 							}
 						}
 					});
@@ -190,6 +187,7 @@ public class FileTreeItem extends TreeItem<String> {
 			if (files != null) {
 				ObservableList<FileTreeItem> children = FXCollections.observableArrayList();
 				for (File childFile : files) {
+					if(childFile.getName().charAt(0)=='.') continue;
 					children.add(new FileTreeItem(childFile));
 				}
 				children.sort(new Comparator<FileTreeItem>() {

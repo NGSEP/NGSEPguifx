@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.SplitPane?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" 
 fx:controller="ngsepfx.controller.MainController"
 fx:id="rootBorderPane">
-	<left>
+<center>
+<SplitPane dividerPositions="0.5" focusTraversable="true">
+	<items>
 		<fx:include source="FileExplorer.fxml" fx:id="fileExplorer"/>
-	</left>
-	<center>
-		<BorderPane>
-			<bottom>
+		<SplitPane dividerPositions="0.65" focusTraversable="true" orientation="VERTICAL">
+			<items>
+				<BorderPane fx:id="analysisAreaBorderPane">
+				</BorderPane>
 				<fx:include source="ProgressBarArea.fxml" fx:id="progressBarArea"/>
-			</bottom>
-		</BorderPane>
-	</center>
+			</items>
+		</SplitPane>
+	</items>
+</SplitPane>
+</center>
 </BorderPane>
-

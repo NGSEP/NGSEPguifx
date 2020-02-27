@@ -48,6 +48,9 @@ public class MainController {
 	@FXML
 	private BorderPane rootBorderPane;
 	
+	@FXML
+	private BorderPane analysisAreaBorderPane;
+	
 	private AnalysisAreaController controller;
 	
 	// FXML Life cycle methods.
@@ -72,16 +75,18 @@ public class MainController {
 	 */
 	private void handleNGSEPAnalyzeFileEvent(NGSEPAnalyzeFileEvent event) {
 		try {
+			System.out.println("Fired analyze file event");
+			// Initialize controller to display parameters area
 			event.consume();
 			Class<?> controllerClass = (Class<?>) Class.forName(event.controllerFullyQualifiedName);
 			Constructor <?> [] constructors = (Constructor<?>[]) controllerClass.getDeclaredConstructors();
 			controller = (AnalysisAreaController)constructors[0].newInstance();
 			controller.initializeController();
-			Node analysisAreaRoot = controller.getRootNode();
-			BorderPane analysisArea = (BorderPane) rootBorderPane.getCenter();
-			analysisArea.setCenter(analysisAreaRoot);
-			controller.handleActivationEvent(event);
 			
+			// Add graphic components
+			Node analysisAreaNode = controller.getRootNode();
+			analysisAreaBorderPane.setCenter(analysisAreaNode);
+			controller.handleActivationEvent(event);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -98,11 +103,11 @@ public class MainController {
 		event.consume();
 		progressBarAreaController.addProgressBarComponentForTask(event.task);
 		
-		BorderPane analysisArea = (BorderPane) rootBorderPane.getCenter();
-		analysisArea.setCenter(null);
+		
 		
 		ExecutorService executor = ExecutorSingleton.getExecutor();
 		executor.submit(event.task);
+		analysisAreaBorderPane.setCenter(null);
 	}
 	
 	private void handleNGSEPRefreshFileExplorerEvent(NGSEPRefreshFileExplorerEvent event) {

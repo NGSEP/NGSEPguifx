@@ -34,8 +34,8 @@ import javafx.scene.image.ImageView;
 import javafx.stage.DirectoryChooser;
 
 /**
- * Controller for the File Explorer area of the application. Handles
- * the {@link TreeView}.
+ * Controller for the File Explorer area of the application.
+ * Handles the {@link TreeView}.
  * @author Fernando Reyes
  *
  */
@@ -61,9 +61,7 @@ public class FileExplorerController {
 	 */
 	private void userHomeRoot() {
 		if (System.getProperty("user.home") != null) {
-			FileTreeItem rootNode = new FileTreeItem(
-					new File(System.getProperty("user.home"))
-					);
+			FileTreeItem rootNode = new FileTreeItem(new File(System.getProperty("user.home")));
 			rootNode.setExpanded(true);
 			this.treeviewFileBrowse.setRoot(rootNode);
 		} else {
