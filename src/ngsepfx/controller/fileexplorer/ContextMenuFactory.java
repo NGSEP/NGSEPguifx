@@ -44,7 +44,7 @@ public final class ContextMenuFactory {
 	 * @param cell {@link FileExplorerTreeCell}
 	 * @return {@link ContextMenu} for the {@link FileExplorerTreeCell}.
 	 */
-	public static final ContextMenu getContextMenu(FileExplorerTreeCell cell) {
+	public static final ContextMenu buildContextMenu(FileExplorerTreeCell cell) {
     	FileTreeItem fileTreeItem = (FileTreeItem) cell.getTreeItem();
 		File file = fileTreeItem.getFile();
 	    ContextMenu contextMenu = new ContextMenu();

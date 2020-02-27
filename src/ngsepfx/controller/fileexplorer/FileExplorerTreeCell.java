@@ -35,8 +35,13 @@
 
 package ngsepfx.controller.fileexplorer;
 
+import java.io.File;
+
 import javafx.scene.control.TreeCell;
+import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import ngsepfx.controller.OpenFileController;
+import ngsepfx.event.NGSEPAnalyzeFileEvent;
 
 /**
  * {@link TreeCell} for the File Explorer {@link TreeView}.
@@ -62,7 +67,22 @@ public class FileExplorerTreeCell extends TreeCell<String> {
         } else {
         	setText(getItem().toString());
         	setGraphic(getTreeItem().getGraphic());        	
-        	setContextMenu(ContextMenuFactory.getContextMenu(this));
+        	setContextMenu(ContextMenuFactory.buildContextMenu(this));
+        	setOnMouseClicked(event -> {        	
+    	    	event.consume();
+    	    	TreeItem<String> ti = getTreeItem();
+                if (ti == null || !(ti instanceof FileTreeItem) || event.getClickCount() < 2) {
+                	return;
+                }
+                    
+    	    	FileTreeItem fileTreeItem = (FileTreeItem) ti;
+    	    	File file = fileTreeItem.getFile();
+    	    	if (!file.exists()) return;
+    	    	if (!file.isFile()) return;
+    	    	if (file.getName().toLowerCase().endsWith(".bam")) return;
+    	    	fireEvent(new NGSEPAnalyzeFileEvent(OpenFileController.class.getName(), file));
+    	    });
         }
     }
+    
 }
