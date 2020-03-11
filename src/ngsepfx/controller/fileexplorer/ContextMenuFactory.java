@@ -48,18 +48,27 @@ public final class ContextMenuFactory {
     	FileTreeItem fileTreeItem = (FileTreeItem) cell.getTreeItem();
 		File file = fileTreeItem.getFile();
 	    ContextMenu contextMenu = new ContextMenu();
+	    String fileInLower = file.getName().toLowerCase();
 	    // TODO Build menu based on file type.
-	    if(true) {
-	    	//addSimpleMenuItem(contextMenu, cell, "Test analysis","ngsepfx.controller.TestAnalysisController");
-	    	//addSimpleMenuItem(contextMenu, cell, "Count lines","ngsepfx.controller.CountFileLinesController");
+	    if (file.isDirectory())
+	    {
+	    	addSimpleMenuItem(contextMenu, cell, "GBS DeNovo", "ngsepfx.controller.DeNovoGBSController");
+	    }
+	    else if(fileInLower.contains(".vcf")) {
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Summary Statistics", "ngsepfx.controller.VCFSummaryStatisticsController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Filter", "ngsepfx.controller.VCFFilterController");
-	    	addSimpleMenuItem(contextMenu, cell, "Assembler", "ngsepfx.controller.AssemblerController");
-	    	addSimpleMenuItem(contextMenu, cell, "Genome Indexer", "ngsepfx.controller.GenomeIndexerController");
-	    	addSimpleMenuItem(contextMenu, cell, "Reads Aligner", "ngsepfx.controller.ReadsAlignerController");
-	    	addSimpleMenuItem(contextMenu, cell, "GBS DeNovo", "ngsepfx.controller.DeNovoGBSController");
-	    	//addTest2(contextMenu, cell);
+	    	
 	    }
+	    else if (fileInLower.contains(".fa")) {
+	    	addSimpleMenuItem(contextMenu, cell, "Genome Indexer", "ngsepfx.controller.GenomeIndexerController");
+	    	addSimpleMenuItem(contextMenu, cell, "Assembler", "ngsepfx.controller.AssemblerController");
+	    	addSimpleMenuItem(contextMenu, cell, "Reads Aligner", "ngsepfx.controller.ReadsAlignerController");
+	    }
+	    else if (fileInLower.contains(".bam") || file.getName().contains(".sam"))
+	    {
+	    	addSimpleMenuItem(contextMenu, cell, "Sort Alignement", "ngsepfx.controller.SortAlignementController");
+	    }
+	    	//addTest2(contextMenu, cell);
 	    return contextMenu;
 	}
 
