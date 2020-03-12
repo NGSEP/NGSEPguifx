@@ -22,6 +22,9 @@ package ngsepfx.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -245,6 +248,13 @@ public abstract class AnalysisAreaController {
 		if (logFilename.contains(".")) logFilename = logFilename.substring(0,logFilename.lastIndexOf("."));
 		logFilename = logFilename+"_"+suffix+".log";
 		return new FileHandler(logFilename);
+	}
+	public static String serializeException(Exception e) {
+		Writer writer = new StringWriter();
+		PrintWriter printWriter = new PrintWriter(writer);
+		e.printStackTrace(printWriter);
+		String srtMessage = writer.toString();
+		return srtMessage;
 	}
 	
 	/**

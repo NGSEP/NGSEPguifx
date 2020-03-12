@@ -103,14 +103,7 @@ public class ReadsAlignerController extends AnalysisAreaController {
 		return new NGSEPTask<Void>() {	
     		@Override 
     		public Void call() {
-    			updateMessage(fmIndexFileTextField.getText());
     			updateMessage(inputFileTextField.getText());
-    			updateMessage(inputFile2TextField.getText());
-    			updateMessage(knownSTRsFileTextField.getText());
-    			updateMessage(kmerLengthTextField.getText());
-    			updateMessage(minProportionKmersTextField.getText());
-    			updateMessage(minInsertLengthTextField.getText());
-    			updateMessage(maxInsertLengthTextField.getText());
 				updateTitle(TASK_NAME);
     			FileHandler logHandler = null;
     			try {
@@ -123,6 +116,7 @@ public class ReadsAlignerController extends AnalysisAreaController {
     				instance.setLog(log);
     				instance.setProgressNotifier(this);
     				instance.run();
+    				SortAlignmentController.sortAlignments(inputFileTextField.getText(), outputFileTextField.getText(), log);
     			} catch (Exception e) {
     				e.printStackTrace();
     				showExecutionErrorDialog(Thread.currentThread().getName(), e);
