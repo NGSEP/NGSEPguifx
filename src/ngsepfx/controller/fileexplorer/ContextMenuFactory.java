@@ -66,7 +66,8 @@ public final class ContextMenuFactory {
 	    }
 	    else if (fileInLower.contains(".bam") || file.getName().contains(".sam"))
 	    {
-	    	addSimpleMenuItem(contextMenu, cell, "Sort Alignement", "ngsepfx.controller.SortAlignementController");
+	    	addSimpleMenuItem(contextMenu, cell, "Variants Detector", "ngsepfx.controller.VariantsDetectorController");
+	    	addSimpleMenuItem(contextMenu, cell, "Sort Alignments", "ngsepfx.controller.SortAlignmentController");
 	    }
 	    	//addTest2(contextMenu, cell);
 	    return contextMenu;
