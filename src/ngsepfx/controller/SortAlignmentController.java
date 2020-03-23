@@ -1,26 +1,22 @@
 package ngsepfx.controller;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import net.sf.picard.sam.SortSam;
-import ngsep.alignments.ReadsAligner;
+import ngsep.discovery.VariantsDetector;
 import ngsepfx.concurrent.NGSEPTask;
+import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
-import ngsepfx.event.NGSEPExecuteTaskEvent;
 import ngsepfx.view.component.ValidatedTextField;
 
 public class SortAlignmentController extends AnalysisAreaController{
 	
 	//Constants.
 	
-	public static final String TASK_NAME = "SortAlignement";
+	public static final String TASK_NAME = "SortAlignment";
 	
 	//FXML parameters.
 	
@@ -36,8 +32,10 @@ public class SortAlignmentController extends AnalysisAreaController{
 
 	@Override
 	public void handleActivationEvent(NGSEPEvent event) {
-		// TODO Auto-generated method stub
-		
+		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
+		File file = analyzeEvent.file;
+		inputFileTextField.setText(file.getAbsolutePath());
+		suggestOutputFile(file, outputFileTextField, "_sorted");
 	}
 
 	@Override
@@ -52,7 +50,7 @@ public class SortAlignmentController extends AnalysisAreaController{
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
     				String outFile = inputFileTextField.getText().trim();
-    				logHandler = createLogHandler(outFile, "");
+    				logHandler = createLogHandler(outFile, "Sort");
     				log.addHandler(logHandler);
     				sortAlignments(inputFileTextField.getText(), outputFileTextField.getText(), log);
     			} catch (Exception e) {

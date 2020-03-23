@@ -34,43 +34,43 @@
 							<ValidatedTextField fx:id="outputPrefixTextField" label="$outputPrefixLabel"
 												GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="output-file" 
 												validators="OUTPUT_FILE, MANDATORY"/>
-							<Button onAction="#changeOutputPrefix" userData="$outputPrefixTextField" GridPane.rowIndex="1" GridPane.columnIndex="2" text="..."/>
+							<Button onAction="#changeOutputFile" userData="$outputPrefixTextField" GridPane.rowIndex="1" GridPane.columnIndex="2" text="..."/>
 							
-							<Label fx:id="genomeLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Reference genome: </Label>
+							<Label fx:id="genomeLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">(*) Reference genome: </Label>
 							<ValidatedTextField fx:id="genomeTextField" label="$genomeLabel" 
 												GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="input-file"
 												validators="INPUT_FILE"/>
-							<Button onAction="#changeGenome" userData="$genomeTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+							<Button onAction="#changeInputFile" userData="$genomeTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="2"/>
 							
 							<Label fx:id="knownSVsFileLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Known SVs (.gff) file: </Label>
 							<ValidatedTextField fx:id="knownSVsFileTextField" label="$knownSVsFileLabel"
 												GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="input-file"
 												validators="INPUT_FILE"/>
-							<Button onAction="#changeKnownSVsFile" userData="$knownSVsFileTextField" text="..." GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+							<Button onAction="#changeInputFile" userData="$knownSVsFileTextField" text="..." GridPane.rowIndex="3" GridPane.columnIndex="2"/>
 
 							<Label fx:id="knownSTRsFileLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">Known STRs file: </Label>
 							<ValidatedTextField fx:id="knownSTRsFileTextField" label="$knownSTRsFileLabel"
 												GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="input-file"
 												validators="INPUT_FILE"/>
-							<Button onAction="#changeKnownSTRsFile" userData="$knownSTRsFileTextField" text="..." GridPane.rowIndex="4" GridPane.columnIndex="2"/>
+							<Button onAction="#changeInputFile" userData="$knownSTRsFileTextField" text="..." GridPane.rowIndex="4" GridPane.columnIndex="2"/>
 
 							<Label fx:id="knownVariantsFileLabel" GridPane.rowIndex="5" GridPane.columnIndex="0">Known Variants (.vcf) file: </Label>
 							<ValidatedTextField fx:id="knownVariantsFileTextField" label="$knownVariantsFileLabel"
 												GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="input-file"
 												validators="INPUT_FILE"/>
-							<Button onAction="#changeKnownVariantsFile" userData="$knownVariantsFileTextField" text="..." GridPane.rowIndex="5" GridPane.columnIndex="2"/>
+							<Button onAction="#changeInputFile" userData="$knownVariantsFileTextField" text="..." GridPane.rowIndex="5" GridPane.columnIndex="2"/>
 						</GridPane>
 						<HBox styleClass="hbox" >
-							<GridPane styleClass="grid-pane" >
+							<VBox styleClass="vbox">
 								<CheckBox fx:id="findRepeatsCheckBox" text="Run detection of repetitive regions"/>
 								<CheckBox fx:id="runRDAnalysisCheckBox" text="Run read depth (RD) analysis"/>
 								<CheckBox fx:id="runRPAnalysisCheckBox" text="Run read pair (RP) analysis"/>
 								<CheckBox fx:id="runOnlySVsAnalysesCheckBox" text="Skip detection of SNVs and small indels"/>
-							</GridPane>
-							<VBox styleClass="vbox">
-								<Label fx:id="minMQLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">Mininimum mapping quality unique alignments:</Label>
+							</VBox>
+							<GridPane styleClass="grid-pane" >
+								<Label fx:id="minMQLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">Minimum mapping quality unique alignments:</Label>
 								<ValidatedTextField fx:id="minMQTextField" label="$minMQLabel"
-											GridPane.rowIndex="0" GridPane.columnIndex="3" styleClass="small-number-input"
+											GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="small-number-input"
 											validators="INT, POSITIVE_NUMBER"/>
 													
 								<Label fx:id="ignoreBPLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Ignore Basepairs:</Label>
@@ -87,52 +87,50 @@
 									
 								<Label fx:id="sampleIdLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">(*) Sample id</Label>
 								<ValidatedTextField fx:id="sampleIdTextField" label="$sampleIdLabel" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-							</VBox>
+							</GridPane>
 						</HBox>
 					</VBox>
 				</TitledPane>
 				<TitledPane text="Options for SNVs / small indels">
-					<VBox styleClass="vbox">
+					<HBox styleClass="hbox">
 						<GridPane styleClass="grid-pane" >
-							<Label fx:id="normalPloidyLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Normal sample ploidy:</Label>
+							<Label fx:id="normalPloidyLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">Normal sample ploidy:</Label>
 							<ValidatedTextField fx:id="normalPloidyTextField" label="$normalPloidyLabel" styleClass="small-number-input"
-										GridPane.rowIndex="1" GridPane.columnIndex="3" 
+										GridPane.rowIndex="0" GridPane.columnIndex="1" 
 										validators="INT, POSITIVE_NUMBER"/>
 
-							<Label fx:id="heterozygosityRateLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Heterozygosity rate:</Label>
+							<Label fx:id="heterozygosityRateLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Heterozygosity rate:</Label>
 							<ValidatedTextField fx:id="heterozygosityRateTextField" label="$heterozygosityRateLabel" styleClass="small-number-input"
-										GridPane.rowIndex="2" GridPane.columnIndex="3" 
+										GridPane.rowIndex="1" GridPane.columnIndex="1" 
 										validators="POSITIVE_NUMBER"/>
 
-							<Label fx:id="minQualityLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Minimum genotype quality score:</Label>
+							<Label fx:id="minQualityLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Minimum genotype quality score:</Label>
 							<ValidatedTextField fx:id="minQualityTextField" label="$minQualityLabel" styleClass="small-number-input"
-										GridPane.rowIndex="3" GridPane.columnIndex="3"
+										GridPane.rowIndex="2" GridPane.columnIndex="1"
 										validators="INT, POSITIVE_NUMBER"/>
 
-							<Label fx:id="maxBaseQSLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">Maximum base quality score:</Label>
+							<Label fx:id="maxBaseQSLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Maximum base quality score:</Label>
 								<ValidatedTextField fx:id="maxBaseQSTextField" label="$maxBaseQSLabel" styleClass="small-number-input"
-										GridPane.rowIndex="4" GridPane.columnIndex="3"
+										GridPane.rowIndex="3" GridPane.columnIndex="1"
 										validators="INT, POSITIVE_NUMBER"/>
 
-							<Label fx:id="maxAlnsPerStartPosLabel" GridPane.rowIndex="5" GridPane.columnIndex="0">Maximum alignments per start position:</Label>
+							<Label fx:id="maxAlnsPerStartPosLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">Maximum alignments per start position:</Label>
 							<ValidatedTextField fx:id="maxAlnsPerStartPosTextField" label="$maxAlnsPerStartPosLabel" styleClass="small-number-input"
-										GridPane.rowIndex="5" GridPane.columnIndex="3"
+										GridPane.rowIndex="4" GridPane.columnIndex="1"
 										validators="INT, POSITIVE_NUMBER"/>
 
 						</GridPane>
 						<VBox styleClass="vbox">
-							<GridPane styleClass="grid-pane" >
-								<CheckBox fx:id="printSamplePloidyCheckBox" text="Print sample ploidy"/>
-								<CheckBox fx:id="ignoreLowerCaseRefCheckBox" text="Ignore lower case reference"/>
-								<CheckBox fx:id="processNonUniquePrimaryAlignmentsCheckBox" text="Process all primary alignments"/>
-								<CheckBox fx:id="processSecondaryAlignmentsCheckBox" text="Process secondary alignments"/>
-								<CheckBox fx:id="callEmbeddedSNVsCheckBox" text="Call SNVs within STRs"/>
-							</GridPane>
+							<CheckBox fx:id="printSamplePloidyCheckBox" text="Print sample ploidy"/>
+							<CheckBox fx:id="ignoreLowerCaseRefCheckBox" text="Ignore lower case reference"/>
+							<CheckBox fx:id="processNonUniquePrimaryAlignmentsCheckBox" text="Process all primary alignments"/>
+							<CheckBox fx:id="processSecondaryAlignmentsCheckBox" text="Process secondary alignments"/>
+							<CheckBox fx:id="callEmbeddedSNVsCheckBox" text="Call SNVs within STRs"/>
 						</VBox>
-					</VBox>
+					</HBox>
 				</TitledPane>
 				<TitledPane text="Options for structural variants">
-					<VBox styleClass="vbox">
+					<HBox styleClass="hbox">
 						<GridPane styleClass="grid-pane" >
 							<Label fx:id="minSVQualityLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">Minimum quality:</Label>
 							<ValidatedTextField fx:id="minSVQualityTextField" label="$minSVQualityLabel" styleClass="small-number-input"
@@ -140,7 +138,7 @@
 										validators="INT, POSITIVE_NUMBER"/>
 
 							<Label fx:id="inputGenomeSizeLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Genome size:</Label>
-							<ValidatedTextField fx:id="inputGenomeSizeTextField" label="$inputGenomeSizeLabel" styleClass="small-number-input"
+							<ValidatedTextField fx:id="inputGenomeSizeTextField" label="$inputGenomeSizeLabel"
 										GridPane.rowIndex="1" GridPane.columnIndex="1" 
 										validators="INT, POSITIVE_NUMBER"/>
 
@@ -155,9 +153,9 @@
 										validators="INT, POSITIVE_NUMBER"/>
 
 						</GridPane>
-						<VBox styleClass="vbox">
+						<GridPane styleClass="grid-pane" >
 							<Label fx:id="maxLengthDeletionLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">Max deletion length:</Label>
-							<ValidatedTextField fx:id="maxLengthDeletionTextField" label="$maxLengthDeletionLabel" styleClass="small-number-input"
+							<ValidatedTextField fx:id="maxLengthDeletionTextField" label="$maxLengthDeletionLabel"
 										GridPane.rowIndex="0" GridPane.columnIndex="1"
 										validators="INT, POSITIVE_NUMBER"/>
 
@@ -165,9 +163,10 @@
 							<ValidatedTextField fx:id="splitReadSeedTextField" label="$splitReadSeedLabel" styleClass="small-number-input"
 									GridPane.rowIndex="1" GridPane.columnIndex="1"
 									validators="INT, POSITIVE_NUMBER"/>
+
 							<CheckBox fx:id="ignoreProperPairFlagCheckBox" text="Ignore proper pair flag" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-						</VBox>
-					</VBox>
+						</GridPane>
+					</HBox>
 				</TitledPane>
 			</panes>
 		</Accordion>

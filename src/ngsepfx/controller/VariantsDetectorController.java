@@ -27,12 +27,12 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
-import ngsep.alignments.ReadsAligner;
-import ngsep.discovery.VariantsDetector;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
 import ngsepfx.view.component.ValidatedTextField;
+
+import ngsep.discovery.VariantsDetector;
 
 /**
  * 
@@ -53,7 +53,7 @@ public class VariantsDetectorController extends AnalysisAreaController {
 	private ValidatedTextField genomeTextField;
 	
 	@FXML
-	private ValidatedTextField knownSVsTextField;
+	private ValidatedTextField knownSVsFileTextField;
 	
 	@FXML
 	private ValidatedTextField knownSTRsFileTextField;
@@ -86,6 +86,9 @@ public class VariantsDetectorController extends AnalysisAreaController {
 	private ValidatedTextField maxBaseQSTextField;
 	
 	@FXML
+	private ValidatedTextField maxAlnsPerStartPosTextField;
+	
+	@FXML
 	private ValidatedTextField minSVQualityTextField;
 	
 	@FXML
@@ -101,7 +104,7 @@ public class VariantsDetectorController extends AnalysisAreaController {
 	private ValidatedTextField maxLengthDeletionTextField;
 	
 	@FXML
-	private ValidatedTextField splitReadTextField;
+	private ValidatedTextField splitReadSeedTextField;
 	
 	@FXML
 	private CheckBox findRepeatsCheckBox;
@@ -143,18 +146,56 @@ public class VariantsDetectorController extends AnalysisAreaController {
 		Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
 		textFields.put("inputFile", inputFileTextField);
 		textFields.put("outputPrefix", outputPrefixTextField);
-		
+		textFields.put("genome",genomeTextField);
 		textFields.put("knownSTRsFile", knownSTRsFileTextField);
+		textFields.put("knownSVsFile", knownSVsFileTextField);
+		
+		textFields.put("knownVariantsFile",knownVariantsFileTextField);
+		textFields.put("minMQ", minMQTextField);
+		textFields.put("basesToIgnore5P", basesToIgnore5PTextField);
+		textFields.put("basesToIgnore3P", basesToIgnore3PTextField);
+		textFields.put("sampleId", sampleIdTextField);
+		textFields.put("normalPloidy", normalPloidyTextField);
+		
+		textFields.put("heterozygosityRate", heterozygosityRateTextField);
+		textFields.put("minQuality", minQualityTextField);
+		textFields.put("maxBaseQS", maxBaseQSTextField);
+		textFields.put("maxAlnsPerStartPos", maxAlnsPerStartPosTextField);
+		
+		textFields.put("minSVQuality", minSVQualityTextField);
+		textFields.put("inputGenomeSize", inputGenomeSizeTextField);
+		textFields.put("binSize", binSizeTextField);
+		textFields.put("maxPCTOverlapCNVs", maxPCTOverlapCNVsTextField);
+		textFields.put("maxLengthDeletion", maxLengthDeletionTextField);
+		textFields.put("splitReadSeed", splitReadSeedTextField);
 		return textFields;
+	}
+	
+	
+
+	@Override
+	protected Map<String, CheckBox> getCheckBoxComponents() {
+		Map<String, CheckBox> checkboxes = new HashMap<String, CheckBox>();
+		checkboxes.put("findRepeats", findRepeatsCheckBox);
+		checkboxes.put("runRDAnalysis", runRDAnalysisCheckBox);
+		checkboxes.put("runRPAnalysis", runRPAnalysisCheckBox);
+		checkboxes.put("runOnlySVsAnalyses", runOnlySVsAnalysesCheckBox);
+		checkboxes.put("printSamplePloidy", printSamplePloidyCheckBox);
+		checkboxes.put("ignoreLowerCaseRef", ignoreLowerCaseRefCheckBox);
+		checkboxes.put("processNonUniquePrimaryAlignments", processNonUniquePrimaryAlignmentsCheckBox);
+		checkboxes.put("processSecondaryAlignments", processSecondaryAlignmentsCheckBox);
+		checkboxes.put("callEmbeddedSNVs", callEmbeddedSNVsCheckBox);
+		checkboxes.put("ignoreProperPairFlag", ignoreProperPairFlagCheckBox);
+		return checkboxes;
 	}
 
 	@Override
 	public void handleActivationEvent(NGSEPEvent event) {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
-		setDefaultValues(ReadsAligner.class.getName());
+		setDefaultValues(VariantsDetector.class.getName());
 		inputFileTextField.setText(file.getAbsolutePath());
-		suggestOutputFile(file, inputFileTextField, "_variants");
+		suggestOutputFile(file, outputPrefixTextField, "_variants");
 		
 	}
 
@@ -171,7 +212,7 @@ public class VariantsDetectorController extends AnalysisAreaController {
     				fillAttributes(instance);
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
-    				logHandler = createLogHandler(instance.getOutputPrefix(), "");
+    				logHandler = createLogHandler(instance.getOutputPrefix(), null);
     				log.addHandler(logHandler);
     				instance.setLog(log);
     				instance.setProgressNotifier(this);

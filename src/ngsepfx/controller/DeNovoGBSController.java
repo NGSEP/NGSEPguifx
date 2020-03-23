@@ -108,15 +108,6 @@ public class DeNovoGBSController extends AnalysisAreaController {
     		@Override 
     		public Void call() {
     			updateMessage(inputDirectoryTextField.getText());
-    			updateMessage(outputPrefixTextField.getText());
-    			updateMessage(filesDescriptorTextField.getText());
-    			updateMessage(kmerLengthTextField.getText());
-    			updateMessage(maxNumClustersTextField.getText());
-    			updateMessage(numThreadsTextField.getText());
-    			updateMessage(maxBaseQSTextField.getText());
-    			updateMessage(minQualityTextField.getText());
-    			updateMessage(heterozygosityRateTextField.getText());
-    			updateMessage(normalPloidyTextField.getText());
 				updateTitle(TASK_NAME);
     			FileHandler logHandler = null;
     			try {
@@ -124,7 +115,7 @@ public class DeNovoGBSController extends AnalysisAreaController {
     				fillAttributes(instance);
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
-    				logHandler = createLogHandler(instance.getOutputPrefix(), "");
+    				logHandler = createLogHandler(instance.getOutputPrefix(), null);
     				log.addHandler(logHandler);
     				instance.setLog(log);
     				instance.setProgressNotifier(this);

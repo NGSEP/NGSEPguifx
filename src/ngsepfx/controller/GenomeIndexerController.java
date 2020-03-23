@@ -89,7 +89,7 @@ public class GenomeIndexerController extends AnalysisAreaController {
     				fillAttributes(instance);
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
-    				logHandler = createLogHandler(instance.getOutputFile(), "");
+    				logHandler = createLogHandler(instance.getOutputFile(), "Indexer");
     				log.addHandler(logHandler);
     				instance.setLog(log);
     				instance.setProgressNotifier(this);

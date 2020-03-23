@@ -102,7 +102,7 @@ public class VCFSummaryStatisticsController extends AnalysisAreaController {
     				fillAttributes(instance);
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
-    				logHandler = createLogHandler(instance.getOutputFile(), "");
+    				logHandler = createLogHandler(instance.getOutputFile(), "SummaryStats");
     				log.addHandler(logHandler);
     				instance.setLog(log);
     				instance.setProgressNotifier(this);

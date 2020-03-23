@@ -244,9 +244,12 @@ public abstract class AnalysisAreaController {
 	protected abstract NGSEPTask<Void> getTask();
 	
 	protected FileHandler createLogHandler (String outputFile, String suffix) throws IOException {
-		String logFilename = outputFile;
-		if (logFilename.contains(".")) logFilename = logFilename.substring(0,logFilename.lastIndexOf("."));
-		logFilename = logFilename+"_"+suffix+".log";
+		String logFilename = removeExtension(outputFile);
+		if(suffix!=null && suffix.length()>0) {
+			logFilename = logFilename+"_"+suffix;
+		}
+		
+		logFilename = logFilename + ".log";
 		return new FileHandler(logFilename);
 	}
 	public static String serializeException(Exception e) {
@@ -352,8 +355,6 @@ public abstract class AnalysisAreaController {
 		
 		Command command = commands.getCommandByClass(programInstance.getClass().getName());
 		System.out.println("Command: "+command.getId());
-		Map<String, ValidatedTextField> textFieldsMap = getValidatedTextFieldComponents();
-		System.out.println("Text fields: "+textFieldsMap.size());
 		Map<String,CommandOption> options = command.getOptions();
 		System.out.println("Command options: "+options.size());
 		Map<String,CommandOption> optionsByAttribute = new HashMap<String, CommandOption>();
@@ -363,12 +364,14 @@ public abstract class AnalysisAreaController {
 				optionsByAttribute.put(option.getAttribute(), option);
 			}
 		}
+		Map<String, ValidatedTextField> textFieldsMap = getValidatedTextFieldComponents();
+		System.out.println("Text fields: "+textFieldsMap.size());
 		System.out.println("Options with attribute: "+optionsByAttribute.size()+" text fields map keys: "+textFieldsMap.keySet().size());
 		for(String attribute: textFieldsMap.keySet()) {
 			ValidatedTextField textField = textFieldsMap.get(attribute);
 			String value = textField.getText().trim();
 			CommandOption option = optionsByAttribute.get(attribute);
-			System.out.println("Attribute: "+attribute+". Option found: "+option+" value: "+value);
+			System.out.println("Attribute: "+attribute+". Option found: "+option+" value to set: "+value);
 			if(option==null) {
 				//By now it can happen that not all text fields are tied with command options
 				continue;
@@ -382,7 +385,27 @@ public abstract class AnalysisAreaController {
 				System.err.println("Error setting value \""+value+"\" for parameter \""+option.getId()+"\" of type: "+option.getType()+". "+e.getMessage());
 				throw new RuntimeException(e);
 			}
-		}	
+		}
+		Map<String, CheckBox> checkboxesMap = getCheckBoxComponents();
+		System.out.println("Checkboxes: "+checkboxesMap.size());
+		for (String attribute: checkboxesMap.keySet()) {
+			CheckBox chk = checkboxesMap.get(attribute);
+			CommandOption option = optionsByAttribute.get(attribute);
+			System.out.println("Attribute: "+attribute+". Option found: "+option);
+			if(option==null) {
+				//By now it can happen that not all text fields are tied with command options
+				continue;
+			}
+			if(!chk.isSelected()) continue;
+			Method setter = option.findSetMethod(programInstance);
+			try {
+				setter.invoke(programInstance, Boolean.TRUE);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				System.err.println("Error setting to true boolean parameter \""+option.getId()+". "+e.getMessage());
+				throw new RuntimeException(e);
+			}
+			
+		}
 	}
 	
 
