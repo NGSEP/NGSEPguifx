@@ -93,8 +93,11 @@ public class ReadsAlignerController extends AnalysisAreaController {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
 		setDefaultValues(ReadsAligner.class.getName());
-		fmIndexFileTextField.setText(file.getAbsolutePath());
-		suggestOutputFile(file, outputFileTextField, "_ReadsAligner.bam");
+		//Load history from v 4.0.1
+		//String savedIndexName = HistoryManager.getInstance().getLastGenomeIndexFile();
+		//if(savedIndexName!=null) fmIndexFileTextField.setText(savedIndexName);
+		inputFileTextField.setText(file.getAbsolutePath());
+		suggestOutputFile(file, outputFileTextField, "_aln.bam");
 		
 	}
 
@@ -109,6 +112,10 @@ public class ReadsAlignerController extends AnalysisAreaController {
     			try {
     				ReadsAligner instance = new ReadsAligner();
     				fillAttributes(instance);
+    				//Set explicitely FM index to reuse memory from v 4.0.1
+    				//ReferenceGenomeFMIndex index = HistoryManager.getInstance().getGenomeIndex(fmIndexFileTextField.getText());
+    				//instance.setFmIndex(index);
+    				
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
     				logHandler = createLogHandler(instance.getOutputFile(), "Aligner");

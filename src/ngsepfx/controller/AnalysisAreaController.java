@@ -49,10 +49,12 @@ import javafx.scene.layout.Priority;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
+import ngsep.genome.ReferenceGenome;
 import ngsep.main.Command;
 import ngsep.main.CommandOption;
 import ngsep.main.CommandsDescriptor;
 import ngsepfx.concurrent.NGSEPTask;
+import ngsepfx.controller.fileexplorer.HistoryManager;
 import ngsepfx.controller.validator.ValidationReport;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
@@ -67,6 +69,7 @@ import ngsepfx.view.component.ValidatedTextField;
  */
 public abstract class AnalysisAreaController {
 	
+	private static final String SPECIAL_OPTION_REFERENCE_GENOME = "genome";
 	// Attributes.
 	
 	@FXML
@@ -277,12 +280,18 @@ public abstract class AnalysisAreaController {
 		Map<String, ValidatedTextField> textFieldsMap = getValidatedTextFieldComponents();
 		System.out.println("Command class name: "+commandClassName+" Command: "+command.getId()+" fields: "+textFieldsMap.size());
 		for(String parameter: textFieldsMap.keySet()) {
+			ValidatedTextField textField = textFieldsMap.get(parameter);
 			String defaultValue = defaultValuesByParameter.get(parameter);
+			//TODO: Change with option type GENOME from v4.0.1
+			if(SPECIAL_OPTION_REFERENCE_GENOME.equals(parameter)) {
+				String genomeFile = HistoryManager.getInstance().getLastGenomeFile();
+				if(genomeFile!=null) textField.setText(genomeFile);
+				continue;
+			}
 			System.out.println("Parameter: "+parameter+" default value: "+defaultValue);
 			if(defaultValue==null) {
 				continue;
 			}
-			ValidatedTextField textField = textFieldsMap.get(parameter);
 			textField.setText(defaultValue);
 		}
 	}
@@ -374,6 +383,21 @@ public abstract class AnalysisAreaController {
 			System.out.println("Attribute: "+attribute+". Option found: "+option+" value to set: "+value);
 			if(option==null) {
 				//By now it can happen that not all text fields are tied with command options
+				continue;
+			}
+			// TODO: Replace with GENOME option type from version 4.0.1
+			if(SPECIAL_OPTION_REFERENCE_GENOME.equals(attribute)) {
+				try {
+					ReferenceGenome savedGenome = HistoryManager.getInstance().getGenome(value);
+					Method setter = programInstance.getClass().getMethod("setGenome",ReferenceGenome.class);
+					setter.invoke(programInstance, savedGenome);
+				} catch (IOException e) {
+					System.err.println("Error loading reference genome from "+value+". "+e.getMessage());
+					throw new RuntimeException(e);
+				} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+					System.err.println("Error setting value \""+value+"\" for parameter \""+option.getId()+"\" of type: "+option.getType()+". "+e.getMessage());
+					throw new RuntimeException(e);
+				}
 				continue;
 			}
 			Method setter = option.findStringSetMethod(programInstance);

@@ -25,14 +25,10 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Map;
 import java.util.Properties;
-import java.util.Set;
 import java.util.TreeMap;
 
 import ngsep.genome.ReferenceGenome;
 import ngsep.genome.ReferenceGenomeFMIndex;
-import ngsep.sequences.QualifiedSequenceList;
-import ngsep.transcriptome.Transcriptome;
-import ngsep.transcriptome.io.GFF3TranscriptomeHandler;
 
 /**
  * @author Juan Camilo Quintero
@@ -73,6 +69,7 @@ public class HistoryManager {
 	
 	public ReferenceGenome getGenome (String filename) throws IOException {
 		ReferenceGenome genome = loadedGenomes.get(filename);
+		System.out.println("Saved genome: "+genome);
 		if(genome == null) {
 			//Try to load genome
 			genome = new ReferenceGenome(filename);
@@ -84,6 +81,7 @@ public class HistoryManager {
 	
 	public ReferenceGenomeFMIndex getGenomeIndex (String filename) throws IOException {
 		ReferenceGenomeFMIndex index = loadedGenomeIndexes.get(filename);
+		System.out.println("Saved index: "+index);
 		if(index == null) {
 			//Try to load index
 			index = ReferenceGenomeFMIndex.loadFromBinaries(filename);
