@@ -80,7 +80,6 @@ public class ReadsAlignerController extends AnalysisAreaController {
 		textFields.put("inputFile2", inputFile2TextField);
 		textFields.put("fmIndexFile", fmIndexFileTextField);
 		textFields.put("knownSTRsFile", knownSTRsFileTextField);
-		textFields.put("outputFile", outputFileTextField);
 		textFields.put("kmerLength", kmerLengthTextField);
 		textFields.put("minProportionKmers", minProportionKmersTextField);
 		textFields.put("minInsertLength", minInsertLengthTextField);
@@ -97,7 +96,7 @@ public class ReadsAlignerController extends AnalysisAreaController {
 		//String savedIndexName = HistoryManager.getInstance().getLastGenomeIndexFile();
 		//if(savedIndexName!=null) fmIndexFileTextField.setText(savedIndexName);
 		inputFileTextField.setText(file.getAbsolutePath());
-		suggestOutputFile(file, outputFileTextField, "_aln.bam");
+		suggestOutputFile(file, outputFileTextField, ".bam");
 		
 	}
 
@@ -112,6 +111,10 @@ public class ReadsAlignerController extends AnalysisAreaController {
     			try {
     				ReadsAligner instance = new ReadsAligner();
     				fillAttributes(instance);
+    				String outFileUnsorted = outputFileTextField.getText();
+    				if(outFileUnsorted.toLowerCase().endsWith(".bam")) outFileUnsorted = outFileUnsorted.substring(0,outFileUnsorted.length()-3);
+    				outFileUnsorted+="_unsorted.bam";
+    				instance.setOutputFile(outFileUnsorted);
     				//Set explicitely FM index to reuse memory from v 4.0.1
     				//ReferenceGenomeFMIndex index = HistoryManager.getInstance().getGenomeIndex(fmIndexFileTextField.getText());
     				//instance.setFmIndex(index);
@@ -123,7 +126,7 @@ public class ReadsAlignerController extends AnalysisAreaController {
     				instance.setLog(log);
     				instance.setProgressNotifier(this);
     				instance.run();
-    				SortAlignmentController.sortAlignments(inputFileTextField.getText(), outputFileTextField.getText(), log);
+    				SortAlignmentController.sortAlignments(outFileUnsorted, outputFileTextField.getText(), log);
     			} catch (Exception e) {
     				e.printStackTrace();
     				showExecutionErrorDialog(Thread.currentThread().getName(), e);
