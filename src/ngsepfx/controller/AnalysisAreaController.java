@@ -68,8 +68,6 @@ import ngsepfx.view.component.ValidatedTextField;
  * @author Fernando Reyes
  */
 public abstract class AnalysisAreaController {
-	
-	private static final String SPECIAL_OPTION_REFERENCE_GENOME = "genome";
 	// Attributes.
 	
 	@FXML
@@ -91,8 +89,6 @@ public abstract class AnalysisAreaController {
 				this.root.getStylesheets().add(cssForm);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			throw new RuntimeException("ValidationError loading .fxml", e);
 		}
 	}
@@ -184,6 +180,7 @@ public abstract class AnalysisAreaController {
 		File selectedFile = chooser.showOpenDialog(null);
 		if (selectedFile != null) {
 			textField.setText(selectedFile.getAbsolutePath());
+			updateLastDirectory(selectedFile.getParentFile());
 		}
 	}
 	
@@ -203,6 +200,7 @@ public abstract class AnalysisAreaController {
 		File selectedDir = chooser.showDialog(null);
 		if (selectedDir != null) {
 			textField.setText(selectedDir.getAbsolutePath());
+			updateLastDirectory(selectedDir);
 		}
 	}
 	
@@ -217,9 +215,14 @@ public abstract class AnalysisAreaController {
 		File selectedFile = chooser.showSaveDialog(null);
 		if (selectedFile != null) {
 			textField.setText(selectedFile.getAbsolutePath());
+			updateLastDirectory(selectedFile.getParentFile());
 		}
 	}
 	
+	private File lastDirectory = null;
+	public void updateLastDirectory(File directory) {
+		if (directory.exists() && directory.isDirectory()) lastDirectory = directory;
+	}
 	private File selectCurrentDirectory(ValidatedTextField textField) {
 		String currentValue = textField.getText().trim();
 		File currentDir = null;
@@ -227,10 +230,9 @@ public abstract class AnalysisAreaController {
 			File currentFile = new File(currentValue);
 			currentDir = currentFile.getParentFile();
 		}
-		if(currentDir == null) {
-			currentDir = new File(System.getProperty("user.home"));
-		}
-		return currentDir;
+		if(currentDir!=null) return currentDir;
+		if(lastDirectory!=null) return lastDirectory;
+		return new File(System.getProperty("user.home"));
 	}
 	
 	@FXML
@@ -271,24 +273,32 @@ public abstract class AnalysisAreaController {
 		CommandsDescriptor commands = CommandsDescriptor.getInstance();
 		Command command = commands.getCommandByClass(commandClassName);
 		Map<String,CommandOption> options = command.getOptions();
+		Map<String,CommandOption> optionsByAttribute = new HashMap<String, CommandOption>();
 		Map<String,String> defaultValuesByParameter = new HashMap<String, String>();
-		for(CommandOption option: options.values()) {
-			if(option.getAttribute()!=null && option.getDefaultValue()!=null) {
-				defaultValuesByParameter.put(option.getAttribute(), option.getDefaultValue());
+		for(String optionKey:options.keySet()) {
+			CommandOption option = options.get(optionKey);
+			//System.out.println("Option key: "+optionKey+" id: "+option.getId()+" attribute: "+option.getAttribute()+" type "+option.getType()+" value: "+option.getDefaultValue());
+			if(option.getAttribute()!=null) {
+				optionsByAttribute.put(option.getAttribute(), option);
+				if( option.getDefaultValue()!=null) {
+					defaultValuesByParameter.put(option.getAttribute(), option.getDefaultValue());
+				}
 			}
 		}
 		Map<String, ValidatedTextField> textFieldsMap = getValidatedTextFieldComponents();
 		System.out.println("Command class name: "+commandClassName+" Command: "+command.getId()+" fields: "+textFieldsMap.size());
 		for(String parameter: textFieldsMap.keySet()) {
 			ValidatedTextField textField = textFieldsMap.get(parameter);
-			String defaultValue = defaultValuesByParameter.get(parameter);
-			//TODO: Change with option type GENOME from v4.0.1
-			if(SPECIAL_OPTION_REFERENCE_GENOME.equals(parameter)) {
+			CommandOption option = optionsByAttribute.get(parameter);
+			System.out.println("Parameter "+parameter+" option: "+option);
+			if(option!=null && CommandOption.TYPE_GENOME.equals(option.getType())) {
 				String genomeFile = HistoryManager.getInstance().getLastGenomeFile();
+				System.out.println("Genome file "+genomeFile);
 				if(genomeFile!=null) textField.setText(genomeFile);
 				continue;
 			}
-			System.out.println("Parameter: "+parameter+" default value: "+defaultValue);
+			String defaultValue = defaultValuesByParameter.get(parameter);
+			//System.out.println("Parameter: "+parameter+" default value: "+defaultValue);
 			if(defaultValue==null) {
 				continue;
 			}
@@ -385,8 +395,8 @@ public abstract class AnalysisAreaController {
 				//By now it can happen that not all text fields are tied with command options
 				continue;
 			}
-			// TODO: Replace with GENOME option type from version 4.0.1
-			if(SPECIAL_OPTION_REFERENCE_GENOME.equals(attribute)) {
+			System.out.println("Option type: "+option.getType());
+			if(CommandOption.TYPE_GENOME.equals(option.getType())) {
 				try {
 					ReferenceGenome savedGenome = HistoryManager.getInstance().getGenome(value);
 					Method setter = programInstance.getClass().getMethod("setGenome",ReferenceGenome.class);

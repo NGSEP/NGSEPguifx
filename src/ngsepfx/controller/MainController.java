@@ -13,6 +13,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  */
 package ngsepfx.controller;
 
+import java.io.File;
 import java.lang.reflect.Constructor;
 import java.util.concurrent.ExecutorService;
 
@@ -81,7 +82,14 @@ public class MainController {
 			Class<?> controllerClass = (Class<?>) Class.forName(event.controllerFullyQualifiedName);
 			Constructor <?> [] constructors = (Constructor<?>[]) controllerClass.getDeclaredConstructors();
 			controller = (AnalysisAreaController)constructors[0].newInstance();
+			
 			controller.initializeController();
+			if (event instanceof NGSEPAnalyzeFileEvent) {
+				NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
+				File file = analyzeEvent.file;
+				controller.updateLastDirectory(file.getParentFile());
+			}
+			
 			
 			// Add graphic components
 			Node analysisAreaNode = controller.getRootNode();

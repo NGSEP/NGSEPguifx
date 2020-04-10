@@ -69,3 +69,8 @@
 	-fx-pref-width: 50;
 	-fx-max-width: 50;
 }
+
+.medium-number-input {
+	-fx-pref-width: 80;
+	-fx-max-width: 80;
+}
