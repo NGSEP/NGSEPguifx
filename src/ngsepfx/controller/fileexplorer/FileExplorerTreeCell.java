@@ -79,7 +79,7 @@ public class FileExplorerTreeCell extends TreeCell<String> {
     	    	File file = fileTreeItem.getFile();
     	    	if (!file.exists()) return;
     	    	if (!file.isFile()) return;
-    	    	if (file.getName().toLowerCase().endsWith(".bam")) return;
+    	    	if (file.getName().toLowerCase().endsWith(".bai")) return;
     	    	fireEvent(new NGSEPAnalyzeFileEvent(OpenFileController.class.getName(), file));
     	    });
         }

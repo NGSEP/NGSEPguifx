@@ -27,9 +27,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.util.Iterator;
 
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
+import ngsep.alignments.ReadAlignment;
+import ngsep.alignments.io.ReadAlignmentFileReader;
 import ngsep.main.io.ConcatGZIPInputStream;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
@@ -55,9 +58,37 @@ public class OpenFileController extends AnalysisAreaController {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		PrintStream out = new PrintStream(os);
-		out.println(file.getName());
-		out.println();
+		
+		String name = file.getName();
+		
+		try (PrintStream out = new PrintStream(os)){
+			out.println(name);
+			out.println();
+			if(name.toLowerCase().endsWith(".bam")) {
+				
+				dumpBAMFile (file, out);
+			} else {
+				dumpRegularFile(file, out);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			showExecutionErrorDialog(Thread.currentThread().getName(), e);
+		}
+		contentText.setText(os.toString());
+	}
+
+	private void dumpBAMFile(File file, PrintStream out) throws IOException {
+		try (ReadAlignmentFileReader reader = new ReadAlignmentFileReader(file.getAbsolutePath())) {
+			Iterator<ReadAlignment> it = reader.iterator();
+			for(int i=0;i<1000 && it.hasNext();i++) {
+				ReadAlignment aln = it.next();
+				out.print(aln.getReadName()+"\t"+aln.getFlags()+"\t"+aln.getSequenceName()+"\t"+aln.getFirst()+"\t"+aln.getAlignmentQuality());
+				out.println("\t"+aln.getCigarString()+"\t"+aln.getMateSequenceName()+"\t"+aln.getMateFirst()+"\t"+aln.getInferredInsertSize());
+			}
+		}
+	}
+
+	private void dumpRegularFile(File file, PrintStream out) throws IOException {
 		InputStream stream=null;
 		try (FileInputStream fis = new FileInputStream(file)) {
 			if(file.getName().toLowerCase().endsWith(".gz")) {
@@ -73,12 +104,7 @@ public class OpenFileController extends AnalysisAreaController {
 				lines++;
 				line = bufferedReader.readLine();
 			}
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		contentText.setText(os.toString());
 	}
 
 	@Override
