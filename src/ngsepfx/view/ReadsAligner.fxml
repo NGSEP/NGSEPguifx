@@ -18,13 +18,13 @@
 		<ValidatedTextField fx:id="inputFileTextField" label="$inputFileLabel"
 							GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
 							validators="INPUT_FILE, MANDATORY" />
-		<Button onAction="#changeInputFile" userData="$inputFileTextField" text="..." GridPane.rowIndex="0" GridPane.columnIndex="4" />
+		<Button fx:id="inputFileButton" onAction="#changeInputFile" userData="$inputFileTextField" text="..." GridPane.rowIndex="0" GridPane.columnIndex="4" />
 		
 		<Label fx:id="inputFile2Label" GridPane.rowIndex="1" GridPane.columnIndex="0"> Input Fastq File 2:</Label>
 		<ValidatedTextField fx:id="inputFile2TextField" label="$inputFile2Label"
 							GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
 							validators="INPUT_FILE" />
-		<Button onAction="#changeInputFile" userData="$inputFile2TextField" text="..." GridPane.rowIndex="1" GridPane.columnIndex="4" />
+		<Button fx:id="inputFile2Button" onAction="#changeInputFile" userData="$inputFile2TextField" text="..." GridPane.rowIndex="1" GridPane.columnIndex="4" />
 		
 		<Label fx:id="genomeLabel" GridPane.rowIndex="2" GridPane.columnIndex="0"> (*) Reference genome:</Label>
 		<ValidatedTextField fx:id="genomeTextField" label="$genomeLabel"
@@ -48,7 +48,7 @@
 		<ValidatedTextField fx:id="outputFileTextField" label="$outputFileLabel"
 							GridPane.rowIndex="5" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="output-file"
 							validators="OUTPUT_FILE, MANDATORY"/>
-		<Button onAction="#changeOutputFile" userData="$outputFileTextField" text="..." GridPane.rowIndex="5" GridPane.columnIndex="4" />	
+		<Button onAction="#changeOutput" userData="$outputFileTextField" text="..." GridPane.rowIndex="5" GridPane.columnIndex="4" />	
 	
 	</GridPane>
 	
@@ -64,11 +64,18 @@
 								GridPane.rowIndex="1" GridPane.columnIndex="1"
 								validators="POSITIVE_NUMBER, INT"/>
 							
-			<Label fx:id="inputFormatLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Input format:</Label>
-			<ChoiceBox fx:id="inputFormatChoiceBox" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-								
+			<Label fx:id="platformLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Platform:</Label>
+			<ChoiceBox fx:id="platformChoiceBox" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 			
-			<CheckBox fx:id="longReadsCheckBox" text="Long reads" GridPane.rowIndex="3" GridPane.columnIndex="0"/>				
+			<Label fx:id="sampleIdLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Sample id:</Label>
+			<ValidatedTextField fx:id="sampleIdTextField" label="$sampleIdLabel"
+								GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+			
+			<Label fx:id="inputFormatLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">Input format:</Label>
+			<ChoiceBox fx:id="inputFormatChoiceBox" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+			
+			
+												
 		</GridPane>
 		<VBox styleClass="vbox">
 			<Label>Insert length limits (Paired end reads).</Label>
@@ -84,6 +91,11 @@
 			<HBox styleClass="hbox">
 				<Label fx:id="windowLengthLabel">Window length for minimizers (Long reads):</Label>
 				<ValidatedTextField fx:id="windowLengthTextField" label="$windowLengthLabel" styleClass="small-number-input"
+								validators="POSITIVE_NUMBER, INT"/>
+			</HBox>
+			<HBox styleClass="hbox">
+				<Label fx:id="numThreadsLabel">Number of threads:</Label>
+				<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 			</HBox>
 		</VBox>

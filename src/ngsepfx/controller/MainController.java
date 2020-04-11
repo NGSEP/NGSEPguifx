@@ -84,11 +84,8 @@ public class MainController {
 			controller = (AnalysisAreaController)constructors[0].newInstance();
 			
 			controller.initializeController();
-			if (event instanceof NGSEPAnalyzeFileEvent) {
-				NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
-				File file = analyzeEvent.file;
-				controller.updateLastDirectory(file.getParentFile());
-			}
+			File file = event.file;
+			controller.updateLastDirectory(file.getParentFile());
 			
 			
 			// Add graphic components

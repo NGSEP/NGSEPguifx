@@ -53,6 +53,7 @@ public final class ContextMenuFactory {
 	    if (file.isDirectory())
 	    {
 	    	addSimpleMenuItem(contextMenu, cell, "GBS DeNovo", "ngsepfx.controller.DeNovoGBSController");
+	    	addSimpleMenuItem(contextMenu, cell, "Multiple Reads Aligner", "ngsepfx.controller.ReadsAlignerController");
 	    }
 	    else if(fileInLower.contains(".vcf")) {
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Summary Statistics", "ngsepfx.controller.VCFSummaryStatisticsController");

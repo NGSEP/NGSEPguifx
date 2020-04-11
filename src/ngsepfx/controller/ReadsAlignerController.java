@@ -20,14 +20,24 @@
 package ngsepfx.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import ngsep.alignments.ReadAlignment;
 import ngsep.alignments.ReadsAligner;
 import ngsep.genome.ReferenceGenomeFMIndex;
 import ngsepfx.concurrent.NGSEPTask;
@@ -49,13 +59,22 @@ public class ReadsAlignerController extends AnalysisAreaController {
 	private ValidatedTextField inputFileTextField;
 	
 	@FXML
+	private Button inputFileButton;
+	
+	@FXML
 	private ValidatedTextField inputFile2TextField;
+	
+	@FXML
+	private Button inputFile2Button;
 	
 	@FXML
 	private ValidatedTextField genomeTextField;
 	
 	@FXML
 	private ValidatedTextField fmIndexFileTextField;
+	
+	@FXML
+	private Label outputFileLabel;
 	
 	@FXML
 	private ValidatedTextField outputFileTextField;
@@ -70,6 +89,12 @@ public class ReadsAlignerController extends AnalysisAreaController {
 	private ValidatedTextField maxAlnsPerReadTextField;
 	
 	@FXML
+	private ChoiceBox<ReadAlignment.Platform> platformChoiceBox;
+	
+	@FXML
+	private ValidatedTextField sampleIdTextField;
+	
+	@FXML
 	private ChoiceBox<String> inputFormatChoiceBox;
 	
 	@FXML
@@ -82,7 +107,22 @@ public class ReadsAlignerController extends AnalysisAreaController {
 	private ValidatedTextField windowLengthTextField;
 	
 	@FXML
-	private CheckBox longReadsCheckBox;
+	private ValidatedTextField numThreadsTextField;
+	
+	private List<ReadsAlignerFileData> filesData;
+	private boolean pairedEnd = false;
+	
+	private static String [] extensions = {".fastq",".fastq.gz",".fasta",".fasta.gz",".fa",".fa.gz"};
+	
+	public static int getExtensionIndex (String filename) {
+		String nameLC = filename.toLowerCase();
+		for(int j = 0;j<extensions.length;j++) {
+			if(nameLC.endsWith(extensions[j])) {
+				return nameLC.lastIndexOf(extensions[j]);
+			}
+		}
+		return -1;
+	}
 	
 	@Override
 	public String getFXMLResourcePath() {
@@ -92,24 +132,15 @@ public class ReadsAlignerController extends AnalysisAreaController {
 	@Override
 	public Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
 		Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
-		textFields.put("inputFile", inputFileTextField);
-		textFields.put("inputFile2", inputFile2TextField);
 		textFields.put("genome", genomeTextField);
-		textFields.put("fmIndexFile", fmIndexFileTextField);
 		textFields.put("knownSTRsFile", knownSTRsFileTextField);
 		textFields.put("kmerLength", kmerLengthTextField);
 		textFields.put("maxAlnsPerRead", maxAlnsPerReadTextField);
 		textFields.put("minInsertLength", minInsertLengthTextField);
 		textFields.put("maxInsertLength", maxInsertLengthTextField);
 		textFields.put("windowLength", windowLengthTextField);
+		textFields.put("numThreads", numThreadsTextField);
 		return textFields;
-	}
-	
-	@Override
-	protected Map<String, CheckBox> getCheckBoxComponents() {
-		Map<String, CheckBox> checkboxes = new HashMap<String, CheckBox>();
-		checkboxes.put("longReads", longReadsCheckBox);
-		return checkboxes;
 	}
 
 	@Override
@@ -117,14 +148,72 @@ public class ReadsAlignerController extends AnalysisAreaController {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
 		setDefaultValues(ReadsAligner.class.getName());
-		//Load history from v 4.0.1
+		//Load history
 		String savedIndexName = HistoryManager.getInstance().getLastGenomeIndexFile();
 		if(savedIndexName!=null) fmIndexFileTextField.setText(savedIndexName);
-		inputFileTextField.setText(file.getAbsolutePath());
-		inputFormatChoiceBox.getItems().add("Fastq");
-		inputFormatChoiceBox.getItems().add("Fasta");
-		suggestOutputFile(file, outputFileTextField, ".bam");
-		
+		inputFormatChoiceBox.getItems().add(FORMAT_FASTQ);
+		inputFormatChoiceBox.getItems().add(FORMAT_FASTA);
+		platformChoiceBox.getItems().add(ReadAlignment.Platform.ILLUMINA);
+		platformChoiceBox.getItems().add(ReadAlignment.Platform.IONTORRENT);
+		platformChoiceBox.getItems().add(ReadAlignment.Platform.PACBIO);
+		platformChoiceBox.getItems().add(ReadAlignment.Platform.ONT);
+		platformChoiceBox.getSelectionModel().select(0);
+		if (file.isDirectory()) {
+			try {
+				openSelectReadsDialog(file);
+			} catch (IOException e) {
+				showExecutionErrorDialog(Thread.currentThread().getName(), e);
+				return;
+			}
+			inputFileTextField.setText("Selected "+filesData.size()+" samples");
+			inputFileTextField.setEditable(false);
+			inputFileButton.setDisable(true);
+			inputFile2TextField.setEditable(false);
+			inputFile2Button.setDisable(true);
+			sampleIdTextField.setEditable(false);
+			inputFormatChoiceBox.setDisable(true);
+			outputFileLabel.setText("(*) Output directory:");
+			outputFileTextField.setText(file.getAbsolutePath());
+			if (pairedEnd) {
+				platformChoiceBox.setDisable(true);
+				windowLengthTextField.setDisable(true);
+				inputFile2TextField.setText("Files are paired-end");
+			}
+			else {
+				minInsertLengthTextField.setEditable(false);
+				maxInsertLengthTextField.setEditable(false);
+			}
+		} else {
+			inputFileTextField.setText(file.getAbsolutePath());
+			String filename = file.getName();
+			int k = getExtensionIndex(filename);
+			if(k>0) {
+				sampleIdTextField.setText(filename.substring(0,k));
+				if(filename.toLowerCase().substring(k).startsWith(".fastq")) inputFormatChoiceBox.getSelectionModel().select(0);
+				else inputFormatChoiceBox.getSelectionModel().select(1);
+			}
+			suggestOutputFile(file, outputFileTextField, ".bam");
+		}
+	}
+	@FXML
+	protected void changeOutput(ActionEvent event) {
+		if(filesData!=null) super.changeOutputDirectory(event);
+		else super.changeOutputFile(event);
+	}
+
+	private void openSelectReadsDialog(File directory) throws IOException {
+		//Parent parent = FXMLLoader.load(getClass().getResource("/ngsepfx/view/SelectReadsForAlignmentDialog.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ngsepfx/view/SelectReadsForAlignmentDialog.fxml"));
+        Parent parent = fxmlLoader.load();
+        SelectReadsForAlignmentController controller = fxmlLoader.getController();
+        controller.setDirectory(directory);
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
+        filesData = controller.getSelectedReadFilesData();
+        pairedEnd = controller.isPairedEnd();
 	}
 
 	@Override
@@ -134,45 +223,75 @@ public class ReadsAlignerController extends AnalysisAreaController {
     		public Void call() {
     			updateMessage(inputFileTextField.getText());
 				updateTitle(TASK_NAME);
-    			FileHandler logHandler = null;
-    			try {
-    				ReadsAligner instance = new ReadsAligner();
-    				fillAttributes(instance);
-    				String inputFormatStr = inputFormatChoiceBox.getValue();
-    				if("Fasta".equals(inputFormatStr)) instance.setInputFormat(ReadsAligner.INPUT_FORMAT_FASTA);
-    				String outFileUnsorted = outputFileTextField.getText();
-    				if(outFileUnsorted.toLowerCase().endsWith(".bam")) outFileUnsorted = outFileUnsorted.substring(0,outFileUnsorted.length()-4);
-    				outFileUnsorted+="_unsorted.bam";
-    				instance.setOutputFile(outFileUnsorted);
-    				//Set explicitely FM index to reuse memory
-    				if (!fmIndexFileTextField.getText().isEmpty()) {
-    					ReferenceGenomeFMIndex index = HistoryManager.getInstance().getGenomeIndex(fmIndexFileTextField.getText());
-        				instance.setFMIndex(index);
-    				}
-    				
-    				//Log 
-    				Logger log = Logger.getAnonymousLogger();
-    				logHandler = createLogHandler(outputFileTextField.getText(), "Aligner");
-    				log.addHandler(logHandler);
-    				instance.setLog(log);
-    				instance.setProgressNotifier(this);
-    				instance.run();
-    				SortAlignmentController.sortAlignments(outFileUnsorted, outputFileTextField.getText(), log);
-    				//Delete unsorted file
-    				File f = new File(outFileUnsorted);
-    				if(f.exists()) f.delete();
-    			} catch (Exception e) {
-    				e.printStackTrace();
-    				showExecutionErrorDialog(Thread.currentThread().getName(), e);
-    			} finally {
-    				if(logHandler!=null) {
-    					logHandler.flush();
-    					logHandler.close();
-    				}
-    			}
+				if(filesData!=null) {
+					if(this.isCancelled()) return null;
+					File outDir = new File (outputFileTextField.getText());
+					if (!outDir.exists()) return null;
+					if (!outDir.canWrite()) return null;
+					for(ReadsAlignerFileData fileData:filesData) {
+						System.out.println("Processing sample "+fileData.getSampleId()+" file: "+fileData.getFile());
+						fileData.setOutBamFile(outDir.getAbsolutePath()+File.separator+fileData.getOutBamFile());
+						processAlignmentsFile(fileData, this);
+						if(this.isCancelled()) break;
+					}
+				} else {
+					File f1 = new File(inputFileTextField.getText());
+					File f2 = new File(inputFile2TextField.getText());
+					if(f1.exists()) {
+						ReadsAlignerFileData singleFileData = new ReadsAlignerFileData(sampleIdTextField.getText(), f1);
+						if(f2.exists()) singleFileData.setFile2(f2);
+						singleFileData.setInputFormat(inputFormatChoiceBox.getValue());
+						singleFileData.setOutBamFile(outputFileTextField.getText());
+						processAlignmentsFile(singleFileData, this);
+					}
+				}
+    			
     			return null;
     		}
 		};
 	}
 
+	private void processAlignmentsFile(ReadsAlignerFileData data, NGSEPTask<Void> task) {
+		FileHandler logHandler = null;
+		try {
+			ReadsAligner instance = new ReadsAligner();
+			fillAttributes(instance);
+			instance.setInputFile(data.getFile().getAbsolutePath());
+			if(data.getFile2()!=null) instance.setInputFile2(data.getFile2().getAbsolutePath());
+			String ifStr = data.getInputFormat();
+			if(FORMAT_FASTA.equals(ifStr)) instance.setInputFormat(ReadsAligner.INPUT_FORMAT_FASTA);
+			instance.setSampleId(data.getSampleId());
+			
+			String outFileSorted = data.getOutBamFile();
+			String outFilePrefix = outFileSorted;
+			if(outFilePrefix.toLowerCase().endsWith(".bam")) outFilePrefix = outFilePrefix.substring(0,outFilePrefix.length()-4);
+			String outFileUnsorted = outFilePrefix+"_unsorted.bam";
+			instance.setOutputFile(outFileUnsorted);
+			//Log 
+			Logger log = Logger.getAnonymousLogger();
+			logHandler = createLogHandler(outFilePrefix, "Aligner");
+			log.addHandler(logHandler);
+			//Set explicitely FM index to reuse memory
+			if (!fmIndexFileTextField.getText().isEmpty()) {
+				ReferenceGenomeFMIndex index = HistoryManager.getInstance().getGenomeIndex(fmIndexFileTextField.getText(), log);
+				instance.setFMIndex(index);
+			}
+			
+			instance.setLog(log);
+			instance.setProgressNotifier(task);
+			instance.run();
+			SortAlignmentController.sortAlignments(outFileUnsorted, outFileSorted, log);
+			//Delete unsorted file
+			File f = new File(outFileUnsorted);
+			if(f.exists()) f.delete();
+		} catch (Exception e) {
+			e.printStackTrace();
+			showExecutionErrorDialog(Thread.currentThread().getName(), e);
+		} finally {
+			if(logHandler!=null) {
+				logHandler.flush();
+				logHandler.close();
+			}
+		}
+	}
 }

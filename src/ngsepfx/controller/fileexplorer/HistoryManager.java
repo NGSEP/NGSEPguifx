@@ -26,6 +26,7 @@ import java.io.PrintStream;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
+import java.util.logging.Logger;
 
 import ngsep.genome.ReferenceGenome;
 import ngsep.genome.ReferenceGenomeFMIndex;
@@ -79,14 +80,15 @@ public class HistoryManager {
 		return genome;
 	}
 	
-	public ReferenceGenomeFMIndex getGenomeIndex (String filename) throws IOException {
+	public ReferenceGenomeFMIndex getGenomeIndex (String filename, Logger log) throws IOException {
 		ReferenceGenomeFMIndex index = loadedGenomeIndexes.get(filename);
-		System.out.println("Saved index: "+index);
 		if(index == null) {
 			//Try to load index
+			log.info("Loading index from: "+filename);
 			index = ReferenceGenomeFMIndex.loadFromBinaries(filename);
+			log.info("Loaded index");
 			loadedGenomeIndexes.put(filename, index);
-		}
+		} else log.info("Using loaded index for: "+filename);
 		lastGenomeIndexFile = filename;
 		
 		return index;

@@ -68,6 +68,10 @@ import ngsepfx.view.component.ValidatedTextField;
  * @author Fernando Reyes
  */
 public abstract class AnalysisAreaController {
+	
+	public static final String FORMAT_FASTQ= "fastq";
+	public static final String FORMAT_FASTA= "fasta";
+	
 	// Attributes.
 	
 	@FXML
@@ -216,6 +220,20 @@ public abstract class AnalysisAreaController {
 		if (selectedFile != null) {
 			textField.setText(selectedFile.getAbsolutePath());
 			updateLastDirectory(selectedFile.getParentFile());
+		}
+	}
+	@FXML
+	protected void changeOutputDirectory(ActionEvent event) {
+		Node node = (Node) event.getSource();
+		ValidatedTextField textField = (ValidatedTextField)node.getUserData();
+		File currentDir = selectCurrentDirectory(textField);
+		DirectoryChooser chooser = new DirectoryChooser();
+		chooser.setInitialDirectory(currentDir);
+		chooser.setTitle("Select output directory");
+		File selectedDir = chooser.showDialog(null);
+		if (selectedDir != null) {
+			textField.setText(selectedDir.getAbsolutePath());
+			updateLastDirectory(selectedDir);
 		}
 	}
 	
@@ -389,6 +407,7 @@ public abstract class AnalysisAreaController {
 		for(String attribute: textFieldsMap.keySet()) {
 			ValidatedTextField textField = textFieldsMap.get(attribute);
 			String value = textField.getText().trim();
+			if(value.isEmpty()) continue;
 			CommandOption option = optionsByAttribute.get(attribute);
 			System.out.println("Attribute: "+attribute+". Option found: "+option+" value to set: "+value);
 			if(option==null) {
@@ -412,7 +431,7 @@ public abstract class AnalysisAreaController {
 			}
 			Method setter = option.findStringSetMethod(programInstance);
 			
-			if(value.isEmpty()) continue;
+			
 			try {
 				setter.invoke(programInstance, value);
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
