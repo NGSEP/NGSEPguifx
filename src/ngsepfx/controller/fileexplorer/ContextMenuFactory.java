@@ -54,16 +54,19 @@ public final class ContextMenuFactory {
 	    {
 	    	addSimpleMenuItem(contextMenu, cell, "GBS DeNovo", "ngsepfx.controller.DeNovoGBSController");
 	    	addSimpleMenuItem(contextMenu, cell, "Multiple Reads Aligner", "ngsepfx.controller.ReadsAlignerController");
+	    	addSimpleMenuItem(contextMenu, cell, "K-mers Extractor", "ngsepfx.controller.KmersExtractorController");
 	    }
 	    else if(fileInLower.contains(".vcf")) {
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Summary Statistics", "ngsepfx.controller.VCFSummaryStatisticsController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Filter", "ngsepfx.controller.VCFFilterController");
+	    	addSimpleMenuItem(contextMenu, cell, "VCF Annotate", "ngsepfx.controller.VCFFunctionalAnnotatorController");
 	    	
 	    }
 	    else if (fileInLower.contains(".fa")) {
 	    	addSimpleMenuItem(contextMenu, cell, "Genome Indexer", "ngsepfx.controller.GenomeIndexerController");
 	    	addSimpleMenuItem(contextMenu, cell, "Assembler", "ngsepfx.controller.AssemblerController");
 	    	addSimpleMenuItem(contextMenu, cell, "Reads Aligner", "ngsepfx.controller.ReadsAlignerController");
+	    	addSimpleMenuItem(contextMenu, cell, "Reads File Errors Corrector", "ngsepfx.controller.ReadsFileErrorsCorrectorController");
 	    }
 	    else if (fileInLower.contains(".bam") || file.getName().contains(".sam"))
 	    {

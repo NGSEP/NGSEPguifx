@@ -24,49 +24,50 @@
 							validators="INPUT_FILE" />
 		<Button onAction="#changeInputFile" userData="$filesDescriptorTextField" text="..." GridPane.rowIndex="1" GridPane.columnIndex="4" />
 
-		<Label fx:id="outputPrefixLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">(*) Output File:</Label>
+		<Label fx:id="outputPrefixLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">(*) Output File:</Label>
 		<ValidatedTextField fx:id="outputPrefixTextField" label="$outputPrefixLabel"
-							GridPane.rowIndex="4" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="output-file"
+							GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="output-file"
 							validators="OUTPUT_FILE, MANDATORY"/>
-		<Button onAction="#changeOutputFile" userData="$outputPrefixTextField" text="..." GridPane.rowIndex="4" GridPane.columnIndex="4" />
+		<Button onAction="#changeOutputFile" userData="$outputPrefixTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />
 
 	</GridPane>
 
-	<HBox styleClass="hbox">
-		<Label fx:id="kmerLengthLabel">Kmer length:</Label>
-		<ValidatedTextField fx:id="kmerLengthTextField" label="$kmerLengthLabel"
+	<GridPane styleClass="grid-pane">
+		<Label fx:id="kmerLengthLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">Kmer length:</Label>
+		<ValidatedTextField fx:id="kmerLengthTextField" label="$kmerLengthLabel" styleClass="medium-number-input"
+							GridPane.rowIndex="0" GridPane.columnIndex="1"
 							validators="POSITIVE_NUMBER, INT"/>
 
-		<Label fx:id="maxNumClustersLabel">Maximum Number of Clusters:</Label>
-		<ValidatedTextField fx:id="maxNumClustersTextField" label="$maxNumClustersLabel"
-							validators="POSITIVE_NUMBER, INT"/>
-	</HBox>
-
-	<HBox styleClass="hbox">
-		<Label fx:id="maxBaseQSLabel">Maximum value allowed for a base quality score:</Label>
-		<ValidatedTextField fx:id="maxBaseQSTextField" label="$maxBaseQSLabel"
+		<Label fx:id="maxNumClustersLabel" GridPane.rowIndex="0" GridPane.columnIndex="5">Maximum Number of Clusters:</Label>
+		<ValidatedTextField fx:id="maxNumClustersTextField" label="$maxNumClustersLabel" styleClass="medium-number-input"
+							GridPane.rowIndex="0" GridPane.columnIndex="6"
 							validators="POSITIVE_NUMBER, INT"/>
 
-		<Label fx:id="minQualityLabel">Minimum variant quality:</Label>
-		<ValidatedTextField fx:id="minQualityTextField" label="$minQualityLabel"
+		<Label fx:id="maxBaseQSLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Maximum value allowed for a base quality score:</Label>
+		<ValidatedTextField fx:id="maxBaseQSTextField" label="$maxBaseQSLabel" styleClass="medium-number-input"
+							GridPane.rowIndex="1" GridPane.columnIndex="1"
 							validators="POSITIVE_NUMBER, INT"/>
-	</HBox>
 
-	<HBox styleClass="hbox">
-		<Label fx:id="heterozygosityRateLabel">Prior heterozygosity rate:</Label>
-		<ValidatedTextField fx:id="heterozygosityRateTextField" label="$heterozygosityRateLabel"
+		<Label fx:id="heterozygosityRateLabel" GridPane.rowIndex="1" GridPane.columnIndex="5">Prior heterozygosity rate:</Label>
+		<ValidatedTextField fx:id="heterozygosityRateTextField" label="$heterozygosityRateLabel" styleClass="medium-number-input"
+							GridPane.rowIndex="1" GridPane.columnIndex="6"
 							validators="POSITIVE_NUMBER"/>
-
-		<Label fx:id="normalPloidyLabel">Default ploidy of the samples:</Label>
-		<ValidatedTextField fx:id="normalPloidyTextField" label="$normalPloidyLabel"
+		
+		<Label fx:id="normalPloidyLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Default ploidy of the samples:</Label>
+		<ValidatedTextField fx:id="normalPloidyTextField" label="$normalPloidyLabel" styleClass="medium-number-input"
+							GridPane.rowIndex="2" GridPane.columnIndex="1"
+							validators="POSITIVE_NUMBER, INT"/>		
+		
+		<Label fx:id="minQualityLabel" GridPane.rowIndex="2" GridPane.columnIndex="5">Minimum variant quality:</Label>
+		<ValidatedTextField fx:id="minQualityTextField" label="$minQualityLabel" styleClass="medium-number-input"
+							GridPane.rowIndex="2" GridPane.columnIndex="6"
 							validators="POSITIVE_NUMBER, INT"/>
-	</HBox>
 
-	<HBox styleClass="hbox">
-		<Label fx:id="numThreadsLabel">Number of threads to process read clusters:</Label>
-		<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel"
+		<Label fx:id="numThreadsLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Number of threads to process read clusters:</Label>
+		<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel" styleClass="medium-number-input"
+							GridPane.rowIndex="3" GridPane.columnIndex="1"
 							validators="POSITIVE_NUMBER"/>
-	</HBox>
+	</GridPane>							
 
 	<HBox >
 		<Button onAction="#submitTask" text="DeNovoGBS" />
