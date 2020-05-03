@@ -28,13 +28,13 @@
 							<ValidatedTextField fx:id="inputFileTextField" label="$inputFileLabel" 
 												GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="input-file"  
 								 				validators="INPUT_FILE, MANDATORY"/>
-							<Button onAction="#changeInputFile" userData="$fileValidatedTextField" text="..." GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+							<Button fx:id="inputFileButton" onAction="#changeInputFile" userData="$fileValidatedTextField" text="..." GridPane.rowIndex="0" GridPane.columnIndex="2"/>
 							
-							<Label fx:id="outputPrefixLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">(*) Output files prefix: </Label>
-							<ValidatedTextField fx:id="outputPrefixTextField" label="$outputPrefixLabel"
+							<Label fx:id="outputFileLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">(*) Output file: </Label>
+							<ValidatedTextField fx:id="outputFileTextField" label="$outputFileLabel"
 												GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="output-file" 
 												validators="OUTPUT_FILE, MANDATORY"/>
-							<Button onAction="#changeOutputFile" userData="$outputPrefixTextField" GridPane.rowIndex="1" GridPane.columnIndex="2" text="..."/>
+							<Button onAction="#changeOutputFile" userData="$outputFileTextField" GridPane.rowIndex="1" GridPane.columnIndex="2" text="..."/>
 							
 							<Label fx:id="genomeLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">(*) Reference genome: </Label>
 							<ValidatedTextField fx:id="genomeTextField" label="$genomeLabel" 
@@ -105,17 +105,17 @@
 										validators="POSITIVE_NUMBER"/>
 
 							<Label fx:id="minQualityLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Minimum genotype quality score:</Label>
-							<ValidatedTextField fx:id="minQualityTextField" label="$minQualityLabel" styleClass="small-number-input"
+							<ValidatedTextField fx:id="minQualityTextField" label="$minQualityLabel" styleClass="medium-number-input"
 										GridPane.rowIndex="2" GridPane.columnIndex="1"
 										validators="INT, POSITIVE_NUMBER"/>
 
 							<Label fx:id="maxBaseQSLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Maximum base quality score:</Label>
-								<ValidatedTextField fx:id="maxBaseQSTextField" label="$maxBaseQSLabel" styleClass="small-number-input"
+								<ValidatedTextField fx:id="maxBaseQSTextField" label="$maxBaseQSLabel" styleClass="medium-number-input"
 										GridPane.rowIndex="3" GridPane.columnIndex="1"
 										validators="INT, POSITIVE_NUMBER"/>
 
 							<Label fx:id="maxAlnsPerStartPosLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">Maximum alignments per start position:</Label>
-							<ValidatedTextField fx:id="maxAlnsPerStartPosTextField" label="$maxAlnsPerStartPosLabel" styleClass="small-number-input"
+							<ValidatedTextField fx:id="maxAlnsPerStartPosTextField" label="$maxAlnsPerStartPosLabel" styleClass="medium-number-input"
 										GridPane.rowIndex="4" GridPane.columnIndex="1"
 										validators="INT, POSITIVE_NUMBER"/>
 
@@ -129,7 +129,7 @@
 						</VBox>
 					</HBox>
 				</TitledPane>
-				<TitledPane text="Options for structural variants">
+				<TitledPane fx:id="svsTitledPane" text="Options for structural variants">
 					<HBox styleClass="hbox">
 						<GridPane styleClass="grid-pane" >
 							<Label fx:id="minSVQualityLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">Minimum quality:</Label>

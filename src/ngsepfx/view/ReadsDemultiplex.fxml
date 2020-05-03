@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.CheckBox?>
+
+<?import ngsepfx.view.component.ValidatedTextField?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" id="mainContainer">
+	<GridPane styleClass="grid-pane">
+		<Label fx:id="indexFileLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">(*) Barcode file:</Label>
+		<ValidatedTextField fx:id="indexFileTextField" label="$indexFileLabel"
+							GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
+							validators="INPUT_FILE, MANDATORY" />
+		<Button onAction="#changeInputFile" userData="$indexFileTextField" text="..." GridPane.rowIndex="0" GridPane.columnIndex="4" />
+		
+		<Label fx:id="outDirectoryLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">(*) Output directory: </Label>
+		<ValidatedTextField fx:id="outDirectoryTextField" label="$outDirectoryLabel"
+							GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="output-file" 
+							validators="OUTPUT_FILE, MANDATORY"/>
+		<Button onAction="#changeOutputDirectory" userData="$outDirectoryTextField" GridPane.rowIndex="1" GridPane.columnIndex="2" text="..."/>	
+		
+		<Label fx:id="laneFilesDescriptorLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Lanes info:</Label>
+		<ValidatedTextField fx:id="laneFilesDescriptorTextField" label="$laneFilesDescriptorLabel"
+							GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
+							validators="INPUT_FILE" />
+		<Button onAction="#changeInputFile" userData="$laneFilesDescriptorTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />
+		
+		<Label fx:id="fastqFileLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Fastq file 1:</Label>
+		<ValidatedTextField fx:id="fastqFileTextField" label="$fastqFileLabel"
+							GridPane.rowIndex="3" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
+							validators="INPUT_FILE" />
+		<Button onAction="#changeInputFile" userData="$fastqFileTextField" text="..." GridPane.rowIndex="3" GridPane.columnIndex="4" />
+		
+		<Label fx:id="fastqFile2Label" GridPane.rowIndex="4" GridPane.columnIndex="0">Fastq file 2:</Label>
+		<ValidatedTextField fx:id="fastqFile2TextField" label="$fastqFile2Label"
+							GridPane.rowIndex="4" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
+							validators="INPUT_FILE" />
+		<Button onAction="#changeInputFile" userData="$fastqFile2TextField" text="..." GridPane.rowIndex="4" GridPane.columnIndex="4" />
+		
+	</GridPane>
+	<GridPane styleClass="grid-pane">
+	
+		<Label fx:id="flowcellLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">Flowcell:</Label>
+		<ValidatedTextField fx:id="flowcellTextField" label="$flowcellLabel"
+							GridPane.rowIndex="0" GridPane.columnIndex="1"/>	
+							
+		<Label fx:id="laneLabel" GridPane.rowIndex="0" GridPane.columnIndex="2">Lane:</Label>
+		<ValidatedTextField fx:id="laneTextField" label="$laneLabel"
+							GridPane.rowIndex="0" GridPane.columnIndex="3" styleClass="small-number-input"
+							validators="POSITIVE_NUMBER, INT"/>
+							
+		<Label fx:id="trimSequencesLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Adapter sequences to trim (comma-separated):</Label>
+		<ValidatedTextField fx:id="trimSequencesTextField" label="$trimSequencesLabel"
+							GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+							
+		<Label fx:id="minReadLengthLabel" GridPane.rowIndex="1" GridPane.columnIndex="2">Minimum read length after trimming:</Label>
+		<ValidatedTextField fx:id="minReadLengthTextField" label="$minReadLengthLabel"
+							GridPane.rowIndex="1" GridPane.columnIndex="3" styleClass="small-number-input"
+							validators="POSITIVE_NUMBER, INT"/>
+								
+		<CheckBox fx:id="dualBarcodeCheckBox" text="Dual barcoding" GridPane.rowIndex="3" GridPane.columnIndex="0"/>					
+		<CheckBox fx:id="uncompressedOutputCheckBox" text="Output uncompressed files" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+		
+	</GridPane>
+	
+	<HBox >
+		<Button onAction="#submitTask" text="Demultiplex" />
+	</HBox>
+</VBox>

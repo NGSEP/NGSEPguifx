@@ -20,18 +20,29 @@
 package ngsepfx.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
 import ngsepfx.view.component.ValidatedTextField;
-
+import ngsep.discovery.MultisampleVariantsDetector;
 import ngsep.discovery.VariantsDetector;
 
 /**
@@ -47,7 +58,13 @@ public class VariantsDetectorController extends AnalysisAreaController {
 	private ValidatedTextField inputFileTextField;
 	
 	@FXML
-	private ValidatedTextField outputPrefixTextField;
+	private Button inputFileButton;
+	
+	@FXML
+	private Label outputFileLabel;
+	
+	@FXML
+	private ValidatedTextField outputFileTextField;
 	
 	@FXML
 	private ValidatedTextField genomeTextField;
@@ -136,6 +153,11 @@ public class VariantsDetectorController extends AnalysisAreaController {
 	@FXML
 	private CheckBox ignoreProperPairFlagCheckBox;
 	
+	@FXML
+	private TitledPane svsTitledPane;
+	
+	private List<VariantsDetectorFileData> alnFilesData=null;
+	
 	@Override
 	public String getFXMLResourcePath() {
 		return "/ngsepfx/view/VariantsDetector.fxml";
@@ -144,9 +166,7 @@ public class VariantsDetectorController extends AnalysisAreaController {
 	@Override
 	public Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
 		Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
-		textFields.put("inputFile", inputFileTextField);
-		textFields.put("outputPrefix", outputPrefixTextField);
-		textFields.put("genome",genomeTextField);
+		textFields.put("genome", genomeTextField);
 		textFields.put("knownSTRsFile", knownSTRsFileTextField);
 		textFields.put("knownSVsFile", knownSVsFileTextField);
 		
@@ -194,9 +214,41 @@ public class VariantsDetectorController extends AnalysisAreaController {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
 		setDefaultValues(VariantsDetector.class.getName());
-		inputFileTextField.setText(file.getAbsolutePath());
-		suggestOutputFile(file, outputPrefixTextField, "_variants");
+		if (file.isDirectory()) {
+			try {
+				openSelectAlnsDialog(file);
+			} catch (IOException e) {
+				e.printStackTrace();
+				showExecutionErrorDialog(Thread.currentThread().getName(), e);
+				return;
+			}
+			inputFileTextField.setText("Selected "+alnFilesData.size()+" samples");
+			inputFileTextField.setEditable(false);
+			inputFileButton.setDisable(true);
+			sampleIdTextField.setText("");
+			sampleIdTextField.setEditable(false);
+			outputFileLabel.setText("(*) Output file:");
+			outputFileTextField.setText(file.getAbsolutePath()+File.separator+"population.vcf");
+			svsTitledPane.setVisible(false);
+		} else {
+			inputFileTextField.setText(file.getAbsolutePath());
+			outputFileLabel.setText("(*) Output files prefix:");
+			suggestOutputFile(file, outputFileTextField, "_variants");
+		}
 		
+	}
+	
+	private void openSelectAlnsDialog(File directory) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ngsepfx/view/SelectAlignmentsForVariantsDetectorDialog.fxml"));
+        Parent parent = fxmlLoader.load();
+        SelectAlignmentsForVariantsDetectorController controller = fxmlLoader.getController();
+        controller.setDirectory(directory);
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
+        alnFilesData = controller.getSelectedAlignmentFilesData();
 	}
 
 	@Override
@@ -206,17 +258,31 @@ public class VariantsDetectorController extends AnalysisAreaController {
     		public Void call() {
     			updateMessage(inputFileTextField.getText());
 				updateTitle(TASK_NAME);
-    			FileHandler logHandler = null;
+				FileHandler logHandler = null;
     			try {
-    				VariantsDetector instance = new VariantsDetector();
-    				fillAttributes(instance);
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
-    				logHandler = createLogHandler(instance.getOutputPrefix(), null);
+    				logHandler = createLogHandler(outputFileTextField.getText(), "VD");
     				log.addHandler(logHandler);
-    				instance.setLog(log);
-    				instance.setProgressNotifier(this);
-    				instance.run();
+					if(alnFilesData!=null) {
+						MultisampleVariantsDetector instance = new MultisampleVariantsDetector();
+						fillAttributes(instance);
+						List<String> inputFiles = new ArrayList<String>();
+						for(VariantsDetectorFileData data:alnFilesData) inputFiles.add(data.getFile().getAbsolutePath());
+						instance.setInputFiles(inputFiles);
+						instance.setOutFilename(outputFileTextField.getText());
+						instance.setLog(log);
+						instance.setProgressNotifier(this);
+	    				instance.run();
+					} else {
+	    				VariantsDetector instance = new VariantsDetector();
+	    				fillAttributes(instance);
+	    				instance.setInputFile(inputFileTextField.getText());
+	    				instance.setOutputPrefix(outputFileTextField.getText());
+	    				instance.setLog(log);
+	    				instance.setProgressNotifier(this);
+	    				instance.run();	
+					}
     			} catch (Exception e) {
     				e.printStackTrace();
     				showExecutionErrorDialog(Thread.currentThread().getName(), e);
@@ -226,6 +292,7 @@ public class VariantsDetectorController extends AnalysisAreaController {
     					logHandler.close();
     				}
     			}
+    			
     			return null;
     		}
 		};

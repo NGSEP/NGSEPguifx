@@ -304,14 +304,14 @@ public abstract class AnalysisAreaController {
 			}
 		}
 		Map<String, ValidatedTextField> textFieldsMap = getValidatedTextFieldComponents();
-		System.out.println("Command class name: "+commandClassName+" Command: "+command.getId()+" fields: "+textFieldsMap.size());
+		//System.out.println("Command class name: "+commandClassName+" Command: "+command.getId()+" fields: "+textFieldsMap.size());
 		for(String parameter: textFieldsMap.keySet()) {
 			ValidatedTextField textField = textFieldsMap.get(parameter);
 			CommandOption option = optionsByAttribute.get(parameter);
-			System.out.println("Parameter "+parameter+" option: "+option);
+			//System.out.println("Parameter "+parameter+" option: "+option);
 			if(option!=null && CommandOption.TYPE_GENOME.equals(option.getType())) {
 				String genomeFile = HistoryManager.getInstance().getLastGenomeFile();
-				System.out.println("Genome file "+genomeFile);
+				//System.out.println("Genome file "+genomeFile);
 				if(genomeFile!=null) textField.setText(genomeFile);
 				continue;
 			}
@@ -387,34 +387,34 @@ public abstract class AnalysisAreaController {
 	}
 	
 	protected void fillAttributes(Object programInstance) {
-		System.out.println("Setting parameters for: "+programInstance.getClass().getName());
+		//System.out.println("Setting parameters for: "+programInstance.getClass().getName());
 		CommandsDescriptor commands = CommandsDescriptor.getInstance();
 		
 		Command command = commands.getCommandByClass(programInstance.getClass().getName());
-		System.out.println("Command: "+command.getId());
+		//System.out.println("Command: "+command.getId());
 		Map<String,CommandOption> options = command.getOptions();
-		System.out.println("Command options: "+options.size());
+		//System.out.println("Command options: "+options.size());
 		Map<String,CommandOption> optionsByAttribute = new HashMap<String, CommandOption>();
 		for(CommandOption option: options.values()) {
-			System.out.println("Option id: "+option.getId()+". Option attribute: "+option.getAttribute());
+			//System.out.println("Option id: "+option.getId()+". Option attribute: "+option.getAttribute());
 			if(option.getAttribute()!=null) {
 				optionsByAttribute.put(option.getAttribute(), option);
 			}
 		}
 		Map<String, ValidatedTextField> textFieldsMap = getValidatedTextFieldComponents();
-		System.out.println("Text fields: "+textFieldsMap.size());
-		System.out.println("Options with attribute: "+optionsByAttribute.size()+" text fields map keys: "+textFieldsMap.keySet().size());
+		//System.out.println("Text fields: "+textFieldsMap.size());
+		//System.out.println("Options with attribute: "+optionsByAttribute.size()+" text fields map keys: "+textFieldsMap.keySet().size());
 		for(String attribute: textFieldsMap.keySet()) {
 			ValidatedTextField textField = textFieldsMap.get(attribute);
 			String value = textField.getText().trim();
 			if(value.isEmpty()) continue;
 			CommandOption option = optionsByAttribute.get(attribute);
-			System.out.println("Attribute: "+attribute+". Option found: "+option+" value to set: "+value);
+			//System.out.println("Attribute: "+attribute+". Option found: "+option+" value to set: "+value);
 			if(option==null) {
 				//By now it can happen that not all text fields are tied with command options
 				continue;
 			}
-			System.out.println("Option type: "+option.getType());
+			//System.out.println("Option type: "+option.getType());
 			if(CommandOption.TYPE_GENOME.equals(option.getType())) {
 				try {
 					ReferenceGenome savedGenome = HistoryManager.getInstance().getGenome(value);
@@ -440,11 +440,11 @@ public abstract class AnalysisAreaController {
 			}
 		}
 		Map<String, CheckBox> checkboxesMap = getCheckBoxComponents();
-		System.out.println("Checkboxes: "+checkboxesMap.size());
+		//System.out.println("Checkboxes: "+checkboxesMap.size());
 		for (String attribute: checkboxesMap.keySet()) {
 			CheckBox chk = checkboxesMap.get(attribute);
 			CommandOption option = optionsByAttribute.get(attribute);
-			System.out.println("Attribute: "+attribute+". Option found: "+option);
+			//System.out.println("Attribute: "+attribute+". Option found: "+option);
 			if(option==null) {
 				//By now it can happen that not all text fields are tied with command options
 				continue;
@@ -468,7 +468,7 @@ public abstract class AnalysisAreaController {
 	 */
 	public static void showExecutionErrorDialog(String taskName, Exception e) {
 		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Excecution Error");
+		alert.setTitle("Execution Error");
 		alert.setHeaderText("Error executing "+taskName);
 		alert.setContentText(e.getMessage());
 		alert.initModality(Modality.NONE);

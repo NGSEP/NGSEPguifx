@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import net.sf.picard.sam.SortSam;
-import ngsep.discovery.VariantsDetector;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
