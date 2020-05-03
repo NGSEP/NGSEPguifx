@@ -95,12 +95,12 @@
 					<HBox styleClass="hbox">
 						<GridPane styleClass="grid-pane" >
 							<Label fx:id="normalPloidyLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">Normal sample ploidy:</Label>
-							<ValidatedTextField fx:id="normalPloidyTextField" label="$normalPloidyLabel" styleClass="small-number-input"
-										GridPane.rowIndex="0" GridPane.columnIndex="1" 
+							<ValidatedTextField fx:id="normalPloidyTextField" label="$normalPloidyLabel" styleClass="medium-number-input"
+										GridPane.rowIndex="0" GridPane.columnIndex="1" onKeyTyped="#ploidyChanged" 
 										validators="INT, POSITIVE_NUMBER"/>
 
 							<Label fx:id="heterozygosityRateLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Heterozygosity rate:</Label>
-							<ValidatedTextField fx:id="heterozygosityRateTextField" label="$heterozygosityRateLabel" styleClass="small-number-input"
+							<ValidatedTextField fx:id="heterozygosityRateTextField" label="$heterozygosityRateLabel" styleClass="medium-number-input"
 										GridPane.rowIndex="1" GridPane.columnIndex="1" 
 										validators="POSITIVE_NUMBER"/>
 

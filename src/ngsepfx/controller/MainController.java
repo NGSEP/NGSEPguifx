@@ -76,7 +76,7 @@ public class MainController {
 	 */
 	private void handleNGSEPAnalyzeFileEvent(NGSEPAnalyzeFileEvent event) {
 		try {
-			System.out.println("Fired analyze file event");
+			//System.out.println("Fired analyze file event");
 			// Initialize controller to display parameters area
 			event.consume();
 			Class<?> controllerClass = (Class<?>) Class.forName(event.controllerFullyQualifiedName);

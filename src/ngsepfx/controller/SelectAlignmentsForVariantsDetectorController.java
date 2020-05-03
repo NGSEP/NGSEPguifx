@@ -59,7 +59,7 @@ public class SelectAlignmentsForVariantsDetectorController {
 		alnFilesDataTableView.setItems(alnFilesData);
 	}
 	
-	private Set<String> findSampleIds(File file) {
+	public static Set<String> findSampleIds(File file) {
 		String name = file.getName();
 		if(name.length()<4 || !(name.toLowerCase().endsWith(".bam")))return null;
 		Set<String> sampleIds = new TreeSet<String>();

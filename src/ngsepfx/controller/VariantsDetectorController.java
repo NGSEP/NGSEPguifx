@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
@@ -36,6 +37,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ngsepfx.concurrent.NGSEPTask;
@@ -43,6 +45,7 @@ import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
 import ngsepfx.view.component.ValidatedTextField;
 import ngsep.discovery.MultisampleVariantsDetector;
+import ngsep.discovery.VariantPileupListener;
 import ngsep.discovery.VariantsDetector;
 
 /**
@@ -213,7 +216,6 @@ public class VariantsDetectorController extends AnalysisAreaController {
 	public void handleActivationEvent(NGSEPEvent event) {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
-		setDefaultValues(VariantsDetector.class.getName());
 		if (file.isDirectory()) {
 			try {
 				openSelectAlnsDialog(file);
@@ -222,6 +224,7 @@ public class VariantsDetectorController extends AnalysisAreaController {
 				showExecutionErrorDialog(Thread.currentThread().getName(), e);
 				return;
 			}
+			setDefaultValues(MultisampleVariantsDetector.class.getName());
 			inputFileTextField.setText("Selected "+alnFilesData.size()+" samples");
 			inputFileTextField.setEditable(false);
 			inputFileButton.setDisable(true);
@@ -230,12 +233,19 @@ public class VariantsDetectorController extends AnalysisAreaController {
 			outputFileLabel.setText("(*) Output file:");
 			outputFileTextField.setText(file.getAbsolutePath()+File.separator+"population.vcf");
 			svsTitledPane.setVisible(false);
+			findRepeatsCheckBox.setDisable(true);
+			runRDAnalysisCheckBox.setDisable(true);
+			runRPAnalysisCheckBox.setDisable(true);
+			runOnlySVsAnalysesCheckBox.setDisable(true);
 		} else {
+			setDefaultValues(VariantsDetector.class.getName());
 			inputFileTextField.setText(file.getAbsolutePath());
 			outputFileLabel.setText("(*) Output files prefix:");
 			suggestOutputFile(file, outputFileTextField, "_variants");
+			Set<String> sampleIds = SelectAlignmentsForVariantsDetectorController.findSampleIds(file);
+			if(sampleIds!=null && sampleIds.size()==1) sampleIdTextField.setText(sampleIds.iterator().next());
 		}
-		
+		//normalPloidyTextField.setOnAction((e)-> ploidyChanged());
 	}
 	
 	private void openSelectAlnsDialog(File directory) throws IOException {
@@ -249,6 +259,19 @@ public class VariantsDetectorController extends AnalysisAreaController {
         stage.setScene(scene);
         stage.showAndWait();
         alnFilesData = controller.getSelectedAlignmentFilesData();
+	}
+	@FXML
+	public void ploidyChanged(KeyEvent event) {
+		try {
+			int ploidy = Integer.parseInt(normalPloidyTextField.getText());
+			if(ploidy==1) heterozygosityRateTextField.setText(""+VariantPileupListener.DEF_HETEROZYGOSITY_RATE_HAPLOID);
+			else heterozygosityRateTextField.setText(""+VariantPileupListener.DEF_HETEROZYGOSITY_RATE_DIPLOID);
+			printSamplePloidyCheckBox.setSelected(ploidy!=2);
+		} catch (NumberFormatException e) {
+		}
+		
+		
+		
 	}
 
 	@Override
