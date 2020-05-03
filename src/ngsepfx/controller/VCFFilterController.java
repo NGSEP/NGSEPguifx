@@ -223,7 +223,6 @@ public class VCFFilterController extends AnalysisAreaController {
 		textFields.put("maxSamplesCNVs", maxSamplesCNVSTextField);
 		textFields.put("minGenotypeQuality", minGenotypeQualityTextField);
 		textFields.put("minReadDepth", minReadDepthTextField);
-		textFields.put("genome", genomeTextField);
 		textFields.put("minGCContent", minGCContentTextField);
 		textFields.put("maxGCContent", maxGCContentTextField);
 		textFields.put("geneId", geneIdTextField);
@@ -333,6 +332,12 @@ public class VCFFilterController extends AnalysisAreaController {
     			try {
     				VCFFilter instance = new VCFFilter();
     				fillAttributes(instance);
+    				//The genome is set manually to avoid unwanted filtering
+    				if(genomeTextField.getText().length()>0) {
+    					ReferenceGenome savedGenome = HistoryManager.getInstance().getGenome(genomeTextField.getText());
+    					instance.setGenome(savedGenome);
+    				}
+    				
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
     				logHandler = createLogHandler(instance.getOutputFile(), "VCFFilter");
