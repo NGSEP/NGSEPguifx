@@ -20,17 +20,13 @@
 package ngsepfx.controller.fileexplorer;
 
 import java.io.File;
-import java.util.concurrent.TimeUnit;
 
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
-import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.controller.AnalysisAreaController;
 import ngsepfx.controller.MainController;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
-import ngsepfx.event.NGSEPExecuteTaskEvent;
 
 /**
  * Factory to create {@link ContextMenu} for the {@link FileExplorerTreeCell}.
@@ -49,7 +45,6 @@ public final class ContextMenuFactory {
 		File file = fileTreeItem.getFile();
 	    ContextMenu contextMenu = new ContextMenu();
 	    String fileInLower = file.getName().toLowerCase();
-	    // TODO Build menu based on file type.
 	    if (file.isDirectory())
 	    {
 	    	addSimpleMenuItem(contextMenu, cell, "De Novo GBS", "ngsepfx.controller.DeNovoGBSController");
@@ -97,36 +92,4 @@ public final class ContextMenuFactory {
 	    });
 	    contextMenu.getItems().add(menuItem);
 	}
-	
-	/**
-	 * Test {@link Task} for {@link NGSEPExecuteTaskEvent}.
-	 * @param contextMenu {@link ContextMenu} to be modified.
-	 * @param cell {@link FileExplorerTreeCell} to fire 
-	 * {@link NGSEPExecuteTaskEvent} to the {@link MainController}.
-	 */
-	private static final void addTest2(ContextMenu contextMenu,  FileExplorerTreeCell cell) {
-		MenuItem countMenuItem = new MenuItem("Test execution");
-	    countMenuItem.setOnAction((ActionEvent t) -> {        	
-	    	t.consume();
-	    	cell.fireEvent(
-	        		new NGSEPExecuteTaskEvent(new NGSEPTask<Void>() {
-	    	    		@Override 
-	    	    		public Void call() {
-	    	    			try {
-	    	    				String threadName = Thread.currentThread().getName();
-	    	    				System.out.println(threadName + " starting task");
-	    	    				TimeUnit.SECONDS.sleep(10);
-	    	    				System.out.println(threadName + " ending task");
-	    	    			} catch (InterruptedException e) {
-	    	    				// TODO Auto-generated catch block
-	    	    				e.printStackTrace();
-	    	    			}
-	    	    			return null;
-	    	    		}
-	        		})
-	        		);
-	    });
-	    contextMenu.getItems().add(countMenuItem);
-	}
-
 }
