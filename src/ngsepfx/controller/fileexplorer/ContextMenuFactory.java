@@ -52,29 +52,31 @@ public final class ContextMenuFactory {
 	    // TODO Build menu based on file type.
 	    if (file.isDirectory())
 	    {
-	    	addSimpleMenuItem(contextMenu, cell, "GBS DeNovo", "ngsepfx.controller.DeNovoGBSController");
+	    	addSimpleMenuItem(contextMenu, cell, "De Novo GBS", "ngsepfx.controller.DeNovoGBSController");
 	    	addSimpleMenuItem(contextMenu, cell, "Multiple Reads Aligner", "ngsepfx.controller.ReadsAlignerController");
-	    	addSimpleMenuItem(contextMenu, cell, "K-mers Extractor", "ngsepfx.controller.KmersExtractorController");
+	    	addSimpleMenuItem(contextMenu, cell, "Multiple Variants Detector", "ngsepfx.controller.VariantsDetectorController");
+	    	addSimpleMenuItem(contextMenu, cell, "Variant Files Merge", "ngsepfx.controller.VariantFilesMergeController");
+	    	
+	    	//addSimpleMenuItem(contextMenu, cell, "K-mers Extractor", "ngsepfx.controller.KmersExtractorController");
 	    }
 	    else if(fileInLower.contains(".vcf")) {
+	    	addSimpleMenuItem(contextMenu, cell, "VCF Annotate", "ngsepfx.controller.VCFFunctionalAnnotatorController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Summary Statistics", "ngsepfx.controller.VCFSummaryStatisticsController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Filter", "ngsepfx.controller.VCFFilterController");
-	    	addSimpleMenuItem(contextMenu, cell, "VCF Annotate", "ngsepfx.controller.VCFFunctionalAnnotatorController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Converter", "ngsepfx.controller.VCFConverterController");
 	    	
 	    }
 	    else if (fileInLower.contains(".fa")) {
 	    	addSimpleMenuItem(contextMenu, cell, "Genome Indexer", "ngsepfx.controller.GenomeIndexerController");
-	    	addSimpleMenuItem(contextMenu, cell, "Assembler", "ngsepfx.controller.AssemblerController");
+	    	//addSimpleMenuItem(contextMenu, cell, "Assembler", "ngsepfx.controller.AssemblerController");
 	    	addSimpleMenuItem(contextMenu, cell, "Reads Aligner", "ngsepfx.controller.ReadsAlignerController");
-	    	addSimpleMenuItem(contextMenu, cell, "Reads File Errors Corrector", "ngsepfx.controller.ReadsFileErrorsCorrectorController");
+	    	//addSimpleMenuItem(contextMenu, cell, "Reads File Errors Corrector", "ngsepfx.controller.ReadsFileErrorsCorrectorController");
 	    }
 	    else if (fileInLower.contains(".bam") || file.getName().contains(".sam"))
 	    {
 	    	addSimpleMenuItem(contextMenu, cell, "Variants Detector", "ngsepfx.controller.VariantsDetectorController");
 	    	addSimpleMenuItem(contextMenu, cell, "Sort Alignments", "ngsepfx.controller.SortAlignmentController");
 	    }
-	    	//addTest2(contextMenu, cell);
 	    return contextMenu;
 	}
 

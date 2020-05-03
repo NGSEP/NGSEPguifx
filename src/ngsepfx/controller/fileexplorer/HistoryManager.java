@@ -80,12 +80,12 @@ public class HistoryManager {
 		return genome;
 	}
 	
-	public ReferenceGenomeFMIndex getGenomeIndex (String filename, Logger log) throws IOException {
+	public ReferenceGenomeFMIndex getGenomeIndex (ReferenceGenome genome, String filename, Logger log) throws IOException {
 		ReferenceGenomeFMIndex index = loadedGenomeIndexes.get(filename);
 		if(index == null) {
 			//Try to load index
 			log.info("Loading index from: "+filename);
-			index = ReferenceGenomeFMIndex.loadFromBinaries(filename);
+			index = ReferenceGenomeFMIndex.load(genome, filename);
 			log.info("Loaded index");
 			loadedGenomeIndexes.put(filename, index);
 		} else log.info("Using loaded index for: "+filename);

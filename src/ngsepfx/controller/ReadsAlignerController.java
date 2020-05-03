@@ -273,8 +273,8 @@ public class ReadsAlignerController extends AnalysisAreaController {
 			log.addHandler(logHandler);
 			//Set explicitely FM index to reuse memory
 			if (!fmIndexFileTextField.getText().isEmpty()) {
-				ReferenceGenomeFMIndex index = HistoryManager.getInstance().getGenomeIndex(fmIndexFileTextField.getText(), log);
-				instance.setFMIndex(index);
+				ReferenceGenomeFMIndex index = HistoryManager.getInstance().getGenomeIndex(instance.getGenome(),fmIndexFileTextField.getText(), log);
+				instance.setFmIndex(index);
 			}
 			
 			instance.setLog(log);

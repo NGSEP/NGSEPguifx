@@ -32,7 +32,7 @@
 							validators="INPUT_FILE" />
 		<Button onAction="#changeInputFile" userData="$genomeTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />
 		
-		<Label fx:id="fmIndexFileLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">or reference index (short reads):</Label>
+		<Label fx:id="fmIndexFileLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Reference index (short reads):</Label>
 		<ValidatedTextField fx:id="fmIndexFileTextField" label="$fmIndexFileLabel"
 							GridPane.rowIndex="3" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
 							validators="INPUT_FILE" />
