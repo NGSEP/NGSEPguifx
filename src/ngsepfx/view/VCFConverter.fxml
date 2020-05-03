@@ -28,7 +28,7 @@
 		<ValidatedTextField fx:id="populationFileTextField" label="$populationFileLabel"
 							GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
 							validators="INPUT_FILE" />
-		<Button onAction="#changeInputFile" userData="$inputFileTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />
+		<Button onAction="#changeInputFile" userData="$populationFileTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />
 			
 	</GridPane>
 	<HBox styleClass="HBox">
