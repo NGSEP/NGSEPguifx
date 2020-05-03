@@ -18,16 +18,16 @@
 							validators="INPUT_FILE, MANDATORY" />
 		<Button onAction="#changeInputFile" userData="$inputFileTextField" text="..." GridPane.rowIndex="0" GridPane.columnIndex="4" />
 		
-		<Label fx:id="transcriptomeFileLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Transcriptome File (gff3): </Label>
-		<ValidatedTextField fx:id="transcriptomeFileTextField" label="$transcriptomeFileFileLabel"
+		<Label fx:id="transcriptomeFileLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">(*) Transcriptome File (gff3): </Label>
+		<ValidatedTextField fx:id="transcriptomeFileTextField" label="$transcriptomeFileLabel"
 							GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file" 
-							validators="INPUT_FILE" />
+							validators="INPUT_FILE, MANDATORY" />
 		<Button onAction="#changeInputFile" userData="$transcriptomeFileTextField" text="..." GridPane.rowIndex="1" GridPane.columnIndex="4" />
 		
-		<Label fx:id="genomeLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">genome: </Label>
+		<Label fx:id="genomeLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">(*) Reference genome: </Label>
 		<ValidatedTextField fx:id="genomeTextField" label="$genomeLabel"
 							GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file" 
-							validators="INPUT_FILE" />
+							validators="INPUT_FILE, MANDATORY" />
 		<Button onAction="#changeInputFile" userData="$genomeTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />
 		
 		<Label fx:id="outputFileLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">(*) Output file: </Label>

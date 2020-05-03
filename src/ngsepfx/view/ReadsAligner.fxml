@@ -29,7 +29,7 @@
 		<Label fx:id="genomeLabel" GridPane.rowIndex="2" GridPane.columnIndex="0"> (*) Reference genome:</Label>
 		<ValidatedTextField fx:id="genomeTextField" label="$genomeLabel"
 							GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
-							validators="INPUT_FILE" />
+							validators="INPUT_FILE, MANDATORY" />
 		<Button onAction="#changeInputFile" userData="$genomeTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />
 		
 		<Label fx:id="fmIndexFileLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Reference index (short reads):</Label>

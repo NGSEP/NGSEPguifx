@@ -11,6 +11,7 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
-        <javaElement handleIdentifier="=NGSEPguifx"/>
+        <file path="/NGSEPguifx/LICENSE"/>
+        <javaElement handleIdentifier="=NGSEPguifx/src"/>
     </selectedElements>
 </jardesc>

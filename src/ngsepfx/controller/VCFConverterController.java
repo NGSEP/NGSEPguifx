@@ -102,8 +102,8 @@ public class VCFConverterController extends AnalysisAreaController{
 		textFields.put("outputPrefix", outputPrefixTextField);
 		textFields.put("sequenceName", sequenceNameTextField);
 		textFields.put("populationFile", populationFileTextField);
-		//textFields.put("idParent1", idParent1TextField);
-		//textFields.put("idParent2", idParent2TextField);
+		textFields.put("idParent1", idParent1TextField);
+		textFields.put("idParent2", idParent2TextField);
 		return textFields;
 	}
 
@@ -137,7 +137,7 @@ public class VCFConverterController extends AnalysisAreaController{
 		File file = analyzeEvent.file;
 		setDefaultValues(VCFConverter.class.getName());
 		inputFileTextField.setText(file.getAbsolutePath());
-		suggestOutputFile(file, outputPrefixTextField, "_converter");
+		suggestOutputFile(file, outputPrefixTextField, "");
 
 	}
 
@@ -154,7 +154,7 @@ public class VCFConverterController extends AnalysisAreaController{
 					fillAttributes(instance);
 					//Log 
 					Logger log = Logger.getAnonymousLogger();
-					logHandler = createLogHandler(instance.getOutputPrefix(), null);
+					logHandler = createLogHandler(instance.getOutputPrefix(), "Converter");
 					log.addHandler(logHandler);
 					instance.setLog(log);
 					instance.setProgressNotifier(this);

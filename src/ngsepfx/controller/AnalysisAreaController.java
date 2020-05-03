@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.FileHandler;
+import java.util.logging.SimpleFormatter;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventType;
@@ -265,7 +266,7 @@ public abstract class AnalysisAreaController {
 	 * @return NGSEPTask associated with this controller
 	 */
 	protected abstract NGSEPTask<Void> getTask();
-	
+	private SimpleFormatter formatter = new SimpleFormatter();
 	protected FileHandler createLogHandler (String outputFile, String suffix) throws IOException {
 		String logFilename = removeExtension(outputFile);
 		if(suffix!=null && suffix.length()>0) {
@@ -273,7 +274,9 @@ public abstract class AnalysisAreaController {
 		}
 		
 		logFilename = logFilename + ".log";
-		return new FileHandler(logFilename);
+		FileHandler handler = new FileHandler(logFilename);
+		handler.setFormatter(formatter);
+		return handler;
 	}
 	public static String serializeException(Exception e) {
 		Writer writer = new StringWriter();

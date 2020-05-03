@@ -75,7 +75,7 @@ public class VCFFunctionalAnnotatorController extends AnalysisAreaController{
 		File file = analyzeEvent.file;
 		setDefaultValues(VCFFunctionalAnnotator.class.getName());
 		inputFileTextField.setText(file.getAbsolutePath());
-		suggestOutputFile(file, outputFileTextField, "_annotated");
+		suggestOutputFile(file, outputFileTextField, "_annotated.vcf");
 		
 	}
 
@@ -96,7 +96,7 @@ public class VCFFunctionalAnnotatorController extends AnalysisAreaController{
     				log.addHandler(logHandler);
     				instance.setLog(log);
     				instance.setProgressNotifier(this);
-    				//instance.run();
+    				instance.run();
     			} catch (Exception e) {
     				e.printStackTrace();
     				showExecutionErrorDialog(Thread.currentThread().getName(), e);

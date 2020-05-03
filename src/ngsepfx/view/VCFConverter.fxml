@@ -20,9 +20,9 @@
 		
 		<Label fx:id="outputPrefixLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">(*) Output files prefix: </Label>
 		<ValidatedTextField fx:id="outputPrefixTextField" label="$outputPrefixLabel"
-							GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="output-file" 
+							GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="output-file" 
 							validators="OUTPUT_FILE, MANDATORY"/>
-		<Button onAction="#changeOutputFile" userData="$outputPrefixTextField" GridPane.rowIndex="1" GridPane.columnIndex="2" text="..."/>	
+		<Button onAction="#changeOutputFile" userData="$outputPrefixTextField" GridPane.rowIndex="1" GridPane.columnIndex="4" text="..."/>	
 		
 		<Label fx:id="populationFileLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">File with population assignments:</Label>
 		<ValidatedTextField fx:id="populationFileTextField" label="$populationFileLabel"
@@ -31,43 +31,40 @@
 		<Button onAction="#changeInputFile" userData="$inputFileTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />
 			
 	</GridPane>
-	<GridPane styleClass="grid-pane">
-	
-		<Label fx:id="sequenceNameLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">Name of the sequence:</Label>
-		<ValidatedTextField fx:id="sequenceNameTextField" label="$sequenceNameLabel"
-							GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="medium-number-input"
-							validators="POSITIVE_NUMBER, INT"/>	
-							
-		<Label fx:id="idParent1Label" GridPane.rowIndex="0" GridPane.columnIndex="2">Id of the first parent:</Label>
-		<ValidatedTextField fx:id="idParent1TextField" label="$idParent1Label"
-							GridPane.rowIndex="0" GridPane.columnIndex="3" styleClass="medium-number-input"
-							validators="POSITIVE_NUMBER, INT"/>
-							
-		<Label fx:id="idParent2Label" GridPane.rowIndex="0" GridPane.columnIndex="4">Id of the second parent:</Label>
-		<ValidatedTextField fx:id="idParent2TextField" label="$idParent2Label"
-							GridPane.rowIndex="0" GridPane.columnIndex="5" styleClass="medium-number-input"
-							validators="POSITIVE_NUMBER, INT"/>	
-							
-		<CheckBox fx:id="printDarwinCheckBox" text="Input file for DarWin" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-		<CheckBox fx:id="printEigensoftCheckBox" text="Input file for Eingensoft" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-		<CheckBox fx:id="printEmmaCheckBox" text="Input file for Emma" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
-		<CheckBox fx:id="printFastaCheckBox" text="Fasta file" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-		<CheckBox fx:id="printFineStructureCheckBox" text="Input file for FineStructure" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-		<CheckBox fx:id="printFlapjackCheckBox" text="Input file for Flapjack" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
-		<CheckBox fx:id="printGWASPolyCheckBox" text="Input file for GWASPoly" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-		<CheckBox fx:id="printHaploviewCheckBox" text="Input file for Haploview" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-		<CheckBox fx:id="printHapmapCheckBox" text="Input file for HapMap" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
-		<CheckBox fx:id="printJoinMapCheckBox" text="Input file for JoinMap" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-		<CheckBox fx:id="printMatrixCheckBox" text="ACGT file" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
-		<CheckBox fx:id="printPhaseCheckBox" text="Input file for Phase" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
-		<CheckBox fx:id="printPlinkCheckBox" text="Input file for Plink" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-		<CheckBox fx:id="printPowerMarkerCheckBox" text="Input file for PowerMaker" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
-		<CheckBox fx:id="printrrBLUPCheckBox" text="Input file for rrBLUP" GridPane.rowIndex="5" GridPane.columnIndex="2"/>
-		<CheckBox fx:id="printSpagediCheckBox" text="Input file for Spagedi" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
-		<CheckBox fx:id="printStructureCheckBox" text="Input file for Structure" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
-		<CheckBox fx:id="printTreeMixCheckBox" text="Input file for TreeMix" GridPane.rowIndex="6" GridPane.columnIndex="2"/>
-	</GridPane>
-	
+	<HBox styleClass="HBox">
+		<GridPane styleClass="grid-pane">
+			<CheckBox fx:id="printDarwinCheckBox" text="Input file for DarWin" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+			<CheckBox fx:id="printEigensoftCheckBox" text="Input file for Eingensoft" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+			<CheckBox fx:id="printEmmaCheckBox" text="Input file for Emma" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+			<CheckBox fx:id="printFastaCheckBox" text="Fasta file" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+			<CheckBox fx:id="printFineStructureCheckBox" text="Input file for FineStructure" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+			<CheckBox fx:id="printFlapjackCheckBox" text="Input file for Flapjack" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+			<CheckBox fx:id="printGWASPolyCheckBox" text="Input file for GWASPoly" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+			<CheckBox fx:id="printHaploviewCheckBox" text="Input file for Haploview" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+			<CheckBox fx:id="printHapmapCheckBox" text="Input file for HapMap" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+			<CheckBox fx:id="printJoinMapCheckBox" text="Input file for JoinMap" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+			<CheckBox fx:id="printMatrixCheckBox" text="ACGT file" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+			<CheckBox fx:id="printPhaseCheckBox" text="Input file for Phase" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+			<CheckBox fx:id="printPlinkCheckBox" text="Input file for Plink" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+			<CheckBox fx:id="printPowerMarkerCheckBox" text="Input file for PowerMaker" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+			<CheckBox fx:id="printrrBLUPCheckBox" text="Input file for rrBLUP" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+			<CheckBox fx:id="printSpagediCheckBox" text="Input file for Spagedi" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+			<CheckBox fx:id="printStructureCheckBox" text="Input file for Structure" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+			<CheckBox fx:id="printTreeMixCheckBox" text="Input file for TreeMix" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+		</GridPane>	
+		<GridPane styleClass="grid-pane">
+			<Label fx:id="sequenceNameLabel" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="4">Sequence name (Phase and FineStructure)</Label>
+			<ValidatedTextField fx:id="sequenceNameTextField" label="$sequenceNameLabel"
+								GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2" />
+			<Label GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="4">Parent ids (for Joinmap)</Label>
+			<Label fx:id="idParent1Label" GridPane.rowIndex="3" GridPane.columnIndex="0">First:</Label>
+			<ValidatedTextField fx:id="idParent1TextField" label="$idParent1Label"
+								 GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+			<Label fx:id="idParent2Label" GridPane.rowIndex="4" GridPane.columnIndex="0">Second:</Label>
+			<ValidatedTextField fx:id="idParent2TextField" label="$idParent2Label"
+								 GridPane.rowIndex="4" GridPane.columnIndex="1"/>	
+		</GridPane>
+	</HBox>
 	<HBox >
 		<Button onAction="#submitTask" text="VCF Converter" />
 	</HBox>
