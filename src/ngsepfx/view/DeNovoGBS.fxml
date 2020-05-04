@@ -24,7 +24,7 @@
 							validators="INPUT_FILE" />
 		<Button onAction="#changeInputFile" userData="$filesDescriptorTextField" text="..." GridPane.rowIndex="1" GridPane.columnIndex="4" />
 
-		<Label fx:id="outputPrefixLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">(*) Output File:</Label>
+		<Label fx:id="outputPrefixLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">(*) Output prefix:</Label>
 		<ValidatedTextField fx:id="outputPrefixTextField" label="$outputPrefixLabel"
 							GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="output-file"
 							validators="OUTPUT_FILE, MANDATORY"/>
