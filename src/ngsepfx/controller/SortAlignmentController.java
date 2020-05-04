@@ -34,7 +34,7 @@ public class SortAlignmentController extends AnalysisAreaController{
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
 		inputFileTextField.setText(file.getAbsolutePath());
-		suggestOutputFile(file, outputFileTextField, "_sorted");
+		suggestOutputFile(file, outputFileTextField, "_sorted.bam");
 	}
 
 	@Override
