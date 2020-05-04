@@ -98,7 +98,7 @@ public class DeNovoGBSController extends AnalysisAreaController {
 		File file = analyzeEvent.file;
 		setDefaultValues(KmerPrefixReadsClusteringAlgorithm.class.getName());
 		inputDirectoryTextField.setText(file.getAbsolutePath());
-		suggestOutputFile(file, outputPrefixTextField, "_DeNovoGBS.vcf");
+		suggestOutputFile(file, outputPrefixTextField, "_DeNovoGBS");
 		
 	}
 
