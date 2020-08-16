@@ -45,8 +45,8 @@ import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
 import ngsepfx.view.component.ValidatedTextField;
 import ngsep.discovery.MultisampleVariantsDetector;
-import ngsep.discovery.VariantPileupListener;
-import ngsep.discovery.VariantsDetector;
+import ngsep.discovery.SingleSampleVariantPileupListener;
+import ngsep.discovery.SingleSampleVariantsDetector;
 
 /**
  * 
@@ -238,7 +238,7 @@ public class VariantsDetectorController extends AnalysisAreaController {
 			runRPAnalysisCheckBox.setDisable(true);
 			runOnlySVsAnalysesCheckBox.setDisable(true);
 		} else {
-			setDefaultValues(VariantsDetector.class.getName());
+			setDefaultValues(SingleSampleVariantsDetector.class.getName());
 			inputFileTextField.setText(file.getAbsolutePath());
 			outputFileLabel.setText("(*) Output files prefix:");
 			suggestOutputFile(file, outputFileTextField, "_variants");
@@ -264,8 +264,8 @@ public class VariantsDetectorController extends AnalysisAreaController {
 	public void ploidyChanged(KeyEvent event) {
 		try {
 			int ploidy = Integer.parseInt(normalPloidyTextField.getText());
-			if(ploidy==1) heterozygosityRateTextField.setText(""+VariantPileupListener.DEF_HETEROZYGOSITY_RATE_HAPLOID);
-			else heterozygosityRateTextField.setText(""+VariantPileupListener.DEF_HETEROZYGOSITY_RATE_DIPLOID);
+			if(ploidy==1) heterozygosityRateTextField.setText(""+SingleSampleVariantPileupListener.DEF_HETEROZYGOSITY_RATE_HAPLOID);
+			else heterozygosityRateTextField.setText(""+SingleSampleVariantPileupListener.DEF_HETEROZYGOSITY_RATE_DIPLOID);
 			printSamplePloidyCheckBox.setSelected(ploidy!=2);
 		} catch (NumberFormatException e) {
 		}
@@ -298,7 +298,7 @@ public class VariantsDetectorController extends AnalysisAreaController {
 						instance.setProgressNotifier(this);
 	    				instance.run();
 					} else {
-	    				VariantsDetector instance = new VariantsDetector();
+	    				SingleSampleVariantsDetector instance = new SingleSampleVariantsDetector();
 	    				fillAttributes(instance);
 	    				instance.setInputFile(inputFileTextField.getText());
 	    				instance.setOutputPrefix(outputFileTextField.getText());

@@ -26,7 +26,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import ngsep.assembly.Assembler;
+import ngsep.vcf.VCFDiversityCalculator;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
@@ -36,11 +36,11 @@ import ngsepfx.view.component.ValidatedTextField;
  * @author Jorge Duitama
  *
  */
-public class AssemblerController extends AnalysisAreaController {
+public class VCFDiversityCalculatorController extends AnalysisAreaController {
 	
 	//Constants.
 	
-	public static final String TASK_NAME = "Assembler";
+	public static final String TASK_NAME = "VCF Diversity Statistics";
 	
 	//FXML parameters.
 	
@@ -51,65 +51,61 @@ public class AssemblerController extends AnalysisAreaController {
 	private ValidatedTextField outputFileTextField;
 	
 	@FXML
-	private ValidatedTextField kmerLengthTextField;
+	private ValidatedTextField samplesMapFileTextField;
 	
-	@FXML
-	private ValidatedTextField kmerOffsetTextField;
-	
-	//AnalysisAreaController.
 
 	/* (non-Javadoc)
 	 * @see ngsepfx.controller.AnalysisAreaController#getFXMLResourcePath()
 	 */
 	@Override
 	public String getFXMLResourcePath() {
-		return "/ngsepfx/view/Assembler.fxml";
+		return "/ngsepfx/view/VCFDiversityCalculator.fxml";
 	}
-	
 	/* (non-Javadoc)
 	 * @see ngsepfx.controller.AnalysisAreaController#getValidatedTextFieldComponents()
 	 */
 	@Override
-	protected Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
+	public Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
 		Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
 		textFields.put("inputFile", inputFileTextField);
 		textFields.put("outputFile", outputFileTextField);
-		textFields.put("kmerLength", kmerLengthTextField);
-		textFields.put("kmerOffset", kmerOffsetTextField);
+		textFields.put("samplesMap", samplesMapFileTextField);
 		return textFields;
 	}
 
 	/* (non-Javadoc)
 	 * @see ngsepfx.controller.AnalysisAreaController#handleActivationEvent(ngsepfx.event.NGSEPEvent)
+	 * #handleNGSEPEvent(ngsepfx.event.NGSEPEvent)
 	 */
 	@Override
 	public void handleActivationEvent(NGSEPEvent event) {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
-		setDefaultValues(Assembler.class.getName());
+		setDefaultValues(VCFDiversityCalculator.class.getName());
 		inputFileTextField.setText(file.getAbsolutePath());
-		suggestOutputFile(file, outputFileTextField, "_assembly.fa");
+		suggestOutputFile(file, outputFileTextField, "_DiversityStats.txt");
 	}
-
+	
+	/* (non-Javadoc)
+	 * @see ngsepfx.controller.AnalysisAreaController#getTask()
+	 */
 	@Override
 	protected NGSEPTask<Void> getTask() {
-		return new NGSEPTask<Void>() {
+		return new NGSEPTask<Void>() {	
     		@Override 
     		public Void call() {
     			updateMessage(inputFileTextField.getText());
 				updateTitle(TASK_NAME);
     			FileHandler logHandler = null;
     			try {
-    				Assembler instance = new Assembler();
+    				VCFDiversityCalculator instance = new VCFDiversityCalculator();
     				fillAttributes(instance);
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
-    				logHandler = createLogHandler(instance.getOutputPrefix(), "Assembler");
+    				logHandler = createLogHandler(instance.getOutputFile(), "");
     				log.addHandler(logHandler);
-    				
     				instance.setLog(log);
     				instance.setProgressNotifier(this);
-    				
     				instance.run();
     			} catch (Exception e) {
     				e.printStackTrace();
@@ -124,7 +120,4 @@ public class AssemblerController extends AnalysisAreaController {
     		}
 		};
 	}
-	
-	
-
 }

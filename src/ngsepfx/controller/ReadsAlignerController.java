@@ -112,7 +112,7 @@ public class ReadsAlignerController extends AnalysisAreaController {
 	private List<ReadsAlignerFileData> filesData;
 	private boolean pairedEnd = false;
 	
-	private static String [] extensions = {".fastq",".fastq.gz",".fasta",".fasta.gz",".fa",".fa.gz"};
+	private static String [] extensions = {".fastq",".fastq.gz",".fq",".fq.gz", ".fasta",".fasta.gz",".fa",".fa.gz"};
 	
 	public static int getExtensionIndex (String filename) {
 		String nameLC = filename.toLowerCase();

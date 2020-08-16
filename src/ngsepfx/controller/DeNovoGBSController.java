@@ -39,7 +39,7 @@ import ngsepfx.view.component.ValidatedTextField;
  */
 public class DeNovoGBSController extends AnalysisAreaController {
 
-	public static final String TASK_NAME = "DeNovoGBS";
+	public static final String TASK_NAME = "De-Novo GBS";
 	
 	@FXML
 	private ValidatedTextField inputDirectoryTextField;

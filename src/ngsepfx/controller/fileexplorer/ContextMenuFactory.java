@@ -58,16 +58,22 @@ public final class ContextMenuFactory {
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Summary Statistics", "ngsepfx.controller.VCFSummaryStatisticsController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Filter", "ngsepfx.controller.VCFFilterController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Converter", "ngsepfx.controller.VCFConverterController");
+	    	addSimpleMenuItem(contextMenu, cell, "VCF Diversity Stats", "ngsepfx.controller.VCFDiversityCalculatorController");
+	    	addSimpleMenuItem(contextMenu, cell, "VCF Comparator", "ngsepfx.controller.VCFComparatorController");
+	    	addSimpleMenuItem(contextMenu, cell, "VCF Distance Matrix Calculator", "ngsepfx.controller.VCFDistanceMatrixCalculatorController");
 	    } else if (fileInLower.endsWith(".txt") || fileInLower.endsWith(".tsv")) {
 	    	addSimpleMenuItem(contextMenu, cell, "Reads Demultiplex", "ngsepfx.controller.ReadsDemultiplexController");
-	    } else if (fileInLower.contains(".fa")) {
+	    	if(fileInLower.endsWith(".txt")) addSimpleMenuItem(contextMenu, cell, "Neighbor Joining", "ngsepfx.controller.NeighborJoiningController");
+	    } else if (fileInLower.contains(".fa") || fileInLower.contains(".fq")) {
 	    	addSimpleMenuItem(contextMenu, cell, "Genome Indexer", "ngsepfx.controller.GenomeIndexerController");
 	    	//addSimpleMenuItem(contextMenu, cell, "Assembler", "ngsepfx.controller.AssemblerController");
 	    	addSimpleMenuItem(contextMenu, cell, "Reads Aligner", "ngsepfx.controller.ReadsAlignerController");
 	    	//addSimpleMenuItem(contextMenu, cell, "Reads File Errors Corrector", "ngsepfx.controller.ReadsFileErrorsCorrectorController");
-	    } else if (fileInLower.contains(".bam") || file.getName().contains(".sam")) {
+	    } else if (fileInLower.endsWith(".bam") || file.getName().endsWith(".sam")|| file.getName().endsWith(".cram")) {
 	    	addSimpleMenuItem(contextMenu, cell, "Variants Detector", "ngsepfx.controller.VariantsDetectorController");
 	    	addSimpleMenuItem(contextMenu, cell, "Sort Alignments", "ngsepfx.controller.SortAlignmentController");
+	    } else if (fileInLower.contains(".gff")) {
+	    	addSimpleMenuItem(contextMenu, cell, "Transcriptome Analyzer", "ngsepfx.controller.TranscriptomeAnalyzerController");
 	    }
 	    return contextMenu;
 	}
