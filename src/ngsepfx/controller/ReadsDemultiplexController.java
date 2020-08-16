@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
-import ngsep.sequences.KmersExtractor;
 import ngsep.sequencing.ReadsDemultiplex;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
@@ -84,7 +83,7 @@ public class ReadsDemultiplexController extends AnalysisAreaController{
 	public void handleActivationEvent(NGSEPEvent event) {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
-		setDefaultValues(KmersExtractor.class.getName());
+		setDefaultValues(ReadsDemultiplex.class.getName());
 		indexFileTextField.setText(file.getAbsolutePath());
 		outDirectoryTextField.setText(file.getParentFile().getAbsolutePath());
 	}
