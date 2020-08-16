@@ -57,9 +57,6 @@ public class DeNovoGBSController extends AnalysisAreaController {
 	private ValidatedTextField maxNumClustersTextField;
 	
 	@FXML
-	private ValidatedTextField numThreadsTextField;
-	
-	@FXML
 	private ValidatedTextField maxBaseQSTextField;
 	
 	@FXML
@@ -70,6 +67,15 @@ public class DeNovoGBSController extends AnalysisAreaController {
 	
 	@FXML
 	private ValidatedTextField normalPloidyTextField;
+	
+	@FXML
+	private ValidatedTextField basesToIgnore5PTextField;
+	
+	@FXML
+	private ValidatedTextField basesToIgnore3PTextField;
+	
+	@FXML
+	private ValidatedTextField numThreadsTextField;
 	
 	@Override
 	public String getFXMLResourcePath() {
@@ -84,11 +90,13 @@ public class DeNovoGBSController extends AnalysisAreaController {
 		textFields.put("filesDescriptor", filesDescriptorTextField);
 		textFields.put("kmerLength", kmerLengthTextField);
 		textFields.put("maxNumClusters", maxNumClustersTextField);
-		textFields.put("numThreads", numThreadsTextField);
 		textFields.put("maxBaseQS", maxBaseQSTextField);
-		textFields.put("minQuality", minQualityTextField);
 		textFields.put("heterozygosityRate", heterozygosityRateTextField);
 		textFields.put("normalPloidy", normalPloidyTextField);
+		textFields.put("minQuality", minQualityTextField);
+		textFields.put("basesToIgnore5P", basesToIgnore5PTextField);
+		textFields.put("basesToIgnore3P", basesToIgnore3PTextField);
+		textFields.put("numThreads", numThreadsTextField);
 		return textFields;
 	}
 	

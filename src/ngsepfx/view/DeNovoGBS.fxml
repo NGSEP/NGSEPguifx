@@ -38,12 +38,12 @@
 							GridPane.rowIndex="0" GridPane.columnIndex="1"
 							validators="POSITIVE_NUMBER, INT"/>
 
-		<Label fx:id="maxNumClustersLabel" GridPane.rowIndex="0" GridPane.columnIndex="5">Maximum Number of Clusters:</Label>
+		<Label fx:id="maxNumClustersLabel" GridPane.rowIndex="0" GridPane.columnIndex="5">Maximum number of clusters:</Label>
 		<ValidatedTextField fx:id="maxNumClustersTextField" label="$maxNumClustersLabel" styleClass="medium-number-input"
 							GridPane.rowIndex="0" GridPane.columnIndex="6"
 							validators="POSITIVE_NUMBER, INT"/>
 
-		<Label fx:id="maxBaseQSLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Maximum value allowed for a base quality score:</Label>
+		<Label fx:id="maxBaseQSLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Maximum base quality score:</Label>
 		<ValidatedTextField fx:id="maxBaseQSTextField" label="$maxBaseQSLabel" styleClass="medium-number-input"
 							GridPane.rowIndex="1" GridPane.columnIndex="1"
 							validators="POSITIVE_NUMBER, INT"/>
@@ -62,10 +62,22 @@
 		<ValidatedTextField fx:id="minQualityTextField" label="$minQualityLabel" styleClass="medium-number-input"
 							GridPane.rowIndex="2" GridPane.columnIndex="6"
 							validators="POSITIVE_NUMBER, INT"/>
+							
+		<Label fx:id="ignoreBPLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Ignore Basepairs:</Label>
+		<HBox GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="hbox">
+		 	<Label>5':</Label>
+		 	<ValidatedTextField fx:id="basesToIgnore5PTextField" label="$ignoreBPLabel"
+							styleClass="small-number-input"
+							validators="POSITIVE_NUMBER"/>
+		 	<Label>3':</Label>
+		 	<ValidatedTextField fx:id="basesToIgnore3PTextField" label="$ignoreBPLabel"
+ 						styleClass="small-number-input"
+ 						validators="POSITIVE_NUMBER"/>
+		</HBox>
 
-		<Label fx:id="numThreadsLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Number of threads to process read clusters:</Label>
+		<Label fx:id="numThreadsLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">Number of threads:</Label>
 		<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel" styleClass="medium-number-input"
-							GridPane.rowIndex="3" GridPane.columnIndex="1"
+							GridPane.rowIndex="4" GridPane.columnIndex="1"
 							validators="POSITIVE_NUMBER"/>
 	</GridPane>							
 
