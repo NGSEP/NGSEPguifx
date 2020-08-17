@@ -63,7 +63,11 @@ public class VariantFilesMergeController extends AnalysisAreaController {
 		chooser.getExtensionFilters().add(new ExtensionFilter("VCFFiles","*.vcf.gz"));
 		List<File> selected = chooser.showOpenMultipleDialog(null);
 		for(File f:selected) vcfFiles.add(f.getAbsolutePath());
+		String genomeFile = HistoryManager.getInstance().getLastGenomeFile();
+		//System.out.println("Genome file "+genomeFile);
+		if(genomeFile!=null) genomeTextField.setText(genomeFile);
 		selectedFilesLabel.setText("Selected "+vcfFiles.size()+" files");
+		outputFileTextField.setText(inputDirectory+File.separator+"variants.vcf");
 	}
 	@FXML
 	private void mergeVariants(ActionEvent actionEvent) {
