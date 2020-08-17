@@ -98,7 +98,7 @@ public class NeighborJoiningController extends AnalysisAreaController {
     				fillAttributes(instance);
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
-    				logHandler = createLogHandler(instance.getOutputFile(), "NeighborJoining");
+    				logHandler = createLogHandler(instance.getOutputFile(), "");
     				log.addHandler(logHandler);
     				instance.setLog(log);
     				instance.setProgressNotifier(this);

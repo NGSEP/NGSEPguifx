@@ -70,7 +70,7 @@ public class GenomeIndexerController extends AnalysisAreaController {
 		File file = analyzeEvent.file;
 		setDefaultValues(GenomeIndexer.class.getName());
 		inputFileTextField.setText(file.getAbsolutePath());
-		suggestOutputFile(file, outputFileTextField, "_GenomeIndexer.fm");
+		suggestOutputFile(file, outputFileTextField, "_GenomeIndexer.fm.gz");
 		// TODO Auto-generated method stub
 		
 	}
@@ -89,7 +89,7 @@ public class GenomeIndexerController extends AnalysisAreaController {
     				fillAttributes(instance);
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
-    				logHandler = createLogHandler(instance.getOutputFile(), "Indexer");
+    				logHandler = createLogHandler(instance.getOutputFile(), "");
     				log.addHandler(logHandler);
     				instance.setLog(log);
     				instance.setProgressNotifier(this);

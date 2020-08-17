@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -154,7 +155,8 @@ public class VCFConverterController extends AnalysisAreaController{
 					fillAttributes(instance);
 					//Log 
 					Logger log = Logger.getAnonymousLogger();
-					logHandler = createLogHandler(instance.getOutputPrefix(), "Converter");
+					logHandler = new FileHandler(instance.getOutputPrefix()+"_Converter.log");
+					logHandler.setFormatter(new SimpleFormatter());
 					log.addHandler(logHandler);
 					instance.setLog(log);
 					instance.setProgressNotifier(this);

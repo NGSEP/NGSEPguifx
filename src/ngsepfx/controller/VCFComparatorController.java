@@ -77,7 +77,7 @@ public class VCFComparatorController extends AnalysisAreaController {
 	public Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
 		Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
 		textFields.put("inputFile", inputFileTextField);
-		textFields.put("input2File", inputFile2TextField);
+		textFields.put("inputFile2", inputFile2TextField);
 		textFields.put("genome", genomeTextField);
 		textFields.put("outputFile", outputFileTextField);
 		textFields.put("minPCTGenotyped", minPCTGenotypedTextField);
