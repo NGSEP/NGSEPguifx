@@ -51,6 +51,7 @@ public final class ContextMenuFactory {
 	    	addSimpleMenuItem(contextMenu, cell, "Multiple Reads Aligner", "ngsepfx.controller.ReadsAlignerController");
 	    	addSimpleMenuItem(contextMenu, cell, "Multiple Variants Detector", "ngsepfx.controller.VariantsDetectorController");
 	    	addSimpleMenuItem(contextMenu, cell, "Variant Files Merge", "ngsepfx.controller.VariantFilesMergeController");
+	    	addSimpleMenuItem(contextMenu, cell, "TILLING Individual genotyper", "ngsepfx.controller.TillingPoolsIndividualGenotyperController");
 	    	
 	    	//addSimpleMenuItem(contextMenu, cell, "K-mers Extractor", "ngsepfx.controller.KmersExtractorController");
 	    } else if(fileInLower.contains(".vcf")) {
@@ -60,7 +61,9 @@ public final class ContextMenuFactory {
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Converter", "ngsepfx.controller.VCFConverterController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Diversity Stats", "ngsepfx.controller.VCFDiversityCalculatorController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Comparator", "ngsepfx.controller.VCFComparatorController");
-	    	addSimpleMenuItem(contextMenu, cell, "VCF Distance Matrix Calculator", "ngsepfx.controller.VCFDistanceMatrixCalculatorController");
+	    	addSimpleMenuItem(contextMenu, cell, "VCF Variant Density", "ngsepfx.controller.VCFVariantDensityCalculatorController");
+	    	addSimpleMenuItem(contextMenu, cell, "VCF Distance Matrix", "ngsepfx.controller.VCFDistanceMatrixCalculatorController");
+	    	addSimpleMenuItem(contextMenu, cell, "VCF Relative Coordinates Translator", "ngsepfx.controller.VCFRelativeCoordinatesTranslatorController");
 	    } else if (fileInLower.endsWith(".txt") || fileInLower.endsWith(".tsv")) {
 	    	addSimpleMenuItem(contextMenu, cell, "Reads Demultiplex", "ngsepfx.controller.ReadsDemultiplexController");
 	    	addSimpleMenuItem(contextMenu, cell, "TILLING Simulator", "ngsepfx.controller.TillingPopulationSimulatorController");
