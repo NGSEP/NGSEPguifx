@@ -31,6 +31,17 @@
 							validators="OUTPUT_FILE, MANDATORY"/>
 		<Button onAction="#changeOutputFile" userData="$outputFileTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />
 	</GridPane>
+	<GridPane styleClass="grid-pane">
+	
+		<Label fx:id="maxPoolsLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">Maximum number of pools in which a variant is reported:</Label>
+		<ValidatedTextField fx:id="maxPoolsTextField" label="$maxPoolsLabel"
+							GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="small-number-input"
+							validators="POSITIVE_NUMBER"/>
+		<CheckBox fx:id="onlyBiallelicCheckBox" text="Keep only biallelic variants" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+							
+							
+		
+	</GridPane>
 	<Label fx:id="selectedFilesLabel" text="Selected 0 files"/>
 	<HBox >
 		<Button onAction="#submitTask" text="Triangulate pool variants" />

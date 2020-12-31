@@ -9,6 +9,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -32,6 +33,10 @@ public class TillingPoolsIndividualGenotyperController extends AnalysisAreaContr
 	private ValidatedTextField genomeTextField;
 	@FXML
 	private ValidatedTextField outputFileTextField;
+	@FXML
+	private ValidatedTextField maxPoolsTextField;
+	@FXML
+	private CheckBox onlyBiallelicCheckBox;
 	
 	@Override
 	public Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
@@ -39,8 +44,17 @@ public class TillingPoolsIndividualGenotyperController extends AnalysisAreaContr
 		textFields.put("poolsDescriptor", poolsDescriptorTextField);
 		textFields.put("genome", genomeTextField);
 		textFields.put("outputFile", outputFileTextField);
+		textFields.put("maxPools", maxPoolsTextField);
 		return textFields;
 	}
+	
+	@Override
+	protected Map<String, CheckBox> getCheckBoxComponents() {
+		Map<String, CheckBox> checkboxes = new HashMap<String, CheckBox>();
+		checkboxes.put("onlyBiallelic", onlyBiallelicCheckBox);
+		return checkboxes;
+	}
+	
 	@Override
 	public String getFXMLResourcePath() {
 		return "/ngsepfx/view/TillingPoolsIndividualGenotyper.fxml";
