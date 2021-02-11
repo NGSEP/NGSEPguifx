@@ -26,6 +26,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import ngsep.assembly.Assembler;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
@@ -48,13 +49,22 @@ public class AssemblerController extends AnalysisAreaController {
 	private ValidatedTextField inputFileTextField;
 	
 	@FXML
-	private ValidatedTextField outputFileTextField;
+	private ValidatedTextField outputPrefixTextField;
 	
 	@FXML
-	private ValidatedTextField kmerLengthTextField;
+	private ValidatedTextField graphFileTextField;
 	
 	@FXML
-	private ValidatedTextField kmerOffsetTextField;
+	private ValidatedTextField windowLengthTextField;
+	
+	@FXML
+	private ValidatedTextField ploidyTextField;
+	
+	@FXML
+	private ValidatedTextField numThreadsTextField;
+	
+	@FXML
+	private ChoiceBox<String> inputFormatChoiceBox;
 	
 	//AnalysisAreaController.
 
@@ -73,9 +83,11 @@ public class AssemblerController extends AnalysisAreaController {
 	protected Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
 		Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
 		textFields.put("inputFile", inputFileTextField);
-		textFields.put("outputFile", outputFileTextField);
-		textFields.put("kmerLength", kmerLengthTextField);
-		textFields.put("kmerOffset", kmerOffsetTextField);
+		textFields.put("outputPrefix", outputPrefixTextField);
+		textFields.put("graphFile", graphFileTextField);
+		textFields.put("windowLength", windowLengthTextField);
+		textFields.put("ploidy", ploidyTextField);
+		textFields.put("numThreads", numThreadsTextField);
 		return textFields;
 	}
 
@@ -88,7 +100,15 @@ public class AssemblerController extends AnalysisAreaController {
 		File file = analyzeEvent.file;
 		setDefaultValues(Assembler.class.getName());
 		inputFileTextField.setText(file.getAbsolutePath());
-		suggestOutputFile(file, outputFileTextField, "_assembly.fa");
+		inputFormatChoiceBox.getItems().add(FORMAT_FASTQ);
+		inputFormatChoiceBox.getItems().add(FORMAT_FASTA);
+		String filename = file.getName();
+		int k = ReadsAlignerController.getExtensionIndex(filename);
+		if(k>0) {
+			if(filename.toLowerCase().substring(k).startsWith(".fastq")) inputFormatChoiceBox.getSelectionModel().select(0);
+			else inputFormatChoiceBox.getSelectionModel().select(1);
+		}
+		suggestOutputFile(file, outputPrefixTextField, "_assembly");
 	}
 
 	@Override

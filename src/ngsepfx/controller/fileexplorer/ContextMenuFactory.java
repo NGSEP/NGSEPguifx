@@ -70,7 +70,7 @@ public final class ContextMenuFactory {
 	    	if(fileInLower.endsWith(".txt")) addSimpleMenuItem(contextMenu, cell, "Neighbor Joining", "ngsepfx.controller.NeighborJoiningController");
 	    } else if (fileInLower.contains(".fa") || fileInLower.contains(".fq")) {
 	    	addSimpleMenuItem(contextMenu, cell, "Genome Indexer", "ngsepfx.controller.GenomeIndexerController");
-	    	//addSimpleMenuItem(contextMenu, cell, "Assembler", "ngsepfx.controller.AssemblerController");
+	    	addSimpleMenuItem(contextMenu, cell, "Assembler", "ngsepfx.controller.AssemblerController");
 	    	addSimpleMenuItem(contextMenu, cell, "Reads Aligner", "ngsepfx.controller.ReadsAlignerController");
 	    	//addSimpleMenuItem(contextMenu, cell, "Reads File Errors Corrector", "ngsepfx.controller.ReadsFileErrorsCorrectorController");
 	    } else if (fileInLower.endsWith(".bam") || file.getName().endsWith(".sam")|| file.getName().endsWith(".cram")) {
