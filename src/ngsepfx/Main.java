@@ -22,6 +22,7 @@ package ngsepfx;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import ngsepfx.concurrent.ExecutorSingleton;
@@ -51,7 +52,8 @@ public class Main extends Application {
 		try {
 			BorderPane root = FXMLLoader.load(getClass().getResource("view/Main.fxml"));
 			Scene scene = new Scene(root,1200,675);
-			primaryStage.setScene(scene);			
+			primaryStage.setScene(scene);
+			primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/ngsepfx/view/images/NGSEPlogo.png")));
 			primaryStage.show();
 			scene.getStylesheets().add(getClass().getResource("/ngsepfx/view/application.css").toExternalForm());
 		} catch(Exception e) {
