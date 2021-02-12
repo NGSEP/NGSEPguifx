@@ -61,6 +61,7 @@ public final class ContextMenuFactory {
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Converter", "ngsepfx.controller.VCFConverterController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Diversity Stats", "ngsepfx.controller.VCFDiversityCalculatorController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Comparator", "ngsepfx.controller.VCFComparatorController");
+	    	addSimpleMenuItem(contextMenu, cell, "Single Individual Haplotyper", "ngsepfx.controller.SingleIndividualHaplotyperController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Variant Density", "ngsepfx.controller.VCFVariantDensityCalculatorController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Distance Matrix", "ngsepfx.controller.VCFDistanceMatrixCalculatorController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Relative Coordinates Translator", "ngsepfx.controller.VCFRelativeCoordinatesTranslatorController");
