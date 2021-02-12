@@ -39,10 +39,12 @@ public class Validator{
 			System.err.println("WARN: Field: "+label+" does not have validations");
 			return validationError;
 		}
+		System.out.println("Value: "+value+" Label: "+label+" validators: "+validators.length);
 		if (needsValidation(validators, value)) {
 			String error = null;
 			for (ValidationEnum validator : validators) {
 				error = applyValidation(validator, value);
+				System.out.println("Value: "+value+" Label: "+label+" validator: "+validator.name()+" error: "+error);
 				if (error != null) {
 					validationError.addError(error);
 				}
@@ -64,7 +66,7 @@ public class Validator{
 				isMandatory = true;
 			}
 		}
-		return isMandatory || value.trim().isEmpty();
+		return isMandatory || !value.trim().isEmpty();
 	}
 	/**
 	 * Applies the given validator to the given value

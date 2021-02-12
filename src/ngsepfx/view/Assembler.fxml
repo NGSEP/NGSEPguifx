@@ -16,7 +16,7 @@
 		<ValidatedTextField fx:id="inputFileTextField" label="$inputFileLabel"
 							GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file" 
 							validators="INPUT_FILE, MANDATORY"/>
-		<Button onAction="#changeInputFile" text="..." GridPane.rowIndex="0" GridPane.columnIndex="4"/>
+		<Button onAction="#changeInputFile" userData="$inputFileTextField" text="..." GridPane.rowIndex="0" GridPane.columnIndex="4"/>
 		
 		<Label fx:id="outputPrefixLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">(*) Output Prefix:</Label>
 		<ValidatedTextField fx:id="outputPrefixTextField" label="$outputPrefixLabel" 
@@ -28,7 +28,7 @@
 		<ValidatedTextField fx:id="graphFileTextField" label="$graphFileLabel"
 							GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file" 
 							validators="INPUT_FILE"/>
-		<Button onAction="#changeInputFile" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4"/>	
+		<Button onAction="#changeInputFile" userData="$graphFileTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4"/>	
 	</GridPane>
 	
 	<HBox styleClass="hbox">
