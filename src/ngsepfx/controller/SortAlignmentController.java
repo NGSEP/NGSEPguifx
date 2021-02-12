@@ -5,7 +5,9 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import net.sf.picard.sam.SortSam;
+import ngsep.alignments.ReadAlignment;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
@@ -25,6 +27,9 @@ public class SortAlignmentController extends AnalysisAreaController{
 	@FXML
 	private ValidatedTextField outputFileTextField;
 	
+	@FXML
+	private ChoiceBox<ReadAlignment.Platform> platformChoiceBox;
+	
 	public String getFXMLResourcePath() {
 		return "/ngsepfx/view/SortAlignement.fxml";
 	}
@@ -34,6 +39,11 @@ public class SortAlignmentController extends AnalysisAreaController{
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
 		inputFileTextField.setText(file.getAbsolutePath());
+		platformChoiceBox.getItems().add(ReadAlignment.Platform.ILLUMINA);
+		platformChoiceBox.getItems().add(ReadAlignment.Platform.IONTORRENT);
+		platformChoiceBox.getItems().add(ReadAlignment.Platform.PACBIO);
+		platformChoiceBox.getItems().add(ReadAlignment.Platform.ONT);
+		platformChoiceBox.getSelectionModel().select(0);
 		suggestOutputFile(file, outputFileTextField, "_sorted.bam");
 	}
 
@@ -51,7 +61,7 @@ public class SortAlignmentController extends AnalysisAreaController{
     				String outFile = inputFileTextField.getText().trim();
     				logHandler = createLogHandler(outFile, "Sort");
     				log.addHandler(logHandler);
-    				sortAlignments(inputFileTextField.getText(), outputFileTextField.getText(), log);
+    				sortAlignments(inputFileTextField.getText(), outputFileTextField.getText(), platformChoiceBox.getValue(), log);
     			} catch (Exception e) {
     				e.printStackTrace();
     				showExecutionErrorDialog(Thread.currentThread().getName(), e);
@@ -66,8 +76,8 @@ public class SortAlignmentController extends AnalysisAreaController{
 		};
 	}
 	
-	public static void sortAlignments(String inFile, String outFile, Logger log) {
-		String [] args = new String [5];
+	public static void sortAlignments(String inFile, String outFile, ReadAlignment.Platform platform, Logger log) {
+		String [] args = new String [6];
 		
 		File f = new File (outFile);
 		String tmpDir = f.getName();
@@ -87,7 +97,12 @@ public class SortAlignmentController extends AnalysisAreaController{
 		args[2] = "I=" + inFile;
 		args[3] = "O=" + outFile;
 		args[4] = "CREATE_INDEX=true";
-		log.info("Sorting alignments");
+		if(platform == ReadAlignment.Platform.PACBIO || platform == ReadAlignment.Platform.ONT ) {
+			args[5] = "MAX_RECORDS_IN_RAM=20000";
+		} else {
+			args[5] = "MAX_RECORDS_IN_RAM=500000";
+		}
+		log.info("Sorting alignments. Arg input: "+args[2]+" argOutput: "+args[3]);
 		new SortSam().instanceMain(args);
 		log.info("Sorted alignments. Deleting temporary directory");
 		try {

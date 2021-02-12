@@ -256,6 +256,7 @@ public class ReadsAlignerController extends AnalysisAreaController {
 		try {
 			ReadsAligner instance = new ReadsAligner();
 			fillAttributes(instance);
+			instance.setPlatform(platformChoiceBox.getValue());
 			instance.setInputFile(data.getFile().getAbsolutePath());
 			if(data.getFile2()!=null) instance.setInputFile2(data.getFile2().getAbsolutePath());
 			String ifStr = data.getInputFormat();
@@ -280,7 +281,7 @@ public class ReadsAlignerController extends AnalysisAreaController {
 			instance.setLog(log);
 			instance.setProgressNotifier(task);
 			instance.run();
-			SortAlignmentController.sortAlignments(outFileUnsorted, outFileSorted, log);
+			SortAlignmentController.sortAlignments(outFileUnsorted, outFileSorted, platformChoiceBox.getValue(), log);
 			//Delete unsorted file
 			File f = new File(outFileUnsorted);
 			if(f.exists()) f.delete();
