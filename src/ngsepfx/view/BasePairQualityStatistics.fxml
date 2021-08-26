@@ -14,7 +14,7 @@
 		<ValidatedTextField fx:id="inputFileTextField" label="$inputFileLabel"
 							GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
 							validators="INPUT_FILE, MANDATORY" />
-		<Button fx:id="inputFileButton" onAction="#changeInputFile" userData="$inputFileTextField" text="..." GridPane.rowIndex="0" GridPane.columnIndex="4" />
+		<Button fx:id="inputFileButton" onAction="#changeMultipleInputFiles" userData="$inputFileTextField" text="..." GridPane.rowIndex="0" GridPane.columnIndex="4" />
 		
 	
 		<Label fx:id="genomeLabel" GridPane.rowIndex="1" GridPane.columnIndex="0"> (*) Reference genome:</Label>

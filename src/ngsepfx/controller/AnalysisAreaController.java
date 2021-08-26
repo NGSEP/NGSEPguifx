@@ -30,6 +30,7 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
@@ -72,6 +73,10 @@ public abstract class AnalysisAreaController {
 	
 	public static final String FORMAT_FASTQ= "fastq";
 	public static final String FORMAT_FASTA= "fasta";
+	public static final String FORMAT_BAM= "bam";
+	public static final String FORMAT_SAM= "sam";
+	public static final String FORMAT_CRAM= "cram";
+
 	
 	// Attributes.
 	
@@ -188,7 +193,27 @@ public abstract class AnalysisAreaController {
 			updateLastDirectory(selectedFile.getParentFile());
 		}
 	}
+	@FXML
+	protected void changeMultipleInputFiles(ActionEvent event) {
+		Node node = (Node) event.getSource() ;
+		ValidatedTextField textField = (ValidatedTextField) node.getUserData();
+		File currentDir = selectCurrentDirectory(textField);
+		FileChooser chooser = new FileChooser();
+		chooser.setInitialDirectory(currentDir);
+		chooser.setTitle("Select input file");
+		List<File> list = chooser.showOpenMultipleDialog(null);
+		if (list != null) {
+			//String path = "";
+		//	for(File file : list) {
+				//path = path + file.getAbsolutePath();
+				textField.setText(String.valueOf(list.size())+" Uploaded Files");
+				//updateLastDirectory(file.getParentFile());
+			}
+		}
 	
+		
+	
+		
 	/**
 	 * Creates a dialog to change the directory selected in the text field associated with the event
 	 * @param parent window of the dialog

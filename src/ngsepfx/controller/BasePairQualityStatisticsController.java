@@ -1,17 +1,26 @@
 package ngsepfx.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import ngsep.alignments.BasePairQualityStatisticsCalculator;
 import ngsepfx.concurrent.NGSEPTask;
+import ngsepfx.controller.SelectBasePairQualityStatsDialogController.AlignmentsFileData;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
 import ngsepfx.view.component.ValidatedTextField;
@@ -42,6 +51,21 @@ public class BasePairQualityStatisticsController extends AnalysisAreaController 
 	private Label outputFileLabel;
 	@FXML
 	private ValidatedTextField outputFileTextField;
+	private List<AlignmentsFileData> filesData;
+	private String individualFile;
+	
+	private static String [] extensions = {".sam",".bam",".cram"};
+
+	
+	public static int getExtensionIndex (String filename) {
+		String nameLC = filename.toLowerCase();
+		for(int j = 0;j<extensions.length;j++) {
+			if(nameLC.endsWith(extensions[j])) {
+				return nameLC.lastIndexOf(extensions[j]);
+			}
+		}
+		return -1;
+	}
 
 	@Override
 	public String getFXMLResourcePath() {
@@ -65,8 +89,46 @@ public class BasePairQualityStatisticsController extends AnalysisAreaController 
 		setDefaultValues(BasePairQualityStatisticsCalculator.class.getName());
 		inputFileTextField.setText(file.getAbsolutePath());
 		suggestOutputFile(file, outputFileTextField, "_QualityStatistics.txt");
-		
+		if (file.isDirectory()) {
+			try {
+				openSelectReadsDialog(file);
+			} catch (IOException e) {
+				showExecutionErrorDialog(Thread.currentThread().getName(), e);
+				return;
+			}
+			inputFileTextField.setText("Selected "+filesData.size()+" samples");
+			inputFileTextField.setEditable(false);
+			inputFileButton.setDisable(true);
+			outputFileLabel.setText("(*) Output directory:");
+			outputFileTextField.setText(file.getAbsolutePath()+"_QualityStatistics.txt");
+			}
+		else {
+			individualFile = inputFileTextField.getText();
+			}
+		}
+	
+	
+	protected void changeOutput(ActionEvent event) {
+		if(filesData!=null) super.changeOutputDirectory(event);
+		else super.changeOutputFile(event);
 	}
+		
+	
+	
+	private void openSelectReadsDialog(File directory) throws IOException {
+		//Parent parent = FXMLLoader.load(getClass().getResource("/ngsepfx/view/SelectReadsForAlignmentDialog.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ngsepfx/view/SelectBasePairQualityStatsDialog.fxml"));
+        Parent parent = fxmlLoader.load();
+        SelectBasePairQualityStatsDialogController controller = fxmlLoader.getController();
+        controller.setDirectory(directory);
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
+        filesData = controller.getSelectedReadFilesData();
+	}
+	
 
 	@Override
 	protected NGSEPTask<Void> getTask() {
@@ -80,12 +142,18 @@ public class BasePairQualityStatisticsController extends AnalysisAreaController 
     				BasePairQualityStatisticsCalculator instance = new BasePairQualityStatisticsCalculator();
     				fillAttributes(instance);
     				ArrayList<String> inputFiles = new ArrayList<String>();
-    				inputFiles.add(inputFileTextField.getText());
+    				if(filesData!=null) {
+    					for(AlignmentsFileData data:filesData) inputFiles.add(data.getFile().getAbsolutePath());
+    				}
+    				else {
+    					inputFiles.add(individualFile);
+    				}
     				instance.setInputFiles(inputFiles);
      				//Log 
     				Logger log = Logger.getAnonymousLogger();
     				logHandler = createLogHandler(instance.getOutputFile(), "");
     				log.addHandler(logHandler);
+					instance.setOutputFile(outputFileTextField.getText());
     				instance.setLog(log);
     				instance.setProgressNotifier(this);
     				instance.run();

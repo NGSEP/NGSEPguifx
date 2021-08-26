@@ -52,7 +52,8 @@ public final class ContextMenuFactory {
 	    	addSimpleMenuItem(contextMenu, cell, "Multiple Variants Detector", "ngsepfx.controller.VariantsDetectorController");
 	    	addSimpleMenuItem(contextMenu, cell, "Variant Files Merge", "ngsepfx.controller.VariantFilesMergeController");
 	    	addSimpleMenuItem(contextMenu, cell, "TILLING Individual genotyper", "ngsepfx.controller.TillingPoolsIndividualGenotyperController");
-	    	
+	    	addSimpleMenuItem(contextMenu, cell, "Base Pair Quality Statistics Quality", "ngsepfx.controller.BasePairQualityStatisticsController");
+
 	    	//addSimpleMenuItem(contextMenu, cell, "K-mers Extractor", "ngsepfx.controller.KmersExtractorController");
 	    } else if(fileInLower.contains(".vcf")) {
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Annotate", "ngsepfx.controller.VCFFunctionalAnnotatorController");

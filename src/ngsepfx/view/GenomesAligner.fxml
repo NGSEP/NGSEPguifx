@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import ngsepfx.view.component.ValidatedTextField?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" id="mainContainer">
+	<GridPane styleClass="grid-pane">
+	
+		<Label fx:id="genomeFileLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">(*) Genome Fasta File (1):</Label>
+		<ValidatedTextField fx:id="genomeFileTextField" label="$genomeFileLabel"
+							GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
+							validators="INPUT_FILE, MANDATORY" />
+		<Button fx:id="genomeFileButton" onAction="#changeInputFile" userData="$genomeFileTextField" text="..." GridPane.rowIndex="0" GridPane.columnIndex="4" />
+		
+		<Label fx:id="genomeFile2Label" GridPane.rowIndex="1" GridPane.columnIndex="0">(*) Genome Fasta File (2):</Label>
+		<ValidatedTextField fx:id="genomeFile2TextField" label="$genomeFile2Label"
+							GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
+							validators="INPUT_FILE" />
+		<Button fx:id="genomeFile2Button" onAction="#changeInputFile" userData="$genomeFile2TextField" text="..." GridPane.rowIndex="1" GridPane.columnIndex="4" />
+		
+		<Label fx:id="transcriptomeFileLabel" GridPane.rowIndex="2" GridPane.columnIndex="0"> (*) Transcriptome GFF3 File (1):</Label>
+		<ValidatedTextField fx:id="transcriptomeFileTextField" label="$transcriptomeFileLabel"
+							GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
+							validators="INPUT_FILE, MANDATORY" />
+		<Button fx:id="transcriptomeFileButton" onAction="#changeInputFile" userData="$transcriptomeFileTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />
+		
+		<Label fx:id="transcriptomeFile2Label" GridPane.rowIndex="3" GridPane.columnIndex="0"> (*) Transcriptome GFF3 File (2):</Label>
+		<ValidatedTextField fx:id="transcriptomeFile2TextField" label="$transcriptomeFile2Label"
+							GridPane.rowIndex="3" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
+							validators="INPUT_FILE, MANDATORY" />
+		<Button fx:id="transcriptomeFile2Button" onAction="#changeInputFile" userData="$transcriptomeFile2TextField" text="..." GridPane.rowIndex="3" GridPane.columnIndex="4" />
+		
+		<Label fx:id="outputPrefixLabel" GridPane.rowIndex="4" GridPane.columnIndex="0"> Output Prefix:</Label>
+		<ValidatedTextField fx:id="outputPrefixTextField" label="$outputPrefixLabel"
+							GridPane.rowIndex="4" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="output-file"
+							validators="INPUT_FILE, MANDATORY" />
+		<Button fx:id="outputPrefixButton" onAction="#changeInputFile" userData="$outputPrefixTextField" text="..." GridPane.rowIndex="4" GridPane.columnIndex="4" />
+		
+		<Label fx:id="kmerLengthLabel" GridPane.rowIndex="5" GridPane.columnIndex="0"> Kmer Length:</Label>
+		<ValidatedTextField fx:id="kmerLenghtTextField" label="$kmerLengthLabel"
+							GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="medium-number-input"
+							validators="POSITIVE_NUMBER" />
+		<Label fx:id="minimumPercentageLabel" GridPane.rowIndex="6" GridPane.columnIndex="0"> Minimum Percentage Kmers:</Label>
+		<ValidatedTextField fx:id="minimumPercentageTextField" label="$minimumPercentageLabel"
+							GridPane.rowIndex="6" GridPane.columnIndex="1" styleClass="medium-number-input"
+						validators="POSITIVE_NUMBER" />					
+		
+		<CheckBox fx:id="skipMCLCheckBox" text="Skip the MCL clustering phase" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+		</GridPane>
+		<HBox >
+		<Button onAction="#submitTask" text="Genomes Aligner" />
+		</HBox>
+	
+</VBox>
