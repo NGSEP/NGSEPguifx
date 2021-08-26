@@ -26,7 +26,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import ngsep.clustering.NeighborJoining;
+import ngsep.clustering.nj.NeighborJoining;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
