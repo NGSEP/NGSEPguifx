@@ -49,7 +49,7 @@ public class CoverageStatisticsCalculatorController extends AnalysisAreaControll
 
 	public Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
 		Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
-		textFields.put("inputFiles", inputFileTextField);
+		textFields.put("inputFile", inputFileTextField);
 		textFields.put("outputFile", outputFileTextField);
 		textFields.put("genome", genomeTextField);
 		textFields.put("minMQ", minMQTextField);

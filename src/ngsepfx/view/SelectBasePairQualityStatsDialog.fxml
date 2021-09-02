@@ -10,7 +10,6 @@
    <children>
       <TableView fx:id="readFilesDataTableView" layoutX="25.0" layoutY="50.0" prefHeight="350.0" prefWidth="658.0">
         <columns>
-          <TableColumn fx:id="selectColumn" prefWidth="71.0" text="Select" />
           <TableColumn fx:id="idColumn" prefWidth="130.0" text="Sample ID" />
             <TableColumn fx:id="fileColumn" prefWidth="192.0" text="Input Files" />
             <TableColumn fx:id="inputFormatColumn" prefWidth="145.0" text="Input Format" />

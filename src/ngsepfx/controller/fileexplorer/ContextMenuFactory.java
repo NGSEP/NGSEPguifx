@@ -53,6 +53,7 @@ public final class ContextMenuFactory {
 	    	addSimpleMenuItem(contextMenu, cell, "Variant Files Merge", "ngsepfx.controller.VariantFilesMergeController");
 	    	addSimpleMenuItem(contextMenu, cell, "TILLING Individual genotyper", "ngsepfx.controller.TillingPoolsIndividualGenotyperController");
 	    	addSimpleMenuItem(contextMenu, cell, "Base Pair Quality Statistics Quality", "ngsepfx.controller.BasePairQualityStatisticsController");
+	    	addSimpleMenuItem(contextMenu, cell, "Genomes Aligner", "ngsepfx.controller.GenomesAlignerController");
 
 	    	//addSimpleMenuItem(contextMenu, cell, "K-mers Extractor", "ngsepfx.controller.KmersExtractorController");
 	    } else if(fileInLower.contains(".vcf")) {
@@ -76,7 +77,6 @@ public final class ContextMenuFactory {
 	    	addSimpleMenuItem(contextMenu, cell, "Reads Aligner", "ngsepfx.controller.ReadsAlignerController");
 	    	addSimpleMenuItem(contextMenu, cell, "Single Reads Simulator", "ngsepfx.controller.SingleReadsSimulatorController");
 	    	addSimpleMenuItem(contextMenu, cell, "Single Individual Simulator", "ngsepfx.controller.SingleIndividualSimulatorController");
-	    	addSimpleMenuItem(contextMenu, cell, "Genomes Aligner", "ngsepfx.controller.GenomesAlignerController");
 	    	//addSimpleMenuItem(contextMenu, cell, "Genomes Aligner", "ngsepfx.controller.GenomesAlignerController");
 	    	//addSimpleMenuItem(contextMenu, cell, "Reads File Errors Corrector", "ngsepfx.controller.ReadsFileErrorsCorrectorController");
 	    } else if (fileInLower.endsWith(".bam") || file.getName().endsWith(".sam")|| file.getName().endsWith(".cram")) {

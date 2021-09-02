@@ -81,6 +81,7 @@ public class SingleReadsSimulatorController extends AnalysisAreaController {
 		inputFileTextField.setText(file.getAbsolutePath());
 		outFormatChoiceBox.getItems().add(FORMAT_FASTA);
 		outFormatChoiceBox.getItems().add(FORMAT_FASTQ);
+		outFormatChoiceBox.getSelectionModel().select(0);
 		suggestOutputFile(file, outputFileTextField, "_ReadsSimulation.fastq.gz");
 	}
 

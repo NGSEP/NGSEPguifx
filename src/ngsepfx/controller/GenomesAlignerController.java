@@ -27,13 +27,9 @@ public class GenomesAlignerController extends AnalysisAreaController {
 	public static final String TASK_NAME = "GenomeAligner";
 	
 	@FXML
-	private Label genomeFileLabel;
+	private Label inputFileLabel;
 	@FXML
-	private Label genomeFile2Label;
-	@FXML
-	private Label transcriptomeFileLabel;
-	@FXML
-	private Label transcriptomeFile2Label;
+	private Label inputDirectoryLabel;
 	@FXML
 	private Label outputPrefixLabel;	
 	@FXML
@@ -43,30 +39,22 @@ public class GenomesAlignerController extends AnalysisAreaController {
 	@FXML
 	private Label skipMCLLabel;
 	@FXML
-	private ValidatedTextField genomeFileTextField;
+	private Label minFrequencySoftCoreLabel;
+	@FXML
+	private ValidatedTextField inputFileTextField;
+	@FXML
+	private ValidatedTextField inputDirectoryTextField;
 	@FXML 
-	private ValidatedTextField genomeFile2TextField;
-	@FXML
-	private ValidatedTextField transcriptomeFileTextField;
-	@FXML
-	private ValidatedTextField transcriptomeFile2TextField;
-	@FXML
 	private ValidatedTextField outputPrefixTextField;
 	@FXML
 	private ValidatedTextField kmerLengthTextField;
 	@FXML
 	private ValidatedTextField minimunPercentageTextField;
 	@FXML
+	private ValidatedTextField minFrequencySoftCoreTextField;
+	@FXML
 	private CheckBox skipMCLCheckBox;
-	@FXML
-	private Button genomeFileButton;
-	@FXML
-	private Button genomeFile2Button;
-	@FXML
-	private Button transcriptomeFileButton;
-	@FXML
-	private Button transcriptomeFile2Button;
-	
+
 	
 	
 	@Override
@@ -78,12 +66,12 @@ public class GenomesAlignerController extends AnalysisAreaController {
 	@Override
 	public Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
 		Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
-		textFields.put("genome", genomeFileTextField);
-		textFields.put("genome", genomeFile2TextField);
-		textFields.put("transcriptome", transcriptomeFileTextField);
-		textFields.put("transcriptome", transcriptomeFile2TextField);
+		textFields.put("inputFile", inputFileTextField);
+		textFields.put("inputDirectory", inputDirectoryTextField);
 		textFields.put("outputPrefix", outputPrefixTextField);
-		textFields.put("maxHomologsUnit", kmerLengthTextField);
+		textFields.put("minFrequencySoftCore", minFrequencySoftCoreTextField);
+		//textFields.put("maxHomologsUnit", kmerLengthTextField);
+		textFields.put("minPctKmers",minimunPercentageTextField);
 		return textFields;
 	}
 	@Override
@@ -99,8 +87,8 @@ public class GenomesAlignerController extends AnalysisAreaController {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
 		setDefaultValues(GenomesAligner.class.getName());
-		genomeFileTextField.setText(file.getAbsolutePath());
-		suggestOutputFile(file, outputPrefixTextField, "_GenAlign");
+		inputDirectoryTextField.setText(file.getAbsolutePath());
+		suggestOutputFile(file, outputPrefixTextField, "_GenomeAlignment");
 	}
 
 	@Override
@@ -109,11 +97,11 @@ public class GenomesAlignerController extends AnalysisAreaController {
 		return new NGSEPTask<Void>() {	
     		@Override 
     		public Void call() {
-    			updateMessage(genomeFileTextField.getText());
+    			updateMessage(inputDirectoryTextField.getText());
 				updateTitle(TASK_NAME);
     			FileHandler logHandler = null;
     			try {
-    				SingleIndividualSimulator instance = new SingleIndividualSimulator();
+    				GenomesAligner instance = new GenomesAligner();
     				fillAttributes(instance);
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
