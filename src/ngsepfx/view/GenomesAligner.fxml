@@ -14,28 +14,38 @@
 <VBox xmlns:fx="http://javafx.com/fxml/1" id="mainContainer">
 	<GridPane styleClass="grid-pane">
 	
-		<Label fx:id="genomeFileLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">(*) IDs Input File:</Label>
-		<ValidatedTextField fx:id="genomeFileTextField" label="$genomeFileLabel"
+		<Label fx:id="inputDirectoryLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">(*) Input Directory:</Label>
+		<ValidatedTextField fx:id="inputDirectoryTextField" label="$inputDirectoryLabel"
 							GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
 							validators="INPUT_FILE, MANDATORY" />
-		<Button fx:id="genomeFileButton" onAction="#changeInputFile" userData="$genomeFileTextField" text="..." GridPane.rowIndex="0" GridPane.columnIndex="4" />
-							
-		<Label fx:id="outputPrefixLabel" GridPane.rowIndex="1" GridPane.columnIndex="0"> Output Prefix:</Label>
-		<ValidatedTextField fx:id="outputPrefixTextField" label="$outputPrefixLabel"
-							GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="output-file"
+		<Button onAction="#changeInputFile" userData="$inputDirectoryTextField" text="..." GridPane.rowIndex="0" GridPane.columnIndex="4" />
+		
+		<Label fx:id="inputFileLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">(*) Input File:</Label>
+		<ValidatedTextField fx:id="inputFileTextField" label="$inputFileLabel"
+							GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
 							validators="INPUT_FILE, MANDATORY" />
-		<Button fx:id="outputPrefixButton" onAction="#changeInputFile" userData="$outputPrefixTextField" text="..." GridPane.rowIndex="1" GridPane.columnIndex="4" />
+		<Button onAction="#changeInputFile" userData="$inputFileTextField" text="..." GridPane.rowIndex="1" GridPane.columnIndex="4" />
+							
+		<Label fx:id="outputPrefixLabel" GridPane.rowIndex="2" GridPane.columnIndex="0"> Output Prefix:</Label>
+		<ValidatedTextField fx:id="outputPrefixTextField" label="$outputPrefixLabel"
+							GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="output-file"
+							validators="OUTPUT_FILE, MANDATORY" />
+		<Button onAction="#changeOutputFile" userData="$outputPrefixTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />
 		
-		<Label fx:id="kmerLengthLabel" GridPane.rowIndex="2" GridPane.columnIndex="0"> Kmer Length:</Label>
-		<ValidatedTextField fx:id="kmerLenghtTextField" label="$kmerLengthLabel"
-							GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="medium-number-input"
-							validators="POSITIVE_NUMBER" />
-		<Label fx:id="minimumPercentageLabel" GridPane.rowIndex="3" GridPane.columnIndex="0"> Minimum Percentage Kmers:</Label>
-		<ValidatedTextField fx:id="minimumPercentageTextField" label="$minimumPercentageLabel"
+		<Label fx:id="kmerLengthLabel" GridPane.rowIndex="3" GridPane.columnIndex="0"> Kmer Length:</Label>
+		<ValidatedTextField fx:id="kmerLengthTextField" label="$kmerLengthLabel"
 							GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="medium-number-input"
-						validators="POSITIVE_NUMBER" />					
+							validators="POSITIVE_NUMBER" />
+		<Label fx:id="minimumPercentageLabel" GridPane.rowIndex="4" GridPane.columnIndex="0"> Minimum Percentage Kmers:</Label>
+		<ValidatedTextField fx:id="minimunPercentageTextField" label="$minimumPercentageLabel"
+							GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="medium-number-input"
+						validators="POSITIVE_NUMBER" />	
+		<Label fx:id="minFrequencySoftCoreLabel" GridPane.rowIndex="5" GridPane.columnIndex="0"> Minimum Frequency Soft Core :</Label>
+		<ValidatedTextField fx:id="minFrequencySoftCoreTextField" label="$minFrequencySoftCoreLabel"
+							GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="medium-number-input"
+						validators="POSITIVE_NUMBER" />									
 		
-		<CheckBox fx:id="skipMCLCheckBox" text="Skip the MCL clustering phase" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+		<CheckBox fx:id="skipMCLCheckBox" text="Skip the MCL clustering phase" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
 		</GridPane>
 		<HBox >
 		<Button onAction="#submitTask" text="Genomes Aligner" />

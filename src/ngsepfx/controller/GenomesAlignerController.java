@@ -13,10 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import ngsep.genome.GenomesAligner;
-import ngsep.simulation.SingleIndividualSimulator;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
@@ -35,11 +32,12 @@ public class GenomesAlignerController extends AnalysisAreaController {
 	@FXML
 	private Label kmerLengthLabel;
 	@FXML
-	private Label minimumPercetangeLabel;
-	@FXML
-	private Label skipMCLLabel;
+	private Label minimumPercentageLabel;
 	@FXML
 	private Label minFrequencySoftCoreLabel;
+	@FXML
+	private Label skipMCLLabel;
+
 	@FXML
 	private ValidatedTextField inputFileTextField;
 	@FXML
@@ -66,12 +64,12 @@ public class GenomesAlignerController extends AnalysisAreaController {
 	@Override
 	public Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
 		Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
-		textFields.put("inputFile", inputFileTextField);
 		textFields.put("inputDirectory", inputDirectoryTextField);
+		textFields.put("inputFile", inputFileTextField);
 		textFields.put("outputPrefix", outputPrefixTextField);
-		textFields.put("minFrequencySoftCore", minFrequencySoftCoreTextField);
-		//textFields.put("maxHomologsUnit", kmerLengthTextField);
+		textFields.put("kmerLength",kmerLengthTextField);
 		textFields.put("minPctKmers",minimunPercentageTextField);
+		textFields.put("minFrequencySoftCore", minFrequencySoftCoreTextField);
 		return textFields;
 	}
 	@Override
@@ -87,8 +85,8 @@ public class GenomesAlignerController extends AnalysisAreaController {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
 		setDefaultValues(GenomesAligner.class.getName());
-		inputDirectoryTextField.setText(file.getAbsolutePath());
-		suggestOutputFile(file, outputPrefixTextField, "_GenomeAlignment");
+		inputDirectoryTextField.setText(file.getAbsolutePath());		
+		outputPrefixTextField.setText(file.getAbsolutePath() +File.separator + GenomesAligner.DEF_OUT_PREFIX);
 	}
 
 	@Override
@@ -103,6 +101,10 @@ public class GenomesAlignerController extends AnalysisAreaController {
     			try {
     				GenomesAligner instance = new GenomesAligner();
     				fillAttributes(instance);
+    				instance.setInputDirectory(inputDirectoryTextField.getText());
+    				File f = new File(inputFileTextField.getText());
+    				String fileName = f.getName();
+    				instance.setInputFile(fileName);
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
     				logHandler = createLogHandler(instance.getOutputPrefix(), "");
