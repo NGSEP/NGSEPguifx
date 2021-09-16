@@ -10,17 +10,16 @@ import java.util.logging.FileHandler;
 
 
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import ngsep.transcriptome.TranscriptomeFilter;
+import ngsep.variants.GenomicVariant;
 import ngsep.vcf.VCFIndividualGenomeBuilder;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
 import ngsepfx.view.component.ValidatedTextField;
 
-public class IndividualGenomeBuilderController extends AnalysisAreaController  {
+public class VCFIndividualGenomeBuilderController extends AnalysisAreaController  {
  
 		
 		public static final String TASK_NAME = "Individual Genome Builder";
@@ -36,7 +35,7 @@ public class IndividualGenomeBuilderController extends AnalysisAreaController  {
 		@FXML
 		private Label ploidy;
 		@FXML
-		private ValidatedTextField genomeInputFileTextField;
+		private ValidatedTextField inputFileTextField;
 		@FXML
 		private ValidatedTextField inputVCFTextField;
 		@FXML
@@ -49,11 +48,11 @@ public class IndividualGenomeBuilderController extends AnalysisAreaController  {
 		@Override
 		public String getFXMLResourcePath() {
 			// TODO Auto-generated method stub
-			return "/ngsepfx/view/IndividualGenomeBuilder.fxml";
+			return "/ngsepfx/view/VCFIndividualGenomeBuilder.fxml";
 		}
 		public Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
 			Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
-			textFields.put("genome", genomeInputFileTextField);
+			textFields.put("genome", inputFileTextField);
 			textFields.put("variantsFile", inputVCFTextField);
 			textFields.put("outputFile", outputFileTextField);
 			return textFields;
@@ -65,10 +64,11 @@ public class IndividualGenomeBuilderController extends AnalysisAreaController  {
 			NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 			File file = analyzeEvent.file;
 			setDefaultValues(VCFIndividualGenomeBuilder.class.getName());
-			genomeInputFileTextField.setText(file.getAbsolutePath());
-			ploidyChoiceBox.getSelectionModel().select(DIPLOIDY);
+			inputFileTextField.setText(file.getAbsolutePath());
 			ploidyChoiceBox.getItems().add(HAPLOIDY);
 			ploidyChoiceBox.getItems().add(DIPLOIDY);
+			ploidyChoiceBox.getSelectionModel().select(0);
+
 			suggestOutputFile(file, outputFileTextField, "_GenomeBuilder");
 			
 									
@@ -81,7 +81,7 @@ public class IndividualGenomeBuilderController extends AnalysisAreaController  {
 				return new NGSEPTask<Void>() {	
 				@Override
 				public Void call() {
-	    			updateMessage(genomeInputFileTextField.getText());
+	    			updateMessage(inputFileTextField.getText());
 					updateTitle(TASK_NAME);
 					FileHandler logHandler = null;
 	    			try {

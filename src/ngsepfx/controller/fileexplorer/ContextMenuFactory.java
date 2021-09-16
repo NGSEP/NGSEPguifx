@@ -79,14 +79,17 @@ public final class ContextMenuFactory {
 	    	addSimpleMenuItem(contextMenu, cell, "Single Individual Simulator", "ngsepfx.controller.SingleIndividualSimulatorController");
 	    	//addSimpleMenuItem(contextMenu, cell, "Genomes Aligner", "ngsepfx.controller.GenomesAlignerController");
 	    	//addSimpleMenuItem(contextMenu, cell, "Reads File Errors Corrector", "ngsepfx.controller.ReadsFileErrorsCorrectorController");
-	    	addSimpleMenuItem(contextMenu, cell, "Individual Genome Builder", "ngsepfx.controller.IndividualGenomeBuilderController");
+	    	addSimpleMenuItem(contextMenu, cell, "Individual Genome Builder", "ngsepfx.controller.VCFIndividualGenomeBuilderController");
 
 	    } else if (fileInLower.endsWith(".bam") || file.getName().endsWith(".sam")|| file.getName().endsWith(".cram")) {
 	    	addSimpleMenuItem(contextMenu, cell, "Variants Detector", "ngsepfx.controller.VariantsDetectorController");
 	    	addSimpleMenuItem(contextMenu, cell, "Sort Alignments", "ngsepfx.controller.SortAlignmentController");
 	    	addSimpleMenuItem(contextMenu, cell, "Coverage Statistics Calculator", "ngsepfx.controller.CoverageStatisticsCalculatorController");
 	    	addSimpleMenuItem(contextMenu, cell, "Base Pair Quality Statistics Quality", "ngsepfx.controller.BasePairQualityStatisticsController");
+	    	addSimpleMenuItem(contextMenu, cell, "Relative Allele Counts Calculator", "ngsepfx.controller.RelativeAlleleCountsCalculatorController");
+
 	    } else if (fileInLower.contains(".gff")) {
+	    	
 	    	addSimpleMenuItem(contextMenu, cell, "Transcriptome Filter", "ngsepfx.controller.TranscriptomeFilterController");
 	    	addSimpleMenuItem(contextMenu, cell, "Transcriptome Analyzer", "ngsepfx.controller.TranscriptomeAnalyzerController");
 	    }

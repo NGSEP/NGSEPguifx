@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import ngsepfx.view.component.ValidatedTextField?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" id="mainContainer">
+	<GridPane styleClass="grid-pane">
+	
+	<Label fx:id="inputFileLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">(*) Input BAM File:</Label>
+		<ValidatedTextField fx:id="inputFileTextField" label="$inputFileLabel"
+							GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
+							validators="INPUT_FILE, MANDATORY" />
+		<Button fx:id="inputFileButton" onAction="#changeInputFile" userData="$inputFileTextField" text="..." GridPane.rowIndex="0" GridPane.columnIndex="4" />
+		
+		<Label fx:id="genomeReferenceLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Reference Genome:</Label>
+		<ValidatedTextField fx:id="genomeReferenceTextField" label="$genomeReferenceLabel"
+							GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
+							validators="INPUT_FILE" />
+		<Button fx:id="genomeReferenceButton" onAction="#changeInputFile" userData="$genomeReferenceTextField" text="..." GridPane.rowIndex="1" GridPane.columnIndex="4" />
+		
+		<Label fx:id="regionsIncludeLabel" GridPane.rowIndex="2" GridPane.columnIndex="0"> Regions file to exclude: </Label>
+		<ValidatedTextField fx:id="regionsIncludeTextField" label="$regionsIncludeLabel"
+							GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
+							validators="INPUT_FILE" />
+		<Button fx:id="regionsIncludeButton" onAction="#changeInputFile" userData="$regionsIncludeTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />
+		
+		<Label fx:id="regionsExcludeLabel" GridPane.rowIndex="3" GridPane.columnIndex="0"> Regions file to exclude: </Label>
+		<ValidatedTextField fx:id="regionsExcludeTextField" label="$regionsExcludeLabel"
+							GridPane.rowIndex="3" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
+							validators="INPUT_FILE" />
+		<Button fx:id="regionsExcludeButton" onAction="#changeInputFile" userData="$regionsExcludeTextField" text="..." GridPane.rowIndex="3" GridPane.columnIndex="4" />
+		
+		<Label fx:id="outputFileLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">(*) Output File:</Label>
+		<ValidatedTextField fx:id="outputFileTextField" label="$outputFileLabel"
+							GridPane.rowIndex="4" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="output-file"
+							validators="OUTPUT_FILE, MANDATORY" />
+		<Button fx:id="outputFileButton" onAction="#changeOutputFile" userData="$outputFileTextField" text="..." GridPane.rowIndex="4" GridPane.columnIndex="4" />
+		
+			</GridPane>
+			
+	<HBox styleClass="hbox">
+		<Label fx:id="minimumReadDepthLabel" GridPane.rowIndex="5" GridPane.columnIndex="0">Minimum Read Depth:</Label>
+		<ValidatedTextField fx:id="minimumReadDepthTextField" label="$minimumReadDepthLabel"
+							GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="small-number-input"
+							validators="POSITIVE_NUMBER, INT"/>
+		
+		<Label fx:id="maximumReadDepthLabel" GridPane.rowIndex="6" GridPane.columnIndex="0">Maximum alignments per read:</Label>
+		<ValidatedTextField fx:id="maximumReadDepthTextField" label="$maximumReadDepthLabel" styleClass="small-number-input"
+							GridPane.rowIndex="1" GridPane.columnIndex="1"
+							validators="POSITIVE_NUMBER, INT"/>
+							
+		<Label fx:id="minimumScoreLabel" GridPane.rowIndex="7" GridPane.columnIndex="0">Minimum Base Quality Score:</Label>
+		<ValidatedTextField fx:id="minimumScoreTextField" label="$minimumScoreLabel" styleClass="small-number-input"
+							GridPane.rowIndex="1" GridPane.columnIndex="1"
+							validators="POSITIVE_NUMBER, INT"/>
+	</HBox>						
+	
+	<HBox >
+		<Button onAction="#submitTask" text="Allele Counts" />
+	</HBox>
+</VBox>	
+

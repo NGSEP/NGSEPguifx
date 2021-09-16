@@ -7,10 +7,6 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import ngsep.genome.GenomesAligner;
