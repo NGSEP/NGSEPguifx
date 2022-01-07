@@ -41,7 +41,7 @@ public class VCFDistanceMatrixCalculatorController extends AnalysisAreaControlle
 	
 	//Constants.
 	
-	public static final String TASK_NAME = "VCF Distance Matrix Calculator";
+	public static final String TASK_NAME = "VCF distance matrix calculator";
 	
 	private static final String DISTANCE_SOURCE_GENOTYPES_SIMPLE = "Genotype calls (GT field)";
 	private static final String DISTANCE_SOURCE_GENOTYPES_COPY_NUMBER = "Alleles copy number (ACN field)";
@@ -89,7 +89,7 @@ public class VCFDistanceMatrixCalculatorController extends AnalysisAreaControlle
 		distanceSourceChoiceBox.getItems().add(DISTANCE_SOURCE_GENOTYPES_SIMPLE);
 		distanceSourceChoiceBox.getItems().add(DISTANCE_SOURCE_GENOTYPES_COPY_NUMBER);
 		distanceSourceChoiceBox.getItems().add(DISTANCE_SOURCE_COPY_NUMBER);
-		
+		distanceSourceChoiceBox.getSelectionModel().select(0);
 		inputFileTextField.setText(file.getAbsolutePath());
 		suggestOutputFile(file, outputFileTextField, "_DistanceMatrix.txt");
 	}

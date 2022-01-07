@@ -85,7 +85,7 @@
 						 						validators="POSITIVE_NUMBER"/>
 								</HBox>
 									
-								<Label fx:id="sampleIdLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">(*) Sample id</Label>
+								<Label fx:id="sampleIdLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Sample id</Label>
 								<ValidatedTextField fx:id="sampleIdTextField" label="$sampleIdLabel" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 							</GridPane>
 						</HBox>

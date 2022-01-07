@@ -18,7 +18,7 @@ import ngsepfx.view.component.ValidatedTextField;
 public class SingleReadsSimulatorController extends AnalysisAreaController {
 	
 	
-	public static final String TASK_NAME = "SINGLEREADS simulator";
+	public static final String TASK_NAME = "Single reads simulator";
 
 
 	@FXML
@@ -66,7 +66,7 @@ public class SingleReadsSimulatorController extends AnalysisAreaController {
 		textFields.put("numberOfReads", numberOfReadsTextField);
 		textFields.put("meanReadLength", meanReadLenghtTextField);
 		textFields.put("stdevReadlength", stdevReadLengthTextField);
-		textFields.put("minReadLength", minReadLengthTextField);
+		textFields.put("minReadlength", minReadLengthTextField);
 		textFields.put("substitutionErrorRate", substitutionErrorRateTextField);
 		textFields.put("indelErrorRate", indelErrorRateTextField);
 	
@@ -79,8 +79,8 @@ public class SingleReadsSimulatorController extends AnalysisAreaController {
 		File file = analyzeEvent.file;
 		setDefaultValues(SingleReadsSimulator.class.getName());
 		inputFileTextField.setText(file.getAbsolutePath());
-		outFormatChoiceBox.getItems().add(FORMAT_FASTA);
 		outFormatChoiceBox.getItems().add(FORMAT_FASTQ);
+		outFormatChoiceBox.getItems().add(FORMAT_FASTA);
 		outFormatChoiceBox.getSelectionModel().select(0);
 		suggestOutputFile(file, outputFileTextField, "_ReadsSimulation.fastq.gz");
 	}

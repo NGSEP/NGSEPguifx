@@ -22,7 +22,7 @@ import ngsepfx.view.component.ValidatedTextField;
 public class TranscriptomeFilterController extends AnalysisAreaController  {
  
 		
-		public static final String TASK_NAME = "TRANSCRIPTOME Filter";
+		public static final String TASK_NAME = "Transcriptome filter";
 		private static final String FORMAT_GFF = "GFF";
 		private static final String FORMAT_GENE_LIST = "Gene List";
 		private static final String FORMAT_GENE_REGIONS = "Gene Regions";
@@ -103,13 +103,13 @@ public class TranscriptomeFilterController extends AnalysisAreaController  {
 			File file = analyzeEvent.file;
 			setDefaultValues(TranscriptomeFilter.class.getName());
 			inputFileTextField.setText(file.getAbsolutePath());
-			outputFormatChoiceBox.getSelectionModel().select(FORMAT_GFF);
 			outputFormatChoiceBox.getItems().add(FORMAT_GFF);
 			outputFormatChoiceBox.getItems().add(FORMAT_GENE_LIST);
 			outputFormatChoiceBox.getItems().add(FORMAT_GENE_REGIONS);
 			outputFormatChoiceBox.getItems().add(FORMAT_TRANSCRIPT_LIST);
 			outputFormatChoiceBox.getItems().add(FORMAT_TRANSCRIPT_REGIONS);
-			suggestOutputFile(file, outputFileTextField, "_filtered");
+			outputFormatChoiceBox.getSelectionModel().select(0);
+			suggestOutputFile(file, outputFileTextField, "_filtered.gff");
 			
 									
 		}

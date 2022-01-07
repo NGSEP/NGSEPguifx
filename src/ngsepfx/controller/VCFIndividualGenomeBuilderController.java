@@ -12,7 +12,6 @@ import java.util.logging.FileHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import ngsep.variants.GenomicVariant;
 import ngsep.vcf.VCFIndividualGenomeBuilder;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
@@ -22,7 +21,7 @@ import ngsepfx.view.component.ValidatedTextField;
 public class VCFIndividualGenomeBuilderController extends AnalysisAreaController  {
  
 		
-		public static final String TASK_NAME = "Individual Genome Builder";
+		public static final String TASK_NAME = "Individual genome builder";
 		private static final String HAPLOIDY = "1";
 		private static final String DIPLOIDY = "2";
 	
@@ -69,7 +68,7 @@ public class VCFIndividualGenomeBuilderController extends AnalysisAreaController
 			ploidyChoiceBox.getItems().add(DIPLOIDY);
 			ploidyChoiceBox.getSelectionModel().select(0);
 
-			suggestOutputFile(file, outputFileTextField, "_GenomeBuilder");
+			suggestOutputFile(file, outputFileTextField, "_GenomeBuilder.fa");
 			
 									
 		}

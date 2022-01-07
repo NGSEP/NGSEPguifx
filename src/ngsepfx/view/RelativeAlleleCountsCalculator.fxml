@@ -19,10 +19,16 @@
 							validators="INPUT_FILE, MANDATORY" />
 		<Button fx:id="inputFileButton" onAction="#changeInputFile" userData="$inputFileTextField" text="..." GridPane.rowIndex="0" GridPane.columnIndex="4" />
 		
-		<Label fx:id="genomeReferenceLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Reference Genome:</Label>
+		<Label fx:id="outputFileLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">(*) Output File:</Label>
+		<ValidatedTextField fx:id="outputFileTextField" label="$outputFileLabel"
+							GridPane.rowIndex="4" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="output-file"
+							validators="OUTPUT_FILE, MANDATORY" />
+		<Button fx:id="outputFileButton" onAction="#changeOutputFile" userData="$outputFileTextField" text="..." GridPane.rowIndex="4" GridPane.columnIndex="4" />
+		
+		<Label fx:id="genomeReferenceLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">(*) Reference Genome:</Label>
 		<ValidatedTextField fx:id="genomeReferenceTextField" label="$genomeReferenceLabel"
 							GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
-							validators="INPUT_FILE" />
+							validators="INPUT_FILE, MANDATORY" />
 		<Button fx:id="genomeReferenceButton" onAction="#changeInputFile" userData="$genomeReferenceTextField" text="..." GridPane.rowIndex="1" GridPane.columnIndex="4" />
 		
 		<Label fx:id="regionsIncludeLabel" GridPane.rowIndex="2" GridPane.columnIndex="0"> Regions file to exclude: </Label>
@@ -37,11 +43,7 @@
 							validators="INPUT_FILE" />
 		<Button fx:id="regionsExcludeButton" onAction="#changeInputFile" userData="$regionsExcludeTextField" text="..." GridPane.rowIndex="3" GridPane.columnIndex="4" />
 		
-		<Label fx:id="outputFileLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">(*) Output File:</Label>
-		<ValidatedTextField fx:id="outputFileTextField" label="$outputFileLabel"
-							GridPane.rowIndex="4" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="output-file"
-							validators="OUTPUT_FILE, MANDATORY" />
-		<Button fx:id="outputFileButton" onAction="#changeOutputFile" userData="$outputFileTextField" text="..." GridPane.rowIndex="4" GridPane.columnIndex="4" />
+		
 		
 			</GridPane>
 			
@@ -51,7 +53,7 @@
 							GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="small-number-input"
 							validators="POSITIVE_NUMBER, INT"/>
 		
-		<Label fx:id="maximumReadDepthLabel" GridPane.rowIndex="6" GridPane.columnIndex="0">Maximum alignments per read:</Label>
+		<Label fx:id="maximumReadDepthLabel" GridPane.rowIndex="6" GridPane.columnIndex="0">Maximum Read Depth:</Label>
 		<ValidatedTextField fx:id="maximumReadDepthTextField" label="$maximumReadDepthLabel" styleClass="small-number-input"
 							GridPane.rowIndex="1" GridPane.columnIndex="1"
 							validators="POSITIVE_NUMBER, INT"/>

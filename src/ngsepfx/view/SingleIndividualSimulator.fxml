@@ -22,11 +22,11 @@
 							GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="output-file"
 							validators="OUTPUT_FILE, MANDATORY"/>
 		<Button onAction="#changeOutputFile" userData="$outputFileTextField" text="..." GridPane.rowIndex="1" GridPane.columnIndex="4" />
-		<Label fx:id="strsFileLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">STRS file:</Label>
+		<Label fx:id="strsFileLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">STRs file:</Label>
 		<ValidatedTextField fx:id="strsFileTextField" label="$strsFileLabel"
 							GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
 							validators="POSITIVE_NUMBER"/>
-		<Button onAction="#changeOutputFile" userData="$outputFileTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />
+		<Button onAction="#changeInputFile" userData="strsFileTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />
 		
 	
 	</GridPane>
