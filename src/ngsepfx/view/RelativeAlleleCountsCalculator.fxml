@@ -31,7 +31,7 @@
 							validators="INPUT_FILE, MANDATORY" />
 		<Button fx:id="genomeReferenceButton" onAction="#changeInputFile" userData="$genomeReferenceTextField" text="..." GridPane.rowIndex="1" GridPane.columnIndex="4" />
 		
-		<Label fx:id="regionsIncludeLabel" GridPane.rowIndex="2" GridPane.columnIndex="0"> Regions file to exclude: </Label>
+		<Label fx:id="regionsIncludeLabel" GridPane.rowIndex="2" GridPane.columnIndex="0"> Regions file to include: </Label>
 		<ValidatedTextField fx:id="regionsIncludeTextField" label="$regionsIncludeLabel"
 							GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
 							validators="INPUT_FILE" />

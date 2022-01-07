@@ -25,8 +25,8 @@
 		<Label fx:id="strsFileLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">STRs file:</Label>
 		<ValidatedTextField fx:id="strsFileTextField" label="$strsFileLabel"
 							GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
-							validators="POSITIVE_NUMBER"/>
-		<Button onAction="#changeInputFile" userData="strsFileTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />
+							validators="INPUT_FILE"/>
+		<Button onAction="#changeInputFile" userData="$strsFileTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />
 		
 	
 	</GridPane>
@@ -48,7 +48,7 @@
 		<ValidatedTextField fx:id="sampleIdTextField" label="$sampleIdLabel"
 							GridPane.rowIndex="1" GridPane.columnIndex="3" styleClass="medium-number-input"
 							/>
-		<Label fx:id="mutatedSTRFractionLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Mutated STRF fraction:</Label>
+		<Label fx:id="mutatedSTRFractionLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Mutated STR fraction:</Label>
 		<ValidatedTextField fx:id="mutatedSTRFractionTextField" label="$mutatedSTRFractionLabel"
 							GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="medium-number-input"
 							validators="POSITIVE_NUMBER"/>

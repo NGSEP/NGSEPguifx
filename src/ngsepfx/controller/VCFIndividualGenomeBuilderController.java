@@ -10,7 +10,6 @@ import java.util.logging.FileHandler;
 
 
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import ngsep.vcf.VCFIndividualGenomeBuilder;
 import ngsepfx.concurrent.NGSEPTask;
@@ -22,8 +21,6 @@ public class VCFIndividualGenomeBuilderController extends AnalysisAreaController
  
 		
 		public static final String TASK_NAME = "Individual genome builder";
-		private static final String HAPLOIDY = "1";
-		private static final String DIPLOIDY = "2";
 	
 		@FXML
 		private Label genomeInput;
@@ -40,7 +37,7 @@ public class VCFIndividualGenomeBuilderController extends AnalysisAreaController
 		@FXML
 		private ValidatedTextField outputFileTextField;
 		@FXML
-		private ChoiceBox<String> ploidyChoiceBox;
+		private ValidatedTextField ploidyTextField;
 		
 		
 		
@@ -54,6 +51,7 @@ public class VCFIndividualGenomeBuilderController extends AnalysisAreaController
 			textFields.put("genome", inputFileTextField);
 			textFields.put("variantsFile", inputVCFTextField);
 			textFields.put("outputFile", outputFileTextField);
+			textFields.put("ploidy", ploidyTextField);
 			return textFields;
 		}
 	
@@ -64,9 +62,6 @@ public class VCFIndividualGenomeBuilderController extends AnalysisAreaController
 			File file = analyzeEvent.file;
 			setDefaultValues(VCFIndividualGenomeBuilder.class.getName());
 			inputFileTextField.setText(file.getAbsolutePath());
-			ploidyChoiceBox.getItems().add(HAPLOIDY);
-			ploidyChoiceBox.getItems().add(DIPLOIDY);
-			ploidyChoiceBox.getSelectionModel().select(0);
 
 			suggestOutputFile(file, outputFileTextField, "_GenomeBuilder.fa");
 			

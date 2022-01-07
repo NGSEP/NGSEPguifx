@@ -31,7 +31,9 @@
 		<Button onAction="#changeOutputFile" userData="$outputFileTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />	
 
 		<Label fx:id="ploidyLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Ploidy:</Label>
-		<ChoiceBox fx:id="ploidyChoiceBox" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+		<ValidatedTextField fx:id="ploidyTextField" label="$ploidyLabel"
+							GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="medium-number-input"
+							validators="POSITIVE_NUMBER"/>
 
 	</GridPane>
 	
