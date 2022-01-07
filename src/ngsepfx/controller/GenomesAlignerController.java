@@ -17,7 +17,7 @@ import ngsepfx.view.component.ValidatedTextField;
 
 public class GenomesAlignerController extends AnalysisAreaController {
 
-	public static final String TASK_NAME = "GenomeAligner";
+	public static final String TASK_NAME = "Genomes aligner";
 	
 	@FXML
 	private Label inputFileLabel;

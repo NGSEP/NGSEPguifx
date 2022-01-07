@@ -52,7 +52,7 @@ public final class ContextMenuFactory {
 	    	addSimpleMenuItem(contextMenu, cell, "Multiple Variants Detector", "ngsepfx.controller.VariantsDetectorController");
 	    	addSimpleMenuItem(contextMenu, cell, "Variant Files Merge", "ngsepfx.controller.VariantFilesMergeController");
 	    	addSimpleMenuItem(contextMenu, cell, "TILLING Individual genotyper", "ngsepfx.controller.TillingPoolsIndividualGenotyperController");
-	    	addSimpleMenuItem(contextMenu, cell, "Base Pair Quality Statistics Quality", "ngsepfx.controller.BasePairQualityStatisticsController");
+	    	addSimpleMenuItem(contextMenu, cell, "Base Pair Quality Statistics", "ngsepfx.controller.BasePairQualityStatisticsController");
 	    	addSimpleMenuItem(contextMenu, cell, "Genomes Aligner", "ngsepfx.controller.GenomesAlignerController");
 
 	    	//addSimpleMenuItem(contextMenu, cell, "K-mers Extractor", "ngsepfx.controller.KmersExtractorController");
@@ -84,14 +84,14 @@ public final class ContextMenuFactory {
 	    } else if (fileInLower.endsWith(".bam") || file.getName().endsWith(".sam")|| file.getName().endsWith(".cram")) {
 	    	addSimpleMenuItem(contextMenu, cell, "Variants Detector", "ngsepfx.controller.VariantsDetectorController");
 	    	addSimpleMenuItem(contextMenu, cell, "Sort Alignments", "ngsepfx.controller.SortAlignmentController");
-	    	addSimpleMenuItem(contextMenu, cell, "Coverage Statistics Calculator", "ngsepfx.controller.CoverageStatisticsCalculatorController");
-	    	addSimpleMenuItem(contextMenu, cell, "Base Pair Quality Statistics Quality", "ngsepfx.controller.BasePairQualityStatisticsController");
+	    	addSimpleMenuItem(contextMenu, cell, "Coverage Statistics", "ngsepfx.controller.CoverageStatisticsCalculatorController");
+	    	addSimpleMenuItem(contextMenu, cell, "Base Pair Quality Statistics", "ngsepfx.controller.BasePairQualityStatisticsController");
 	    	addSimpleMenuItem(contextMenu, cell, "Relative Allele Counts Calculator", "ngsepfx.controller.RelativeAlleleCountsCalculatorController");
 
 	    } else if (fileInLower.contains(".gff")) {
-	    	
-	    	addSimpleMenuItem(contextMenu, cell, "Transcriptome Filter", "ngsepfx.controller.TranscriptomeFilterController");
 	    	addSimpleMenuItem(contextMenu, cell, "Transcriptome Analyzer", "ngsepfx.controller.TranscriptomeAnalyzerController");
+	    	addSimpleMenuItem(contextMenu, cell, "Transcriptome Filter", "ngsepfx.controller.TranscriptomeFilterController");
+	    	
 	    }
 	    return contextMenu;
 	}
