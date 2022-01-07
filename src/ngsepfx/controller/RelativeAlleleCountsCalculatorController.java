@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import ngsep.discovery.CoverageStatisticsCalculator;
 import ngsep.discovery.RelativeAlleleCountsCalculator;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
