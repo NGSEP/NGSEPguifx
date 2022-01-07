@@ -56,6 +56,9 @@ public class AssemblerController extends AnalysisAreaController {
 	private ValidatedTextField graphFileTextField;
 	
 	@FXML
+	private ValidatedTextField kmerLengthTextField;
+	
+	@FXML
 	private ValidatedTextField windowLengthTextField;
 	
 	@FXML
@@ -86,6 +89,7 @@ public class AssemblerController extends AnalysisAreaController {
 		textFields.put("inputFile", inputFileTextField);
 		textFields.put("outputPrefix", outputPrefixTextField);
 		textFields.put("graphFile", graphFileTextField);
+		textFields.put("kmerLength", kmerLengthTextField);
 		textFields.put("windowLength", windowLengthTextField);
 		textFields.put("ploidy", ploidyTextField);
 		textFields.put("numThreads", numThreadsTextField);

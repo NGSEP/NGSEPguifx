@@ -36,19 +36,25 @@
 			<Label fx:id="inputFormatLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">Input format:</Label>
 			<ChoiceBox fx:id="inputFormatChoiceBox" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 			
-			<Label fx:id="windowLengthLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Window length for minimizers:</Label>
-			<ValidatedTextField fx:id="windowLengthTextField" label="$windowLengthLabel"
+			
+			<Label fx:id="kmerLengthLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Kmer length:</Label>
+			<ValidatedTextField fx:id="kmerLengthTextField" label="$kmerLengthLabel"
 								GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 			
-			<Label fx:id="ploidyLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Ploidy of the sample:</Label>
-			<ValidatedTextField fx:id="ploidyTextField" label="$ploidyLabel"
+			<Label fx:id="windowLengthLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Window length for minimizers:</Label>
+			<ValidatedTextField fx:id="windowLengthTextField" label="$windowLengthLabel"
 								GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 			
-			<Label fx:id="numThreadsLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Number of threads:</Label>
-			<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel"
+			<Label fx:id="ploidyLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Ploidy of the sample:</Label>
+			<ValidatedTextField fx:id="ploidyTextField" label="$ploidyLabel"
 								GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="small-number-input"
+								validators="POSITIVE_NUMBER, INT"/>
+			
+			<Label fx:id="numThreadsLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">Number of threads:</Label>
+			<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel"
+								GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 		</GridPane>
 	</HBox>
