@@ -46,10 +46,10 @@ public class MutatedPeptidesExtractorController extends AnalysisAreaController{
 	@Override
 	public Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
 		Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
-		//textFields.put("inputFile", inputFileTextField);
-		//textFields.put("outputFile", outputFileTextField);
-		//textFields.put("transcriptomeFile", transcriptomeFileTextField);
-		//textFields.put("genome", genomeTextField);
+		textFields.put("inputFile", inputFileTextField);
+		textFields.put("outputFile", outputFileTextField);
+		textFields.put("transcriptomeFile", transcriptomeFileTextField);
+		textFields.put("genome", genomeTextField);
 		textFields.put("offsetUpstream", mutatedSampleIdTextField);
 		textFields.put("offsetDownstream", controlSampleIdTextField);
 		return textFields;
@@ -59,9 +59,9 @@ public class MutatedPeptidesExtractorController extends AnalysisAreaController{
 	public void handleActivationEvent(NGSEPEvent event) {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
-		//setDefaultValues(MutatedPeptidesExtractor.class.getName());
+		setDefaultValues(MutatedPeptidesExtractor.class.getName());
 		inputFileTextField.setText(file.getAbsolutePath());
-		suggestOutputFile(file, outputFileTextField, "_peptides.txt");
+		suggestOutputFile(file, outputFileTextField, "_peptides.fa");
 	}
 
 	@Override
@@ -77,17 +77,16 @@ public class MutatedPeptidesExtractorController extends AnalysisAreaController{
     				fillAttributes(instance);
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
-    				//logHandler = createLogHandler(instance.getOutputFile(), "Annotate");
-    				logHandler = createLogHandler(outputFileTextField.getText(), "peptides");
+    				logHandler = createLogHandler(instance.getOutputFile(), "peptides");
     				log.addHandler(logHandler);
     				instance.setLog(log);
     				instance.setProgressNotifier(this);
-    				//instance.run();
-    				ReferenceGenome genome = new ReferenceGenome(genomeTextField.getText());
+    				instance.run();
+    				/*ReferenceGenome genome = new ReferenceGenome(genomeTextField.getText());
     				instance.loadTranscriptome(transcriptomeFileTextField.getText(), genome);
     				try (PrintStream out = new PrintStream(outputFileTextField.getText())) {
     					instance.findMutatedPeptides(inputFileTextField.getText(), out);
-    				}
+    				}*/
     			} catch (Exception e) {
     				e.printStackTrace();
     				showExecutionErrorDialog(Thread.currentThread().getName(), e);
