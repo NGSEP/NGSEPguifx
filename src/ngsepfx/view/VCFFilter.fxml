@@ -254,11 +254,11 @@
 								</FXCollections>
 							</items>
 						</ComboBox>
-							<ValidatedTextField fx:id="sampleIdsFileTextField"  label="$sampleIdsLabel"
+							<ValidatedTextField fx:id="sampleIdsTextField"  label="$sampleIdsLabel"
 												styleClass="input-file"
 												validators="INPUT_FILE">
 							</ValidatedTextField>
-						<Button onAction="#changeInputFile" userData="$sampleIdsFileTextField" text="..."/>
+						<Button onAction="#changeInputFile" userData="$sampleIdsTextField" text="..."/>
 					</HBox>
 				</TitledPane>
 			</panes>

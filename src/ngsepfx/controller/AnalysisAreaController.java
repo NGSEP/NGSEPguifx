@@ -293,7 +293,10 @@ public abstract class AnalysisAreaController {
 	protected abstract NGSEPTask<Void> getTask();
 	private SimpleFormatter formatter = new SimpleFormatter();
 	protected FileHandler createLogHandler (String outputFile, String suffix) throws IOException {
-		String logFilename = removeExtension(outputFile);
+		File f = new File(outputFile);
+		String parent = f.getParent();
+		String name = f.getName();
+		String logFilename = parent+File.separator+ removeExtension(name);
 		if(suffix!=null && suffix.length()>0) {
 			logFilename = logFilename+"_"+suffix;
 		}

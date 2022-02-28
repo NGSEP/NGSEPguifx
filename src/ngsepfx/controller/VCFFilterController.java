@@ -184,7 +184,7 @@ public class VCFFilterController extends AnalysisAreaController {
 	private ComboBox<String> sampleSelectionComboBox;
 	
 	@FXML
-	private ValidatedTextField sampleIdsFileTextField;
+	private ValidatedTextField sampleIdsTextField;
 	
 	
 
@@ -226,7 +226,7 @@ public class VCFFilterController extends AnalysisAreaController {
 		textFields.put("minGCContent", minGCContentTextField);
 		textFields.put("maxGCContent", maxGCContentTextField);
 		textFields.put("geneId", geneIdTextField);
-		textFields.put("sampleIdsFile", sampleIdsFileTextField);
+		textFields.put("sampleIds", sampleIdsTextField);
 		return textFields;
 	}
 	/* (non-Javadoc)
@@ -351,7 +351,7 @@ public class VCFFilterController extends AnalysisAreaController {
     				
     					//Sample Selection.
     				
-    				if (!sampleIdsFileTextField.getText().trim().isEmpty()) {
+    				if (!sampleIdsTextField.getText().trim().isEmpty()) {
     					instance.setFilterSamples(sampleSelectionComboBox.getSelectionModel().getSelectedIndex()==0);
     				}
     				
