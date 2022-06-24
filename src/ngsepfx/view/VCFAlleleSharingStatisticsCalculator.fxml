@@ -21,7 +21,7 @@
 		<Label fx:id="samplesLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">(*) Populations file:</Label>
 		<ValidatedTextField fx:id="samplesTextField" label="$samplesLabel"
 							GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
-							validators="INPUT_FILE"/>
+							validators="INPUT_FILE, MANDATORY"/>
 		<Button onAction="#changeInputFile" userData="$samplesTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />
 		
 		<Label fx:id="outputFileLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">(*) Output File:</Label>
@@ -35,7 +35,7 @@
 		<Label fx:id="transcriptomeFileLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Transcriptome File (gff3): </Label>
 		<ValidatedTextField fx:id="transcriptomeFileTextField" label="$transcriptomeFileLabel"
 							GridPane.rowIndex="3" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file" 
-							validators="INPUT_FILE, MANDATORY" />
+							validators="INPUT_FILE" />
 		<Button onAction="#changeInputFile" userData="$transcriptomeFileTextField" text="..." GridPane.rowIndex="3" GridPane.columnIndex="4" />
 			
 	</GridPane>

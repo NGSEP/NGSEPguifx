@@ -21,7 +21,7 @@
 		<Label fx:id="populationsFileLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">(*) Populations file:</Label>
 		<ValidatedTextField fx:id="populationsFileTextField" label="$populationsFileLabel"
 							GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
-							validators="INPUT_FILE"/>
+							validators="INPUT_FILE, MANDATORY"/>
 		<Button onAction="#changeInputFile" userData="$populationsFileTextField" text="..." GridPane.rowIndex="1" GridPane.columnIndex="4" />
 		
 		<Label fx:id="outputPrefixLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">(*) Output files prefix: </Label>
