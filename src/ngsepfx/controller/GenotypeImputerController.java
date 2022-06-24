@@ -80,7 +80,7 @@ public class GenotypeImputerController extends AnalysisAreaController{
 	public void handleActivationEvent(NGSEPEvent event) {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
-		setDefaultValues(GenotypeImputerController.class.getName());
+		setDefaultValues(GenotypeImputer.class.getName());
 		inputFileTextField.setText(file.getAbsolutePath());
 		suggestOutputFile(file, outputPrefixTextField, "");
 

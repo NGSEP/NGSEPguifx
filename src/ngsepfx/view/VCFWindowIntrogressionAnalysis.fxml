@@ -65,7 +65,7 @@
 		<Label fx:id="mismatchScoreLabel" GridPane.rowIndex="6" GridPane.columnIndex="0">Mismatch score:</Label>
 		<ValidatedTextField fx:id="mismatchScoreTextField" label="$mismatchScoreLabel"
 							GridPane.rowIndex="6" GridPane.columnIndex="1" styleClass="small-number-input"
-							validators="INT, POSITIVE_NUMBER"/>
+							validators="INT"/>
 							
 		<Label fx:id="minScoreLabel" GridPane.rowIndex="7" GridPane.columnIndex="0">Minimum score:</Label>
 		<ValidatedTextField fx:id="minScoreTextField" label="$minScoreLabel"

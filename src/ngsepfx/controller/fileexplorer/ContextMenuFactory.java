@@ -62,7 +62,7 @@ public final class ContextMenuFactory {
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Diversity Stats", "ngsepfx.controller.VCFDiversityCalculatorController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Comparator", "ngsepfx.controller.VCFComparatorController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Genotype Imputation", "ngsepfx.controller.GenotypeImputerController");
-	    	addSimpleMenuItem(contextMenu, cell, "VCF Allele Sharing Statistics", "ngsepfx.controller.VCFAlleleSharingStatisticsCalculator");
+	    	addSimpleMenuItem(contextMenu, cell, "VCF Allele Sharing Statistics", "ngsepfx.controller.VCFAlleleSharingStatisticsCalculatorController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Introgression Analysis", "ngsepfx.controller.VCFWindowIntrogressionAnalysisController");
 	    	
 	    	addSimpleMenuItem(contextMenu, cell, "Single Individual Haplotyper", "ngsepfx.controller.SingleIndividualHaplotyperController");
