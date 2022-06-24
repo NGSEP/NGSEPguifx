@@ -139,6 +139,9 @@ public class VariantsDetectorController extends AnalysisAreaController {
 	private CheckBox runOnlySVsAnalysesCheckBox;
 	
 	@FXML
+	private CheckBox runLongReadSVsCheckBox;
+	
+	@FXML
 	private CheckBox printSamplePloidyCheckBox;
 	
 	@FXML
@@ -203,6 +206,7 @@ public class VariantsDetectorController extends AnalysisAreaController {
 		checkboxes.put("runRDAnalysis", runRDAnalysisCheckBox);
 		checkboxes.put("runRPAnalysis", runRPAnalysisCheckBox);
 		checkboxes.put("runOnlySVsAnalyses", runOnlySVsAnalysesCheckBox);
+		checkboxes.put("runLongReadSVs", runLongReadSVsCheckBox);
 		checkboxes.put("printSamplePloidy", printSamplePloidyCheckBox);
 		checkboxes.put("ignoreLowerCaseRef", ignoreLowerCaseRefCheckBox);
 		checkboxes.put("processNonUniquePrimaryAlignments", processNonUniquePrimaryAlignmentsCheckBox);
@@ -237,6 +241,7 @@ public class VariantsDetectorController extends AnalysisAreaController {
 			runRDAnalysisCheckBox.setDisable(true);
 			runRPAnalysisCheckBox.setDisable(true);
 			runOnlySVsAnalysesCheckBox.setDisable(true);
+			runLongReadSVsCheckBox.setDisable(true);
 		} else {
 			setDefaultValues(SingleSampleVariantsDetector.class.getName());
 			inputFileTextField.setText(file.getAbsolutePath());

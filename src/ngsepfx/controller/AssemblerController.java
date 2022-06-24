@@ -65,6 +65,12 @@ public class AssemblerController extends AnalysisAreaController {
 	private ValidatedTextField ploidyTextField;
 	
 	@FXML
+	private ValidatedTextField circularMoleculesMaxLengthTextField;
+	
+	@FXML
+	private ValidatedTextField circularMoleculesStartsFileTextField;
+	
+	@FXML
 	private ValidatedTextField numThreadsTextField;
 	
 	@FXML
@@ -92,6 +98,8 @@ public class AssemblerController extends AnalysisAreaController {
 		textFields.put("kmerLength", kmerLengthTextField);
 		textFields.put("windowLength", windowLengthTextField);
 		textFields.put("ploidy", ploidyTextField);
+		textFields.put("circularMoleculesMaxLength", circularMoleculesMaxLengthTextField);
+		textFields.put("circularMoleculesStartsFile", circularMoleculesStartsFileTextField);
 		textFields.put("numThreads", numThreadsTextField);
 		return textFields;
 	}

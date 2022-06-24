@@ -28,7 +28,12 @@
 		<ValidatedTextField fx:id="graphFileTextField" label="$graphFileLabel"
 							GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file" 
 							validators="INPUT_FILE"/>
-		<Button onAction="#changeInputFile" userData="$graphFileTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4"/>	
+		<Button onAction="#changeInputFile" userData="$graphFileTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4"/>
+		<Label fx:id="circularMoleculesStartsFileLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Starts of circular molecules (fasta):</Label>
+		<ValidatedTextField fx:id="circularMoleculesStartsFileTextField" label="$circularMoleculesStartsFileLabel"
+							GridPane.rowIndex="3" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file" 
+							validators="INPUT_FILE"/>
+		<Button onAction="#changeInputFile" userData="$circularMoleculesStartsFileTextField" text="..." GridPane.rowIndex="3" GridPane.columnIndex="4"/>	
 	</GridPane>
 	
 	<HBox styleClass="hbox">
@@ -51,10 +56,15 @@
 			<ValidatedTextField fx:id="ploidyTextField" label="$ploidyLabel"
 								GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
+								
+			<Label fx:id="circularMoleculesMaxLengthLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">Maximum length of circular molecules:</Label>
+			<ValidatedTextField fx:id="circularMoleculesMaxLengthTextField" label="$circularMoleculesMaxLengthLabel"
+								GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="medium-number-input"
+								validators="POSITIVE_NUMBER, INT"/>
 			
-			<Label fx:id="numThreadsLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">Number of threads:</Label>
+			<Label fx:id="numThreadsLabel" GridPane.rowIndex="5" GridPane.columnIndex="0">Number of threads:</Label>
 			<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel"
-								GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="small-number-input"
+								GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 		</GridPane>
 	</HBox>

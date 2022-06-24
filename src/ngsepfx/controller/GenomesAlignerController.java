@@ -45,6 +45,10 @@ public class GenomesAlignerController extends AnalysisAreaController {
 	@FXML
 	private ValidatedTextField minimunPercentageTextField;
 	@FXML
+	private ValidatedTextField minHomologUnitsBlockTextField;
+	@FXML
+	private ValidatedTextField maxDistanceBetweenUnitsTextField;
+	@FXML
 	private ValidatedTextField minFrequencySoftCoreTextField;
 	@FXML
 	private CheckBox skipMCLCheckBox;
@@ -65,6 +69,8 @@ public class GenomesAlignerController extends AnalysisAreaController {
 		textFields.put("outputPrefix", outputPrefixTextField);
 		textFields.put("kmerLength",kmerLengthTextField);
 		textFields.put("minPctKmers",minimunPercentageTextField);
+		textFields.put("minHomologUnitsBlock", minHomologUnitsBlockTextField);
+		textFields.put("maxDistanceBetweenUnits", maxDistanceBetweenUnitsTextField);
 		textFields.put("minFrequencySoftCore", minFrequencySoftCoreTextField);
 		return textFields;
 	}

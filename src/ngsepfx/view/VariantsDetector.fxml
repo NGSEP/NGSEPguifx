@@ -66,6 +66,7 @@
 								<CheckBox fx:id="runRDAnalysisCheckBox" text="Run read depth (RD) analysis"/>
 								<CheckBox fx:id="runRPAnalysisCheckBox" text="Run read pair (RP) analysis"/>
 								<CheckBox fx:id="runOnlySVsAnalysesCheckBox" text="Skip detection of SNVs and small indels"/>
+								<CheckBox fx:id="runLongReadSVsCheckBox" text="Identify structural variants from alignments of long reads"/>
 							</VBox>
 							<GridPane styleClass="grid-pane" >
 								<Label fx:id="minMQLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">Minimum mapping quality unique alignments:</Label>

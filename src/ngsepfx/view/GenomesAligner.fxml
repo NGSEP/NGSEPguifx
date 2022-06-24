@@ -31,24 +31,36 @@
 							GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="output-file"
 							validators="OUTPUT_FILE, MANDATORY" />
 		<Button onAction="#changeOutputFile" userData="$outputPrefixTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />
-		
-		<Label fx:id="kmerLengthLabel" GridPane.rowIndex="3" GridPane.columnIndex="0"> Kmer Length:</Label>
-		<ValidatedTextField fx:id="kmerLengthTextField" label="$kmerLengthLabel"
-							GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="medium-number-input"
+	</GridPane>
+	
+	<HBox styleClass="hbox">
+		<GridPane styleClass="grid-pane" >
+			<Label fx:id="kmerLengthLabel" GridPane.rowIndex="0" GridPane.columnIndex="0"> Kmer Length:</Label>
+			<ValidatedTextField fx:id="kmerLengthTextField" label="$kmerLengthLabel"
+								GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="small-number-input"
+								validators="POSITIVE_NUMBER" />
+			<Label fx:id="minimumPercentageLabel" GridPane.rowIndex="1" GridPane.columnIndex="0"> Minimum Percentage Kmers:</Label>
+			<ValidatedTextField fx:id="minimunPercentageTextField" label="$minimumPercentageLabel"
+								GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="small-number-input"
 							validators="POSITIVE_NUMBER" />
-		<Label fx:id="minimumPercentageLabel" GridPane.rowIndex="4" GridPane.columnIndex="0"> Minimum Percentage Kmers:</Label>
-		<ValidatedTextField fx:id="minimunPercentageTextField" label="$minimumPercentageLabel"
-							GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="medium-number-input"
-						validators="POSITIVE_NUMBER" />	
-		<Label fx:id="minFrequencySoftCoreLabel" GridPane.rowIndex="5" GridPane.columnIndex="0"> Minimum Frequency Soft Core :</Label>
-		<ValidatedTextField fx:id="minFrequencySoftCoreTextField" label="$minFrequencySoftCoreLabel"
-							GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="medium-number-input"
-						validators="POSITIVE_NUMBER" />									
-		
-		<CheckBox fx:id="skipMCLCheckBox" text="Skip the MCL clustering phase" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+			<Label fx:id="minHomologUnitsBlockLabel" GridPane.rowIndex="2" GridPane.columnIndex="0"> Minimum Homology Units per Synteny Block :</Label>
+			<ValidatedTextField fx:id="minHomologUnitsBlockTextField" label="$minHomologUnitsBlockLabel"
+								GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="small-number-input"
+							validators="POSITIVE_NUMBER" />
+			<Label fx:id="maxDistanceBetweenUnitsLabel" GridPane.rowIndex="3" GridPane.columnIndex="0"> Maximum Distance Between Units for Synteny Blocks :</Label>
+			<ValidatedTextField fx:id="maxDistanceBetweenUnitsTextField" label="$maxDistanceBetweenUnitsLabel"
+								GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="medium-number-input"
+							validators="POSITIVE_NUMBER" />	
+			<Label fx:id="minFrequencySoftCoreLabel" GridPane.rowIndex="4" GridPane.columnIndex="0"> Minimum Frequency Soft Core :</Label>
+			<ValidatedTextField fx:id="minFrequencySoftCoreTextField" label="$minFrequencySoftCoreLabel"
+								GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="small-number-input"
+							validators="POSITIVE_NUMBER" />									
+			
+			<CheckBox fx:id="skipMCLCheckBox" text="Skip the MCL clustering phase" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
 		</GridPane>
-		<HBox >
+	</HBox>
+	<HBox >
 		<Button onAction="#submitTask" text="Genomes Aligner" />
-		</HBox>
+	</HBox>
 	
 </VBox>
