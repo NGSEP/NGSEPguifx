@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.CheckBox?>
 
 <?import ngsepfx.view.component.ValidatedTextField?>
@@ -20,32 +21,31 @@
 		
 		<Label fx:id="outputPrefixLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">(*) Output files prefix: </Label>
 		<ValidatedTextField fx:id="outputPrefixTextField" label="$outputPrefixLabel"
-							GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="output-file" 
+							GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="output-file" 
 							validators="OUTPUT_FILE, MANDATORY"/>
-		<Button onAction="#changeOutputFile" userData="$outputPrefixTextField" GridPane.rowIndex="1" GridPane.columnIndex="2" text="..."/>		
+		<Button onAction="#changeOutputFile" userData="$outputPrefixTextField" text="..." GridPane.rowIndex="1" GridPane.columnIndex="4"/>		
 	</GridPane>
-	<GridPane styleClass="grid-pane">
-	
-		<Label fx:id="kmerLengthLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">K-mer length:</Label>
-		<ValidatedTextField fx:id="kmerLengthTextField" label="$kmerLengthLabel"
-							GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="small-number-input"
-							validators="POSITIVE_NUMBER, INT"/>	
-							
-		<Label fx:id="minKmerCountLabel" GridPane.rowIndex="0" GridPane.columnIndex="2">Minimum count to report a k-mer:</Label>
-		<ValidatedTextField fx:id="minKmerCountTextField" label="$minKmerCountLabel"
-							GridPane.rowIndex="0" GridPane.columnIndex="3" styleClass="small-number-input"
-							validators="POSITIVE_NUMBER, INT"/>
-							
-		<Label fx:id="inputFormatLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Format of the input file(s). It can be 0 for fastq or 1 for
-		  fasta.:</Label>
-		<ValidatedTextField fx:id="inputFormatTextField" label="$inputFormatLabel"
-							GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="small-number-input"
-							validators="POSITIVE_NUMBER, INT"/>	
-							
-		<CheckBox fx:id="onlyForwardStrandCheckBox" text="Only forward stand" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
-		<CheckBox fx:id="ignoreLowComplexityCheckBox" text="Ignore low complexity" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
-	</GridPane>
-	
+	<HBox styleClass="hbox">
+		<GridPane styleClass="grid-pane">
+		
+			<Label fx:id="kmerLengthLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">K-mer length:</Label>
+			<ValidatedTextField fx:id="kmerLengthTextField" label="$kmerLengthLabel"
+								GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="small-number-input"
+								validators="POSITIVE_NUMBER, INT"/>	
+								
+			<Label fx:id="minKmerCountLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Minimum count to report a k-mer:</Label>
+			<ValidatedTextField fx:id="minKmerCountTextField" label="$minKmerCountLabel"
+								GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="small-number-input"
+								validators="POSITIVE_NUMBER, INT"/>
+								
+			<Label fx:id="inputFormatLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Format of the input file:</Label>
+			<ChoiceBox fx:id="inputFormatChoiceBox" GridPane.rowIndex="2" GridPane.columnIndex="1"/>	
+			
+			<CheckBox fx:id="freeTextCheckBox" text="Treat sequences as free text" GridPane.rowIndex="3" GridPane.columnIndex="0"/>					
+			<CheckBox fx:id="onlyForwardStrandCheckBox" text="Only forward stand" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+			<CheckBox fx:id="ignoreLowComplexityCheckBox" text="Ignore low complexity" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+		</GridPane>
+	</HBox>
 	<HBox >
 		<Button onAction="#submitTask" text="K-mers Extractor" />
 	</HBox>

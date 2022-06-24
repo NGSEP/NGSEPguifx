@@ -54,8 +54,6 @@ public final class ContextMenuFactory {
 	    	addSimpleMenuItem(contextMenu, cell, "TILLING Individual genotyper", "ngsepfx.controller.TillingPoolsIndividualGenotyperController");
 	    	addSimpleMenuItem(contextMenu, cell, "Base Pair Quality Statistics", "ngsepfx.controller.BasePairQualityStatisticsController");
 	    	addSimpleMenuItem(contextMenu, cell, "Genomes Aligner", "ngsepfx.controller.GenomesAlignerController");
-
-	    	//addSimpleMenuItem(contextMenu, cell, "K-mers Extractor", "ngsepfx.controller.KmersExtractorController");
 	    } else if(fileInLower.contains(".vcf")) {
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Annotate", "ngsepfx.controller.VCFFunctionalAnnotatorController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Summary Statistics", "ngsepfx.controller.VCFSummaryStatisticsController");
@@ -63,6 +61,10 @@ public final class ContextMenuFactory {
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Converter", "ngsepfx.controller.VCFConverterController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Diversity Stats", "ngsepfx.controller.VCFDiversityCalculatorController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Comparator", "ngsepfx.controller.VCFComparatorController");
+	    	addSimpleMenuItem(contextMenu, cell, "VCF Genotype Imputation", "ngsepfx.controller.GenotypeImputerController");
+	    	addSimpleMenuItem(contextMenu, cell, "VCF Allele Sharing Statistics", "ngsepfx.controller.VCFAlleleSharingStatisticsCalculator");
+	    	addSimpleMenuItem(contextMenu, cell, "VCF Introgression Analysis", "ngsepfx.controller.VCFWindowIntrogressionAnalysisController");
+	    	
 	    	addSimpleMenuItem(contextMenu, cell, "Single Individual Haplotyper", "ngsepfx.controller.SingleIndividualHaplotyperController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Variant Density", "ngsepfx.controller.VCFVariantDensityCalculatorController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Distance Matrix", "ngsepfx.controller.VCFDistanceMatrixCalculatorController");
@@ -78,6 +80,7 @@ public final class ContextMenuFactory {
 	    	addSimpleMenuItem(contextMenu, cell, "Reads Aligner", "ngsepfx.controller.ReadsAlignerController");
 	    	addSimpleMenuItem(contextMenu, cell, "Single Reads Simulator", "ngsepfx.controller.SingleReadsSimulatorController");
 	    	addSimpleMenuItem(contextMenu, cell, "Single Individual Simulator", "ngsepfx.controller.SingleIndividualSimulatorController");
+	    	addSimpleMenuItem(contextMenu, cell, "K-mers Extractor", "ngsepfx.controller.KmersExtractorController");
 	    	//addSimpleMenuItem(contextMenu, cell, "Genomes Aligner", "ngsepfx.controller.GenomesAlignerController");
 	    	//addSimpleMenuItem(contextMenu, cell, "Reads File Errors Corrector", "ngsepfx.controller.ReadsFileErrorsCorrectorController");
 	    	addSimpleMenuItem(contextMenu, cell, "Individual Genome Builder", "ngsepfx.controller.VCFIndividualGenomeBuilderController");

@@ -26,23 +26,22 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import ngsep.assembly.Assembler;
+import javafx.scene.control.CheckBox;
+import ngsep.vcf.VCFWindowIntrogressionAnalysis;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
 import ngsepfx.view.component.ValidatedTextField;
 
 /**
- * Controller for the genomes assembler
  * @author Jorge Duitama
  *
  */
-public class AssemblerController extends AnalysisAreaController {
+public class VCFWindowIntrogressionAnalysisController extends AnalysisAreaController {
 	
 	//Constants.
 	
-	public static final String TASK_NAME = "Assembler";
+	public static final String TASK_NAME = "VCF Window Introgression Analysis";
 	
 	//FXML parameters.
 	
@@ -53,97 +52,107 @@ public class AssemblerController extends AnalysisAreaController {
 	private ValidatedTextField outputPrefixTextField;
 	
 	@FXML
-	private ValidatedTextField graphFileTextField;
+	private ValidatedTextField populationsFileTextField;
+
+	@FXML
+	private ValidatedTextField minPCTGenotypedTextField;
 	
 	@FXML
-	private ValidatedTextField kmerLengthTextField;
+	private ValidatedTextField minDiffAFTextField;
 	
 	@FXML
-	private ValidatedTextField windowLengthTextField;
+	private ValidatedTextField maxMAFWithinTextField;
 	
 	@FXML
-	private ValidatedTextField ploidyTextField;
+	private ValidatedTextField windowSizeTextField;
 	
 	@FXML
-	private ValidatedTextField circularMoleculesMaxLengthTextField;
+	private ValidatedTextField overlapTextField;
 	
 	@FXML
-	private ValidatedTextField circularMoleculesStartsFileTextField;
+	private ValidatedTextField matchScoreTextField;
 	
 	@FXML
-	private ValidatedTextField numThreadsTextField;
+	private ValidatedTextField mismatchScoreTextField;
 	
 	@FXML
-	private ChoiceBox<String> inputFormatChoiceBox;
+	private ValidatedTextField minScoreTextField;
 	
-	//AnalysisAreaController.
+	@FXML
+	private CheckBox printVCFCheckBox;
+	
+	@FXML
+	private CheckBox printUnassignedCheckBox;
+	
 
 	/* (non-Javadoc)
 	 * @see ngsepfx.controller.AnalysisAreaController#getFXMLResourcePath()
 	 */
 	@Override
 	public String getFXMLResourcePath() {
-		return "/ngsepfx/view/Assembler.fxml";
+		return "/ngsepfx/view/VCFWindowIntrogressionAnalysis.fxml";
 	}
-	
 	/* (non-Javadoc)
 	 * @see ngsepfx.controller.AnalysisAreaController#getValidatedTextFieldComponents()
 	 */
 	@Override
-	protected Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
+	public Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
 		Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
 		textFields.put("inputFile", inputFileTextField);
 		textFields.put("outputPrefix", outputPrefixTextField);
-		textFields.put("graphFile", graphFileTextField);
-		textFields.put("kmerLength", kmerLengthTextField);
-		textFields.put("windowLength", windowLengthTextField);
-		textFields.put("ploidy", ploidyTextField);
-		textFields.put("circularMoleculesMaxLength", circularMoleculesMaxLengthTextField);
-		textFields.put("circularMoleculesStartsFile", circularMoleculesStartsFileTextField);
-		textFields.put("numThreads", numThreadsTextField);
+		textFields.put("populationsFile", populationsFileTextField);
+		textFields.put("minPCTGenotyped", minPCTGenotypedTextField);
+		textFields.put("minDiffAF", minDiffAFTextField);
+		textFields.put("maxMAFWithin", maxMAFWithinTextField);
+		textFields.put("windowSize", windowSizeTextField);
+		textFields.put("overlap", overlapTextField);
+		textFields.put("matchScore", matchScoreTextField);
+		textFields.put("mismatchScore", mismatchScoreTextField);
+		textFields.put("minScore", minScoreTextField);
 		return textFields;
+	}
+	
+	@Override
+	protected Map<String, CheckBox> getCheckBoxComponents() {
+		Map<String, CheckBox> checkboxes = new HashMap<String, CheckBox>();
+		checkboxes.put("printVCF", printVCFCheckBox);
+		checkboxes.put("printUnassigned", printUnassignedCheckBox);
+		return checkboxes;
 	}
 
 	/* (non-Javadoc)
 	 * @see ngsepfx.controller.AnalysisAreaController#handleActivationEvent(ngsepfx.event.NGSEPEvent)
+	 * #handleNGSEPEvent(ngsepfx.event.NGSEPEvent)
 	 */
 	@Override
 	public void handleActivationEvent(NGSEPEvent event) {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
-		setDefaultValues(Assembler.class.getName());
+		setDefaultValues(VCFWindowIntrogressionAnalysis.class.getName());
 		inputFileTextField.setText(file.getAbsolutePath());
-		inputFormatChoiceBox.getItems().add(FORMAT_FASTQ);
-		inputFormatChoiceBox.getItems().add(FORMAT_FASTA);
-		String filename = file.getName();
-		int k = ReadsAlignerController.getExtensionIndex(filename);
-		if(k>0) {
-			if(filename.toLowerCase().substring(k).startsWith(".fastq")) inputFormatChoiceBox.getSelectionModel().select(0);
-			else inputFormatChoiceBox.getSelectionModel().select(1);
-		}
-		suggestOutputFile(file, outputPrefixTextField, "_assembly");
+		suggestOutputFile(file, outputPrefixTextField, "");
 	}
-
+	
+	/* (non-Javadoc)
+	 * @see ngsepfx.controller.AnalysisAreaController#getTask()
+	 */
 	@Override
 	protected NGSEPTask<Void> getTask() {
-		return new NGSEPTask<Void>() {
+		return new NGSEPTask<Void>() {	
     		@Override 
     		public Void call() {
     			updateMessage(inputFileTextField.getText());
 				updateTitle(TASK_NAME);
     			FileHandler logHandler = null;
     			try {
-    				Assembler instance = new Assembler();
+    				VCFWindowIntrogressionAnalysis instance = new VCFWindowIntrogressionAnalysis();
     				fillAttributes(instance);
-    				if(inputFormatChoiceBox.getSelectionModel().getSelectedIndex()==1) instance.setInputFormat(Assembler.INPUT_FORMAT_FASTA);
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
-    				logHandler = createLogHandler(instance.getOutputPrefix(), "Assembler");
+    				logHandler = createLogHandler(instance.getOutputPrefix(), "_Introgression.log");
     				log.addHandler(logHandler);
-    				
     				instance.setLog(log);
     				instance.setProgressNotifier(this);
-    				
     				instance.run();
     			} catch (Exception e) {
     				e.printStackTrace();
@@ -158,7 +167,4 @@ public class AssemblerController extends AnalysisAreaController {
     		}
 		};
 	}
-	
-	
-
 }

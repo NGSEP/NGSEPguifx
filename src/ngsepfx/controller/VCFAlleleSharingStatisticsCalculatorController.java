@@ -26,23 +26,22 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import ngsep.assembly.Assembler;
+import javafx.scene.control.CheckBox;
+import ngsep.vcf.VCFAlleleSharingStatisticsCalculator;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
 import ngsepfx.view.component.ValidatedTextField;
 
 /**
- * Controller for the genomes assembler
  * @author Jorge Duitama
  *
  */
-public class AssemblerController extends AnalysisAreaController {
+public class VCFAlleleSharingStatisticsCalculatorController extends AnalysisAreaController {
 	
 	//Constants.
 	
-	public static final String TASK_NAME = "Assembler";
+	public static final String TASK_NAME = "VCF Allele Sharing Statistics";
 	
 	//FXML parameters.
 	
@@ -50,100 +49,94 @@ public class AssemblerController extends AnalysisAreaController {
 	private ValidatedTextField inputFileTextField;
 	
 	@FXML
-	private ValidatedTextField outputPrefixTextField;
+	private ValidatedTextField outputFileTextField;
 	
 	@FXML
-	private ValidatedTextField graphFileTextField;
+	private ValidatedTextField samplesTextField;
+
+	@FXML
+	private ValidatedTextField transcriptomeFileTextField;
 	
 	@FXML
-	private ValidatedTextField kmerLengthTextField;
+	private ValidatedTextField populationsGroup1TextField;
+	
+	@FXML
+	private ValidatedTextField populationsGroup2TextField;
 	
 	@FXML
 	private ValidatedTextField windowLengthTextField;
 	
 	@FXML
-	private ValidatedTextField ploidyTextField;
+	private ValidatedTextField stepLengthTextField;
 	
 	@FXML
-	private ValidatedTextField circularMoleculesMaxLengthTextField;
+	private CheckBox includeIntronsCheckBox;
 	
-	@FXML
-	private ValidatedTextField circularMoleculesStartsFileTextField;
-	
-	@FXML
-	private ValidatedTextField numThreadsTextField;
-	
-	@FXML
-	private ChoiceBox<String> inputFormatChoiceBox;
-	
-	//AnalysisAreaController.
 
 	/* (non-Javadoc)
 	 * @see ngsepfx.controller.AnalysisAreaController#getFXMLResourcePath()
 	 */
 	@Override
 	public String getFXMLResourcePath() {
-		return "/ngsepfx/view/Assembler.fxml";
+		return "/ngsepfx/view/VCFAlleleSharingStatisticsCalculator.fxml";
 	}
-	
 	/* (non-Javadoc)
 	 * @see ngsepfx.controller.AnalysisAreaController#getValidatedTextFieldComponents()
 	 */
 	@Override
-	protected Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
+	public Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
 		Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
 		textFields.put("inputFile", inputFileTextField);
-		textFields.put("outputPrefix", outputPrefixTextField);
-		textFields.put("graphFile", graphFileTextField);
-		textFields.put("kmerLength", kmerLengthTextField);
+		textFields.put("outputFile", outputFileTextField);
+		textFields.put("samples", samplesTextField);
+		textFields.put("transcriptomeFile", transcriptomeFileTextField);
+		textFields.put("populationsGroup1", populationsGroup1TextField);
+		textFields.put("populationsGroup2", populationsGroup2TextField);
 		textFields.put("windowLength", windowLengthTextField);
-		textFields.put("ploidy", ploidyTextField);
-		textFields.put("circularMoleculesMaxLength", circularMoleculesMaxLengthTextField);
-		textFields.put("circularMoleculesStartsFile", circularMoleculesStartsFileTextField);
-		textFields.put("numThreads", numThreadsTextField);
+		textFields.put("stepLength", stepLengthTextField);
 		return textFields;
+	}
+	
+	@Override
+	protected Map<String, CheckBox> getCheckBoxComponents() {
+		Map<String, CheckBox> checkboxes = new HashMap<String, CheckBox>();
+		checkboxes.put("includeIntrons", includeIntronsCheckBox);
+		return checkboxes;
 	}
 
 	/* (non-Javadoc)
 	 * @see ngsepfx.controller.AnalysisAreaController#handleActivationEvent(ngsepfx.event.NGSEPEvent)
+	 * #handleNGSEPEvent(ngsepfx.event.NGSEPEvent)
 	 */
 	@Override
 	public void handleActivationEvent(NGSEPEvent event) {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
-		setDefaultValues(Assembler.class.getName());
+		setDefaultValues(VCFAlleleSharingStatisticsCalculator.class.getName());
 		inputFileTextField.setText(file.getAbsolutePath());
-		inputFormatChoiceBox.getItems().add(FORMAT_FASTQ);
-		inputFormatChoiceBox.getItems().add(FORMAT_FASTA);
-		String filename = file.getName();
-		int k = ReadsAlignerController.getExtensionIndex(filename);
-		if(k>0) {
-			if(filename.toLowerCase().substring(k).startsWith(".fastq")) inputFormatChoiceBox.getSelectionModel().select(0);
-			else inputFormatChoiceBox.getSelectionModel().select(1);
-		}
-		suggestOutputFile(file, outputPrefixTextField, "_assembly");
+		suggestOutputFile(file, outputFileTextField, "_AlleleSharingStats.txt");
 	}
-
+	
+	/* (non-Javadoc)
+	 * @see ngsepfx.controller.AnalysisAreaController#getTask()
+	 */
 	@Override
 	protected NGSEPTask<Void> getTask() {
-		return new NGSEPTask<Void>() {
+		return new NGSEPTask<Void>() {	
     		@Override 
     		public Void call() {
     			updateMessage(inputFileTextField.getText());
 				updateTitle(TASK_NAME);
     			FileHandler logHandler = null;
     			try {
-    				Assembler instance = new Assembler();
+    				VCFAlleleSharingStatisticsCalculator instance = new VCFAlleleSharingStatisticsCalculator();
     				fillAttributes(instance);
-    				if(inputFormatChoiceBox.getSelectionModel().getSelectedIndex()==1) instance.setInputFormat(Assembler.INPUT_FORMAT_FASTA);
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
-    				logHandler = createLogHandler(instance.getOutputPrefix(), "Assembler");
+    				logHandler = createLogHandler(instance.getOutputFile(), "");
     				log.addHandler(logHandler);
-    				
     				instance.setLog(log);
     				instance.setProgressNotifier(this);
-    				
     				instance.run();
     			} catch (Exception e) {
     				e.printStackTrace();
@@ -158,7 +151,4 @@ public class AssemblerController extends AnalysisAreaController {
     		}
 		};
 	}
-	
-	
-
 }

@@ -8,6 +8,8 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
+import ngsep.assembly.Assembler;
 import ngsep.sequences.KmersExtractor;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
@@ -31,13 +33,16 @@ public class KmersExtractorController extends AnalysisAreaController{
 	private ValidatedTextField minKmerCountTextField;
 	
 	@FXML
+	private CheckBox freeTextCheckBox;
+	
+	@FXML
 	private CheckBox onlyForwardStrandCheckBox;
 	
 	@FXML
-	private ValidatedTextField inputFormatTextField;
+	private CheckBox ignoreLowComplexityCheckBox;
 	
 	@FXML
-	private CheckBox ignoreLowComplexityCheckBox;
+	private ChoiceBox<String> inputFormatChoiceBox;
 	
 	@Override
 	public Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
@@ -46,13 +51,13 @@ public class KmersExtractorController extends AnalysisAreaController{
 		textFields.put("outputPrefix", outputPrefixTextField);
 		textFields.put("kmerLength",kmerLengthTextField);
 		textFields.put("minKmerCount", minKmerCountTextField);
-		textFields.put("inputFormat", inputFormatTextField);
 		return textFields;
 	}
 	
 	@Override
 	protected Map<String, CheckBox> getCheckBoxComponents() {
 		Map<String, CheckBox> checkboxes = new HashMap<String, CheckBox>();
+		checkboxes.put("freeText", freeTextCheckBox);
 		checkboxes.put("onlyForwardStrand", onlyForwardStrandCheckBox);
 		checkboxes.put("ignoreLowComplexity", ignoreLowComplexityCheckBox);
 		return checkboxes;
@@ -69,6 +74,14 @@ public class KmersExtractorController extends AnalysisAreaController{
 		File file = analyzeEvent.file;
 		setDefaultValues(KmersExtractor.class.getName());
 		inputFileTextField.setText(file.getAbsolutePath());
+		inputFormatChoiceBox.getItems().add(FORMAT_FASTQ);
+		inputFormatChoiceBox.getItems().add(FORMAT_FASTA);
+		String filename = file.getName();
+		int k = ReadsAlignerController.getExtensionIndex(filename);
+		if(k>0) {
+			if(filename.toLowerCase().substring(k).startsWith(".fastq")) inputFormatChoiceBox.getSelectionModel().select(0);
+			else inputFormatChoiceBox.getSelectionModel().select(1);
+		}
 		suggestOutputFile(file, outputPrefixTextField, "_kmers");
 		
 	}
@@ -84,6 +97,7 @@ public class KmersExtractorController extends AnalysisAreaController{
     			try {
     				KmersExtractor instance = new KmersExtractor();
     				fillAttributes(instance);
+    				if(inputFormatChoiceBox.getSelectionModel().getSelectedIndex()==1) instance.setInputFormat(KmersExtractor.INPUT_FORMAT_FASTA);
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
     				logHandler = createLogHandler(instance.getOutputPrefix(), null);
