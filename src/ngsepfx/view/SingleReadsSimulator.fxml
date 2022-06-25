@@ -27,27 +27,33 @@
 	</GridPane>
 	<GridPane styleClass="grid-pane">
 	
-		<Label fx:id="numberOfReadsLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Number of reads :</Label>
+		<Label fx:id="numberOfReadsLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">Number of reads :</Label>
 		<ValidatedTextField fx:id="numberOfReadsTextField" label="$numberOfReadsLabel"
-							GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="medium-number-input"
-							validators="POSITIVE_NUMBER"/>
+							GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="medium-number-input"
+							validators="INT, POSITIVE_NUMBER"/>
 	
-		<Label fx:id="meanReadLengthLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Mean read length:</Label>
+		<Label fx:id="meanReadLengthLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Mean read length:</Label>
 		<ValidatedTextField fx:id="meanReadLenghtTextField" label="$meanReadLengthLabel"
-							GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="medium-number-input"
-							validators="POSITIVE_NUMBER"/>
+							GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="medium-number-input"
+							validators="INT, POSITIVE_NUMBER"/>
 							
-		<Label fx:id="stdevReadLengthLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">Standard deviation:</Label>
+		<Label fx:id="stdevReadLengthLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Standard deviation:</Label>
 		<ValidatedTextField fx:id="stdevReadLengthTextField" label="$stdevReadLengthLabel"
+							GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="medium-number-input"
+							validators="INT, POSITIVE_NUMBER"/>
+							
+		<Label fx:id="minReadLengthLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Minimum read length:</Label>
+		<ValidatedTextField fx:id="minReadLenghtTextField" label="$minReadLengthLabel"
+							GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="medium-number-input"
+							validators="INT, POSITIVE_NUMBER"/>
+							
+		<Label fx:id="substitutionErrorRateLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">Substitution error rate </Label>
+		<ValidatedTextField fx:id="substitutionErrorRateTextField" label="$substitutionErrorRateLabel"
 							GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="medium-number-input"
 							validators="POSITIVE_NUMBER"/>
-		<Label fx:id="substitutionErrorRateLabel" GridPane.rowIndex="5" GridPane.columnIndex="0">Substitution error rate </Label>
-		<ValidatedTextField fx:id="substitutionErrorRateTextField" label="$substitutionErrorRateLabel"
-							GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="medium-number-input"
-							validators="POSITIVE_NUMBER"/>
-		<Label fx:id="indelErrorRateLabel" GridPane.rowIndex="6" GridPane.columnIndex="0">Indel error rate:</Label>
+		<Label fx:id="indelErrorRateLabel" GridPane.rowIndex="5" GridPane.columnIndex="0">Indel error rate:</Label>
 		<ValidatedTextField fx:id="indelErrorRateTextField" label="$indelErrorRateLabel"
-							GridPane.rowIndex="6" GridPane.columnIndex="1" styleClass="medium-number-input"
+							GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="medium-number-input"
 							validators="POSITIVE_NUMBER"/>
 	</GridPane>
 	<GridPane styleClass="grid-pane">
