@@ -46,6 +46,8 @@ public class SingleReadsSimulatorController extends AnalysisAreaController {
 	@FXML
 	private ValidatedTextField stdevReadLengthTextField;
 	@FXML
+	private ValidatedTextField minReadLenghtTextField;
+	@FXML
 	private ValidatedTextField substitutionErrorRateTextField;
 	@FXML
 	private ValidatedTextField indelErrorRateTextField;
@@ -63,7 +65,8 @@ public class SingleReadsSimulatorController extends AnalysisAreaController {
 		textFields.put("outputFile", outputFileTextField);
 		textFields.put("numberOfReads", numberOfReadsTextField);
 		textFields.put("meanReadLength", meanReadLenghtTextField);
-		textFields.put("stdevReadlength", stdevReadLengthTextField);
+		textFields.put("stdevReadLength", stdevReadLengthTextField);
+		textFields.put("minReadLength", minReadLenghtTextField);
 		textFields.put("substitutionErrorRate", substitutionErrorRateTextField);
 		textFields.put("indelErrorRate", indelErrorRateTextField);
 	
