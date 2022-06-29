@@ -46,7 +46,7 @@ public class KmersExtractorController extends AnalysisAreaController{
 	@Override
 	public Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
 		Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
-		textFields.put("inputFile", inputFileTextField);
+		//textFields.put("inputFile", inputFileTextField);
 		textFields.put("outputPrefix", outputPrefixTextField);
 		textFields.put("kmerLength",kmerLengthTextField);
 		textFields.put("minKmerCount", minKmerCountTextField);
@@ -79,6 +79,7 @@ public class KmersExtractorController extends AnalysisAreaController{
 		int k = ReadsAlignerController.getExtensionIndex(filename);
 		if(k>0) {
 			if(filename.toLowerCase().substring(k).startsWith(".fastq")) inputFormatChoiceBox.getSelectionModel().select(0);
+			else if(filename.toLowerCase().substring(k).startsWith(".fq")) inputFormatChoiceBox.getSelectionModel().select(0);
 			else inputFormatChoiceBox.getSelectionModel().select(1);
 		}
 		suggestOutputFile(file, outputPrefixTextField, "_kmers");
@@ -90,7 +91,8 @@ public class KmersExtractorController extends AnalysisAreaController{
 		return new NGSEPTask<Void>() {	
     		@Override 
     		public Void call() {
-    			updateMessage(inputFileTextField.getText());
+    			String inputFile = inputFileTextField.getText(); 
+    			updateMessage(inputFile);
 				updateTitle(TASK_NAME);
     			FileHandler logHandler = null;
     			try {
@@ -103,7 +105,7 @@ public class KmersExtractorController extends AnalysisAreaController{
     				log.addHandler(logHandler);
     				instance.setLog(log);
     				instance.setProgressNotifier(this);
-    				//instance.run();
+    				instance.processFile(inputFile);
     			} catch (Exception e) {
     				e.printStackTrace();
     				showExecutionErrorDialog(Thread.currentThread().getName(), e);
