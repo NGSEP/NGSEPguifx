@@ -1,7 +1,9 @@
 package ngsepfx.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -105,7 +107,10 @@ public class KmersExtractorController extends AnalysisAreaController{
     				log.addHandler(logHandler);
     				instance.setLog(log);
     				instance.setProgressNotifier(this);
-    				instance.processFile(inputFile);
+    				List<String> files = new ArrayList<>();
+    				files.add(inputFile);
+    				instance.processFiles(files);
+    				instance.saveResults();
     			} catch (Exception e) {
     				e.printStackTrace();
     				showExecutionErrorDialog(Thread.currentThread().getName(), e);
