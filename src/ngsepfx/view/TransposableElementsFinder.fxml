@@ -38,9 +38,14 @@
 								GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 			
-			<Label fx:id="numThreadsLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Number of threads:</Label>
-			<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel"
+			<Label fx:id="roundsLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Search rounds:</Label>
+			<ValidatedTextField fx:id="roundsTextField" label="$roundsLabel"
 								GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="small-number-input"
+								validators="POSITIVE_NUMBER, INT"/>
+			
+			<Label fx:id="numThreadsLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Number of threads:</Label>
+			<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel"
+								GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 		</GridPane>
 	</HBox>

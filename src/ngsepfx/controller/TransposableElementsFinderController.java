@@ -58,6 +58,9 @@ public class TransposableElementsFinderController extends AnalysisAreaController
 	private ValidatedTextField minTELengthTextField;
 	
 	@FXML
+	private ValidatedTextField roundsTextField;
+	
+	@FXML
 	private ValidatedTextField numThreadsTextField;
 
 	@Override
@@ -72,6 +75,7 @@ public class TransposableElementsFinderController extends AnalysisAreaController
 		textFields.put("outputFile", outputFileTextField);
 		textFields.put("transposonsDatabaseFile", transposonsDatabaseFileTextField);
 		textFields.put("minTELength", minTELengthTextField);
+		textFields.put("rounds", roundsTextField);
 		textFields.put("numThreads", numThreadsTextField);
 		return textFields;
 	}
