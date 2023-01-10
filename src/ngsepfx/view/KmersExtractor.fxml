@@ -37,13 +37,18 @@
 			<ValidatedTextField fx:id="minKmerCountTextField" label="$minKmerCountLabel"
 								GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
-								
-			<Label fx:id="inputFormatLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Format of the input file:</Label>
-			<ChoiceBox fx:id="inputFormatChoiceBox" GridPane.rowIndex="2" GridPane.columnIndex="1"/>	
 			
-			<CheckBox fx:id="freeTextCheckBox" text="Treat sequences as free text" GridPane.rowIndex="3" GridPane.columnIndex="0"/>					
-			<CheckBox fx:id="onlyForwardStrandCheckBox" text="Only forward stand" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-			<CheckBox fx:id="ignoreLowComplexityCheckBox" text="Ignore low complexity" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+			<Label fx:id="numThreadsLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Number of threads:</Label>					
+			<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel"
+								GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="small-number-input"
+								validators="POSITIVE_NUMBER, INT"/>		
+								
+			<Label fx:id="inputFormatLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Format of the input file:</Label>
+			<ChoiceBox fx:id="inputFormatChoiceBox" GridPane.rowIndex="3" GridPane.columnIndex="1"/>	
+			
+			<CheckBox fx:id="freeTextCheckBox" text="Treat sequences as free text" GridPane.rowIndex="4" GridPane.columnIndex="0"/>					
+			<CheckBox fx:id="onlyForwardStrandCheckBox" text="Only forward stand" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+			<CheckBox fx:id="ignoreLowComplexityCheckBox" text="Ignore low complexity" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
 		</GridPane>
 	</HBox>
 	<HBox >

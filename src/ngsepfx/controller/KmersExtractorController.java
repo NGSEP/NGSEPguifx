@@ -34,6 +34,9 @@ public class KmersExtractorController extends AnalysisAreaController{
 	private ValidatedTextField minKmerCountTextField;
 	
 	@FXML
+	private ValidatedTextField numThreadsTextField;
+	
+	@FXML
 	private CheckBox freeTextCheckBox;
 	
 	@FXML
@@ -52,6 +55,7 @@ public class KmersExtractorController extends AnalysisAreaController{
 		textFields.put("outputPrefix", outputPrefixTextField);
 		textFields.put("kmerLength",kmerLengthTextField);
 		textFields.put("minKmerCount", minKmerCountTextField);
+		textFields.put("numThreads", numThreadsTextField);
 		return textFields;
 	}
 	
