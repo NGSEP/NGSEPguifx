@@ -13,7 +13,7 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml/1" id="mainContainer">
 	<GridPane styleClass="grid-pane">
-		<Label fx:id="inputFileLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">(*) Input Directory:</Label>
+		<Label fx:id="inputFileLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">(*) Input File:</Label>
 		<ValidatedTextField fx:id="inputFileTextField" label="$inputFileLabel"
 							GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
 							validators="INPUT_FILE, MANDATORY" />

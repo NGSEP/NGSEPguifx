@@ -24,6 +24,6 @@
          </columnResizePolicy>
       </TableView>
       <Label fx:id="directoryLabel" layoutX="35.0" layoutY="415.0" text="Select reads to map" />
-      <Button layoutX="562.0" layoutY="425.0" mnemonicParsing="false" onAction="#finish" prefHeight="26.0" prefWidth="131.0" text="Finish" />
+      <Button layoutX="562.0" layoutY="425.0" mnemonicParsing="false" onAction="#finish" prefHeight="26.0" prefWidth="131.0" text="Next" />
 </children>
 </AnchorPane>

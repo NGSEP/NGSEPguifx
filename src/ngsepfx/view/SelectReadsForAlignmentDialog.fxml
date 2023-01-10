@@ -26,7 +26,7 @@
          </columnResizePolicy>
       </TableView>
       <Button fx:id="selectAllButton" layoutX="35.0" layoutY="22.0" mnemonicParsing="false" onAction="#selectAll" prefHeight="26.0" prefWidth="131.0" text="Select All" />
-      <Button fx:id="finishButton" layoutX="634.0" layoutY="424.0" mnemonicParsing="false" onAction="#finish" prefHeight="26.0" prefWidth="131.0" text="Finish" />
+      <Button fx:id="finishButton" layoutX="634.0" layoutY="424.0" mnemonicParsing="false" onAction="#finish" prefHeight="26.0" prefWidth="131.0" text="Next" />
       <Button fx:id="findPairsButton" layoutX="174.0" layoutY="22.0" mnemonicParsing="false" onAction="#findPairs" prefHeight="26.0" prefWidth="131.0" text="Find Pairs" />
       <Label fx:id="directoryLabel" layoutX="37.0" layoutY="421.0" text="Select reads to map" />
 </children>

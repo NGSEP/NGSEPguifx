@@ -20,7 +20,7 @@
 		</columnResizePolicy>
       </TableView>
 	  <Label fx:id="directoryLabel" layoutX="25.0" layoutY="405.0" text="Select reads to map" />
-      <Button fx:id="finishButton" layoutX="552.0" layoutY="415.0" mnemonicParsing="false" onAction="#finish" prefHeight="26.0" prefWidth="131.0" text="Finish" />
+      <Button fx:id="finishButton" layoutX="552.0" layoutY="415.0" mnemonicParsing="false" onAction="#finish" prefHeight="26.0" prefWidth="131.0" text="Next" />
       <Button fx:id="selectAllButton" layoutX="25.0" layoutY="12.0" mnemonicParsing="false" onAction="#selectAll" prefHeight="26.0" prefWidth="131.0" text="Select All" />
    </children>
 </AnchorPane>
