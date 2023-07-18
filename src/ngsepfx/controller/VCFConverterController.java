@@ -56,6 +56,9 @@ public class VCFConverterController extends AnalysisAreaController{
 	private CheckBox printFlapjackCheckBox;
 
 	@FXML
+	private CheckBox printGenePopCheckBox;
+	
+	@FXML
 	private CheckBox printGWASPolyCheckBox;
 
 	@FXML
@@ -117,6 +120,7 @@ public class VCFConverterController extends AnalysisAreaController{
 		checkboxes.put("printFasta", printFastaCheckBox);
 		checkboxes.put("printFineStructure", printFineStructureCheckBox);
 		checkboxes.put("printFlapjack", printFlapjackCheckBox);
+		checkboxes.put("printGenePop", printGenePopCheckBox);
 		checkboxes.put("printGWASPoly", printGWASPolyCheckBox);
 		checkboxes.put("printHaploview", printHaploviewCheckBox);
 		checkboxes.put("printHapmap", printHapmapCheckBox);

@@ -39,9 +39,10 @@
 			<CheckBox fx:id="printFastaCheckBox" text="Fasta file" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
 			<CheckBox fx:id="printFineStructureCheckBox" text="Input file for FineStructure" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
 			<CheckBox fx:id="printFlapjackCheckBox" text="Input file for Flapjack" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-			<CheckBox fx:id="printGWASPolyCheckBox" text="Input file for GWASPoly" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
-			<CheckBox fx:id="printHaploviewCheckBox" text="Input file for Haploview" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
-			<CheckBox fx:id="printHapmapCheckBox" text="Input file for HapMap" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+			<CheckBox fx:id="printGenePopCheckBox" text="Input file for Genepop" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+			<CheckBox fx:id="printGWASPolyCheckBox" text="Input file for GWASPoly" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+			<CheckBox fx:id="printHaploviewCheckBox" text="Input file for Haploview" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+			<CheckBox fx:id="printHapmapCheckBox" text="Input file for HapMap" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
 			<CheckBox fx:id="printJoinMapCheckBox" text="Input file for JoinMap" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 			<CheckBox fx:id="printMatrixCheckBox" text="ACGT file" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 			<CheckBox fx:id="printPhaseCheckBox" text="Input file for Phase" GridPane.rowIndex="2" GridPane.columnIndex="1"/>

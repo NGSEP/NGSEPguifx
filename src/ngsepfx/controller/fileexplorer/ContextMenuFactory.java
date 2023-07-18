@@ -69,7 +69,7 @@ public final class ContextMenuFactory {
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Variant Density", "ngsepfx.controller.VCFVariantDensityCalculatorController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Distance Matrix", "ngsepfx.controller.VCFDistanceMatrixCalculatorController");
 	    	addSimpleMenuItem(contextMenu, cell, "VCF Relative Coordinates Translator", "ngsepfx.controller.VCFRelativeCoordinatesTranslatorController");
-	    	//addSimpleMenuItem(contextMenu, cell, "Mutated Peptides Extractor", "ngsepfx.controller.MutatedPeptidesExtractorController");
+	    	addSimpleMenuItem(contextMenu, cell, "Mutated Peptides Extractor", "ngsepfx.controller.MutatedPeptidesExtractorController");
 	    } else if (fileInLower.endsWith(".txt") || fileInLower.endsWith(".tsv")) {
 	    	addSimpleMenuItem(contextMenu, cell, "Reads Demultiplex", "ngsepfx.controller.ReadsDemultiplexController");
 	    	addSimpleMenuItem(contextMenu, cell, "TILLING Simulator", "ngsepfx.controller.TillingPopulationSimulatorController");

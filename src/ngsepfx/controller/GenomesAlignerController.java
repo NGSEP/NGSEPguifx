@@ -51,6 +51,8 @@ public class GenomesAlignerController extends AnalysisAreaController {
 	@FXML
 	private ValidatedTextField minFrequencySoftCoreTextField;
 	@FXML
+	private ValidatedTextField referenceGenomeIdTextField;
+	@FXML
 	private ValidatedTextField numThreadsTextField;
 	@FXML
 	private CheckBox skipMCLCheckBox;
@@ -59,7 +61,6 @@ public class GenomesAlignerController extends AnalysisAreaController {
 	
 	@Override
 	public String getFXMLResourcePath() {
-		// TODO Auto-generated method stub
 		return "/ngsepfx/view/GenomesAligner.fxml";
 
 	}
@@ -74,6 +75,7 @@ public class GenomesAlignerController extends AnalysisAreaController {
 		textFields.put("minHomologUnitsBlock", minHomologUnitsBlockTextField);
 		textFields.put("maxDistanceBetweenUnits", maxDistanceBetweenUnitsTextField);
 		textFields.put("minFrequencySoftCore", minFrequencySoftCoreTextField);
+		textFields.put("referenceGenomeId", referenceGenomeIdTextField);
 		textFields.put("numThreads", numThreadsTextField);
 		return textFields;
 	}

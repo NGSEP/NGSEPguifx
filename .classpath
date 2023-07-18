@@ -15,6 +15,6 @@
 	<classpathentry kind="lib" path="lib/javafx.swing.jar"/>
 	<classpathentry kind="lib" path="lib/javafx.web.jar"/>
 	<classpathentry kind="lib" path="lib/SortSam.jar"/>
-	<classpathentry kind="lib" path="lib/NGSEPcore_4.3.1.jar"/>
+	<classpathentry kind="lib" path="lib/NGSEPcore_4.3.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -55,10 +55,14 @@
 			<ValidatedTextField fx:id="minFrequencySoftCoreTextField" label="$minFrequencySoftCoreLabel"
 								GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="small-number-input"
 							validators="POSITIVE_NUMBER" />
-			<Label fx:id="numThreadsLabel" GridPane.rowIndex="5" GridPane.columnIndex="0">Number of threads:</Label>
-			<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel"
+			<Label fx:id="referenceGenomeIdLabel" GridPane.rowIndex="5" GridPane.columnIndex="0">Index of the reference genome used to sort and orient other genomes:</Label>
+			<ValidatedTextField fx:id="referenceGenomeIdTextField" label="$referenceGenomeIdLabel"
 								GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="small-number-input"
-								validators="POSITIVE_NUMBER, INT"/>								
+								validators="POSITIVE_NUMBER, INT"/>	
+			<Label fx:id="numThreadsLabel" GridPane.rowIndex="6" GridPane.columnIndex="0">Number of threads:</Label>
+			<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel"
+								GridPane.rowIndex="6" GridPane.columnIndex="1" styleClass="small-number-input"
+								validators="POSITIVE_NUMBER, INT"/>							
 			
 			<CheckBox fx:id="skipMCLCheckBox" text="Skip the MCL clustering phase" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
 		</GridPane>
