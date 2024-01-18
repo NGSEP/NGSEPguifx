@@ -43,6 +43,11 @@
 							validators="INPUT_FILE" />
 		<Button fx:id="regionsExcludeButton" onAction="#changeInputFile" userData="$regionsExcludeTextField" text="..." GridPane.rowIndex="3" GridPane.columnIndex="4" />
 		
+		<Label fx:id="outputFileFullCountsLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">Output File for full counts:</Label>
+		<ValidatedTextField fx:id="outputFileFullCountsTextField" label="$outputFileLabel"
+							GridPane.rowIndex="4" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="output-file"
+							validators="OUTPUT_FILE, MANDATORY" />
+		<Button fx:id="outputFileButton" onAction="#changeOutputFile" userData="$outputFileFullCountsTextField" text="..." GridPane.rowIndex="4" GridPane.columnIndex="4" />
 		
 		
 			</GridPane>

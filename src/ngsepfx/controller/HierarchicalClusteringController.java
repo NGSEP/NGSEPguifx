@@ -26,7 +26,9 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import ngsep.clustering.NeighborJoining;
+import javafx.scene.control.ChoiceBox;
+import ngsep.assembly.AssemblyReferenceSorter;
+import ngsep.clustering.HierarchicalClustering;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
@@ -36,11 +38,11 @@ import ngsepfx.view.component.ValidatedTextField;
  * @author Jorge Duitama
  *
  */
-public class NeighborJoiningController extends AnalysisAreaController {
+public class HierarchicalClusteringController extends AnalysisAreaController {
 	
 	//Constants.
 	
-	public static final String TASK_NAME = "Neighbor Joining";
+	public static final String TASK_NAME = "HierarchicalClustering";
 	
 	//FXML parameters.
 	
@@ -50,13 +52,15 @@ public class NeighborJoiningController extends AnalysisAreaController {
 	@FXML
 	private ValidatedTextField outputFileTextField;
 	
+	@FXML
+	private ChoiceBox<String> algorithm;
 
 	/* (non-Javadoc)
 	 * @see ngsepfx.controller.AnalysisAreaController#getFXMLResourcePath()
 	 */
 	@Override
 	public String getFXMLResourcePath() {
-		return "/ngsepfx/view/NeighborJoining.fxml";
+		return "/ngsepfx/view/HierarchicalClustering.fxml";
 	}
 	/* (non-Javadoc)
 	 * @see ngsepfx.controller.AnalysisAreaController#getValidatedTextFieldComponents()
@@ -77,9 +81,12 @@ public class NeighborJoiningController extends AnalysisAreaController {
 	public void handleActivationEvent(NGSEPEvent event) {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
-		setDefaultValues(NeighborJoining.class.getName());
+		setDefaultValues(HierarchicalClustering.class.getName());
+		algorithm.getItems().add("Neighbor Joining");
+		algorithm.getItems().add("Fast Neighbor Joining");
+		algorithm.getItems().add("UPGMA");
 		inputFileTextField.setText(file.getAbsolutePath());
-		suggestOutputFile(file, outputFileTextField, "_NeighborJoining.nwk");
+		suggestOutputFile(file, outputFileTextField, "_Clustering.nwk");
 	}
 	
 	/* (non-Javadoc)
@@ -94,8 +101,9 @@ public class NeighborJoiningController extends AnalysisAreaController {
 				updateTitle(TASK_NAME);
     			FileHandler logHandler = null;
     			try {
-    				NeighborJoining instance = new NeighborJoining();
+    				HierarchicalClustering instance = new HierarchicalClustering();
     				fillAttributes(instance);
+    				instance.setAlgorithm(algorithm.getSelectionModel().getSelectedIndex());
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
     				logHandler = createLogHandler(instance.getOutputFile(), "");

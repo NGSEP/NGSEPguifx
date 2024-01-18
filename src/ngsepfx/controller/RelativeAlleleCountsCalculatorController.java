@@ -68,6 +68,8 @@ public class RelativeAlleleCountsCalculatorController extends AnalysisAreaContro
 		@FXML
 		private ValidatedTextField outputFileTextField;
 		@FXML
+		private ValidatedTextField outputFileFullCountsTextField;
+		@FXML
 		private ValidatedTextField minimumReadDepthTextField;
 		@FXML
 		private ValidatedTextField maximumReadDepthTextField;
@@ -94,6 +96,7 @@ public class RelativeAlleleCountsCalculatorController extends AnalysisAreaContro
 			Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
 			textFields.put("inputFile", inputFileTextField);
 			textFields.put("outputFile", outputFileTextField);
+			textFields.put("outputFileFullCounts", outputFileFullCountsTextField);
 			textFields.put("genome", genomeReferenceTextField);
 			textFields.put("minRD", minimumReadDepthTextField);
 			textFields.put("maxRD", maximumReadDepthTextField);

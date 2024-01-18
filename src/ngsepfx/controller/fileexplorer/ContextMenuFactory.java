@@ -73,7 +73,7 @@ public final class ContextMenuFactory {
 	    } else if (fileInLower.endsWith(".txt") || fileInLower.endsWith(".tsv")) {
 	    	addSimpleMenuItem(contextMenu, cell, "Reads Demultiplex", "ngsepfx.controller.ReadsDemultiplexController");
 	    	addSimpleMenuItem(contextMenu, cell, "TILLING Simulator", "ngsepfx.controller.TillingPopulationSimulatorController");
-	    	if(fileInLower.endsWith(".txt")) addSimpleMenuItem(contextMenu, cell, "Neighbor Joining", "ngsepfx.controller.NeighborJoiningController");
+	    	if(fileInLower.endsWith(".txt")) addSimpleMenuItem(contextMenu, cell, "Hierarchical clustering", "ngsepfx.controller.HierarchicalClusteringController");
 	    } else if (fileInLower.contains(".fa") || fileInLower.contains(".fq")) {
 	    	if(!fileInLower.contains(".fastq") && !fileInLower.contains(".fq")  ) {
 	    		addSimpleMenuItem(contextMenu, cell, "Genome Assembly Sort by Reference", "ngsepfx.controller.AssemblyReferenceSorterController");
