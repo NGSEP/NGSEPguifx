@@ -27,7 +27,6 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
-import ngsep.assembly.AssemblyReferenceSorter;
 import ngsep.clustering.HierarchicalClustering;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
@@ -53,7 +52,7 @@ public class HierarchicalClusteringController extends AnalysisAreaController {
 	private ValidatedTextField outputFileTextField;
 	
 	@FXML
-	private ChoiceBox<String> algorithm;
+	private ChoiceBox<String> algorithmChoiceBox;
 
 	/* (non-Javadoc)
 	 * @see ngsepfx.controller.AnalysisAreaController#getFXMLResourcePath()
@@ -82,9 +81,10 @@ public class HierarchicalClusteringController extends AnalysisAreaController {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
 		setDefaultValues(HierarchicalClustering.class.getName());
-		algorithm.getItems().add("Neighbor Joining");
-		algorithm.getItems().add("Fast Neighbor Joining");
-		algorithm.getItems().add("UPGMA");
+		algorithmChoiceBox.getItems().add("Neighbor Joining");
+		algorithmChoiceBox.getItems().add("Fast Neighbor Joining");
+		algorithmChoiceBox.getItems().add("UPGMA");
+		algorithmChoiceBox.getSelectionModel().select(0);
 		inputFileTextField.setText(file.getAbsolutePath());
 		suggestOutputFile(file, outputFileTextField, "_Clustering.nwk");
 	}
@@ -103,7 +103,7 @@ public class HierarchicalClusteringController extends AnalysisAreaController {
     			try {
     				HierarchicalClustering instance = new HierarchicalClustering();
     				fillAttributes(instance);
-    				instance.setAlgorithm(algorithm.getSelectionModel().getSelectedIndex());
+    				instance.setAlgorithm(algorithmChoiceBox.getSelectionModel().getSelectedIndex());
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
     				logHandler = createLogHandler(instance.getOutputFile(), "");

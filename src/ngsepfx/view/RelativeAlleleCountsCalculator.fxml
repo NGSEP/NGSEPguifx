@@ -19,12 +19,6 @@
 							validators="INPUT_FILE, MANDATORY" />
 		<Button fx:id="inputFileButton" onAction="#changeInputFile" userData="$inputFileTextField" text="..." GridPane.rowIndex="0" GridPane.columnIndex="4" />
 		
-		<Label fx:id="outputFileLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">(*) Output File:</Label>
-		<ValidatedTextField fx:id="outputFileTextField" label="$outputFileLabel"
-							GridPane.rowIndex="4" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="output-file"
-							validators="OUTPUT_FILE, MANDATORY" />
-		<Button fx:id="outputFileButton" onAction="#changeOutputFile" userData="$outputFileTextField" text="..." GridPane.rowIndex="4" GridPane.columnIndex="4" />
-		
 		<Label fx:id="genomeReferenceLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">(*) Reference Genome:</Label>
 		<ValidatedTextField fx:id="genomeReferenceTextField" label="$genomeReferenceLabel"
 							GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
@@ -43,11 +37,17 @@
 							validators="INPUT_FILE" />
 		<Button fx:id="regionsExcludeButton" onAction="#changeInputFile" userData="$regionsExcludeTextField" text="..." GridPane.rowIndex="3" GridPane.columnIndex="4" />
 		
-		<Label fx:id="outputFileFullCountsLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">Output File for full counts:</Label>
-		<ValidatedTextField fx:id="outputFileFullCountsTextField" label="$outputFileLabel"
+		<Label fx:id="outputFileLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">(*) Output File:</Label>
+		<ValidatedTextField fx:id="outputFileTextField" label="$outputFileLabel"
 							GridPane.rowIndex="4" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="output-file"
 							validators="OUTPUT_FILE, MANDATORY" />
-		<Button fx:id="outputFileButton" onAction="#changeOutputFile" userData="$outputFileFullCountsTextField" text="..." GridPane.rowIndex="4" GridPane.columnIndex="4" />
+		<Button fx:id="outputFileButton" onAction="#changeOutputFile" userData="$outputFileTextField" text="..." GridPane.rowIndex="4" GridPane.columnIndex="4" />
+		
+		<Label fx:id="outputFileFullCountsLabel" GridPane.rowIndex="5" GridPane.columnIndex="0">Output File for full counts:</Label>
+		<ValidatedTextField fx:id="outputFileFullCountsTextField" label="$outputFileLabel"
+							GridPane.rowIndex="5" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="output-file"
+							validators="OUTPUT_FILE, MANDATORY" />
+		<Button fx:id="outputFileButton" onAction="#changeOutputFile" userData="$outputFileFullCountsTextField" text="..." GridPane.rowIndex="5" GridPane.columnIndex="4" />
 		
 		
 			</GridPane>

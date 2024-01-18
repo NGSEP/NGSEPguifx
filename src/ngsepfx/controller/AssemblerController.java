@@ -71,7 +71,7 @@ public class AssemblerController extends AnalysisAreaController {
 	private ValidatedTextField circularMoleculesStartsFileTextField;
 	
 	@FXML
-	private ValidatedTextField errorCorrectionRounds;
+	private ValidatedTextField errorCorrectionRoundsTextField;
 	
 	@FXML
 	private ValidatedTextField weightIndelsTextField;
@@ -106,7 +106,7 @@ public class AssemblerController extends AnalysisAreaController {
 		textFields.put("ploidy", ploidyTextField);
 		textFields.put("circularMoleculesMaxLength", circularMoleculesMaxLengthTextField);
 		textFields.put("circularMoleculesStartsFile", circularMoleculesStartsFileTextField);
-		textFields.put("errorCorrectionRounds", errorCorrectionRounds);
+		textFields.put("errorCorrectionRounds", errorCorrectionRoundsTextField);
 		textFields.put("weightIndels", weightIndelsTextField);
 		textFields.put("numThreads", numThreadsTextField);
 		return textFields;

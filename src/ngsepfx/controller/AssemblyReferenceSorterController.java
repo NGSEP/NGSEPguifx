@@ -98,6 +98,7 @@ public class AssemblyReferenceSorterController extends AnalysisAreaController {
 		renameContigsPolicyChoiceBox.getItems().add(AssemblyReferenceSorter.RENAME_CONTIGS_POLICY_KEEPNAMES, "Keep input sequence names");
 		renameContigsPolicyChoiceBox.getItems().add(AssemblyReferenceSorter.RENAME_CONTIGS_POLICY_REFNAMES,"By reference sequence names");
 		renameContigsPolicyChoiceBox.getItems().add(AssemblyReferenceSorter.RENAME_CONTIGS_POLICY_CONSECUTIVE, "Consecutive");
+		renameContigsPolicyChoiceBox.getSelectionModel().select(AssemblyReferenceSorter.RENAME_CONTIGS_POLICY_REFNAMES);
 		inputFileTextField.setText(file.getAbsolutePath());
 		suggestOutputFile(file, outputFileTextField, "_sortRef.fa");
 	}
