@@ -26,128 +26,107 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
-import ngsep.assembly.Assembler;
+import ngsep.assembly.AssemblyReferenceSorter;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
 import ngsepfx.view.component.ValidatedTextField;
 
 /**
- * Controller for the genomes assembler
+ * 
  * @author Jorge Duitama
  *
  */
-public class AssemblerController extends AnalysisAreaController {
+public class AssemblyReferenceSorterController extends AnalysisAreaController {
 	
-	//Constants.
+	//constants.
+	public static final String TASK_NAME = "AssemblyReferenceSorter";
 	
-	public static final String TASK_NAME = "Assembler";
+	//FXML parameters
 	
-	//FXML parameters.
 	
 	@FXML
 	private ValidatedTextField inputFileTextField;
 	
 	@FXML
-	private ValidatedTextField outputPrefixTextField;
+	private ValidatedTextField referenceFileTextField;
 	
 	@FXML
-	private ValidatedTextField graphFileTextField;
+	private ValidatedTextField outputFileTextField;
+	
+	@FXML
+	private CheckBox hardMaskCheckBox;
 	
 	@FXML
 	private ValidatedTextField kmerLengthTextField;
 	
 	@FXML
 	private ValidatedTextField windowLengthTextField;
-	
-	@FXML
-	private ValidatedTextField ploidyTextField;
-	
-	@FXML
-	private ValidatedTextField circularMoleculesMaxLengthTextField;
-	
-	@FXML
-	private ValidatedTextField circularMoleculesStartsFileTextField;
-	
-	@FXML
-	private ValidatedTextField weightIndelsTextField;
-	
+
 	@FXML
 	private ValidatedTextField numThreadsTextField;
 	
 	@FXML
-	private ChoiceBox<String> inputFormatChoiceBox;
+	private ChoiceBox<String> renameContigsPolicyChoiceBox;
 	
-	//AnalysisAreaController.
-
-	/* (non-Javadoc)
-	 * @see ngsepfx.controller.AnalysisAreaController#getFXMLResourcePath()
-	 */
 	@Override
 	public String getFXMLResourcePath() {
-		return "/ngsepfx/view/Assembler.fxml";
+		return "/ngsepfx/view/AssemblyReferenceSorter.fxml";
 	}
 	
-	/* (non-Javadoc)
-	 * @see ngsepfx.controller.AnalysisAreaController#getValidatedTextFieldComponents()
-	 */
 	@Override
-	protected Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
+	public Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
 		Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
 		textFields.put("inputFile", inputFileTextField);
-		textFields.put("outputPrefix", outputPrefixTextField);
-		textFields.put("graphFile", graphFileTextField);
+		textFields.put("referenceFile", referenceFileTextField);
+		textFields.put("outputFile", outputFileTextField);
 		textFields.put("kmerLength", kmerLengthTextField);
 		textFields.put("windowLength", windowLengthTextField);
-		textFields.put("ploidy", ploidyTextField);
-		textFields.put("circularMoleculesMaxLength", circularMoleculesMaxLengthTextField);
-		textFields.put("circularMoleculesStartsFile", circularMoleculesStartsFileTextField);
-		textFields.put("weightIndels", weightIndelsTextField);
 		textFields.put("numThreads", numThreadsTextField);
 		return textFields;
 	}
+	
+	
+	@Override
+	protected Map<String, CheckBox> getCheckBoxComponents() {
+		Map<String, CheckBox> checkboxes = new HashMap<String, CheckBox>();
+		checkboxes.put("hardMask", hardMaskCheckBox);
+		return checkboxes;
+	}
 
-	/* (non-Javadoc)
-	 * @see ngsepfx.controller.AnalysisAreaController#handleActivationEvent(ngsepfx.event.NGSEPEvent)
-	 */
 	@Override
 	public void handleActivationEvent(NGSEPEvent event) {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
-		setDefaultValues(Assembler.class.getName());
+		setDefaultValues(AssemblyReferenceSorter.class.getName());
+		renameContigsPolicyChoiceBox.getItems().add(AssemblyReferenceSorter.RENAME_CONTIGS_POLICY_REFNAMES,"By reference sequence names");
+		renameContigsPolicyChoiceBox.getItems().add(AssemblyReferenceSorter.RENAME_CONTIGS_POLICY_CONSECUTIVE, "Consecutive");
+		renameContigsPolicyChoiceBox.getItems().add(AssemblyReferenceSorter.RENAME_CONTIGS_POLICY_KEEPNAMES, "Keep input sequence names");
 		inputFileTextField.setText(file.getAbsolutePath());
-		inputFormatChoiceBox.getItems().add(FORMAT_FASTQ);
-		inputFormatChoiceBox.getItems().add(FORMAT_FASTA);
-		String filename = file.getName();
-		int k = ReadsAlignerController.getExtensionIndex(filename);
-		if(k>0) {
-			if(filename.toLowerCase().substring(k).startsWith(".fastq")) inputFormatChoiceBox.getSelectionModel().select(0);
-			else inputFormatChoiceBox.getSelectionModel().select(1);
-		}
-		suggestOutputFile(file, outputPrefixTextField, "_assembly");
+		suggestOutputFile(file, outputFileTextField, "_sortRef.fa");
 	}
 
 	@Override
 	protected NGSEPTask<Void> getTask() {
-		return new NGSEPTask<Void>() {
+
+		return new NGSEPTask<Void>() {	
     		@Override 
     		public Void call() {
     			updateMessage(inputFileTextField.getText());
 				updateTitle(TASK_NAME);
     			FileHandler logHandler = null;
     			try {
-    				Assembler instance = new Assembler();
+    				AssemblyReferenceSorter instance = new AssemblyReferenceSorter();
     				fillAttributes(instance);
-    				if(inputFormatChoiceBox.getSelectionModel().getSelectedIndex()==1) instance.setInputFormat(Assembler.INPUT_FORMAT_FASTA);
+    				instance.setRenameContigsPolicy(renameContigsPolicyChoiceBox.getSelectionModel().getSelectedIndex());
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
-    				logHandler = createLogHandler(instance.getOutputPrefix(), "Assembler");
+    				logHandler = createLogHandler(instance.getOutputFile(), "");
     				log.addHandler(logHandler);
-    				
     				instance.setLog(log);
     				instance.setProgressNotifier(this);
-    				
     				instance.run();
     			} catch (Exception e) {
     				e.printStackTrace();
@@ -162,7 +141,5 @@ public class AssemblerController extends AnalysisAreaController {
     		}
 		};
 	}
-	
-	
 
 }

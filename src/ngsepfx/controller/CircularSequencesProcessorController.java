@@ -26,67 +26,65 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import ngsep.clustering.NeighborJoining;
+import ngsep.assembly.CircularSequencesProcessor;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
 import ngsepfx.view.component.ValidatedTextField;
 
 /**
+ * 
  * @author Jorge Duitama
  *
  */
-public class NeighborJoiningController extends AnalysisAreaController {
+public class CircularSequencesProcessorController extends AnalysisAreaController {
 	
-	//Constants.
+	//constants.
+	public static final String TASK_NAME = "CircularSequencesProcessor";
 	
-	public static final String TASK_NAME = "Neighbor Joining";
+	//FXML parameters
 	
-	//FXML parameters.
 	
 	@FXML
 	private ValidatedTextField inputFileTextField;
 	
 	@FXML
+	private ValidatedTextField startsTextField;
+	
+	@FXML
 	private ValidatedTextField outputFileTextField;
 	
-
-	/* (non-Javadoc)
-	 * @see ngsepfx.controller.AnalysisAreaController#getFXMLResourcePath()
-	 */
+	@FXML
+	private ValidatedTextField maxLengthTextField;
+	
 	@Override
 	public String getFXMLResourcePath() {
-		return "/ngsepfx/view/NeighborJoining.fxml";
+		return "/ngsepfx/view/CircularSequencesProcessor.fxml";
 	}
-	/* (non-Javadoc)
-	 * @see ngsepfx.controller.AnalysisAreaController#getValidatedTextFieldComponents()
-	 */
+	
 	@Override
 	public Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
 		Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
 		textFields.put("inputFile", inputFileTextField);
+		textFields.put("regionsFile", startsTextField);
 		textFields.put("outputFile", outputFileTextField);
+		textFields.put("maxLength", maxLengthTextField);
 		return textFields;
 	}
+	
 
-	/* (non-Javadoc)
-	 * @see ngsepfx.controller.AnalysisAreaController#handleActivationEvent(ngsepfx.event.NGSEPEvent)
-	 * #handleNGSEPEvent(ngsepfx.event.NGSEPEvent)
-	 */
 	@Override
 	public void handleActivationEvent(NGSEPEvent event) {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
-		setDefaultValues(NeighborJoining.class.getName());
+		setDefaultValues(CircularSequencesProcessor.class.getName());
 		inputFileTextField.setText(file.getAbsolutePath());
-		suggestOutputFile(file, outputFileTextField, "_NeighborJoining.nwk");
+		suggestOutputFile(file, outputFileTextField, "_circularized.fa");
 	}
-	
-	/* (non-Javadoc)
-	 * @see ngsepfx.controller.AnalysisAreaController#getTask()
-	 */
+
 	@Override
 	protected NGSEPTask<Void> getTask() {
+
 		return new NGSEPTask<Void>() {	
     		@Override 
     		public Void call() {
@@ -94,7 +92,7 @@ public class NeighborJoiningController extends AnalysisAreaController {
 				updateTitle(TASK_NAME);
     			FileHandler logHandler = null;
     			try {
-    				NeighborJoining instance = new NeighborJoining();
+    				CircularSequencesProcessor instance = new CircularSequencesProcessor();
     				fillAttributes(instance);
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
@@ -116,4 +114,5 @@ public class NeighborJoiningController extends AnalysisAreaController {
     		}
 		};
 	}
+
 }

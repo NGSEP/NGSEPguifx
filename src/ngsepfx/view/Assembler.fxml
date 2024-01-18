@@ -62,9 +62,14 @@
 								GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="medium-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 			
-			<Label fx:id="numThreadsLabel" GridPane.rowIndex="5" GridPane.columnIndex="0">Number of threads:</Label>
-			<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel"
+			<Label fx:id="weightIndelsLabel" GridPane.rowIndex="5" GridPane.columnIndex="0">Weight for small indels in the calculation of edge costs:</Label>
+			<ValidatedTextField fx:id="weightIndelsTextField" label="$weightIndelsLabel"
 								GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="small-number-input"
+								validators="POSITIVE_NUMBER"/>
+			
+			<Label fx:id="numThreadsLabel" GridPane.rowIndex="6" GridPane.columnIndex="0">Number of threads:</Label>
+			<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel"
+								GridPane.rowIndex="6" GridPane.columnIndex="1" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 		</GridPane>
 	</HBox>

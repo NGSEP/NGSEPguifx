@@ -76,9 +76,11 @@ public final class ContextMenuFactory {
 	    	if(fileInLower.endsWith(".txt")) addSimpleMenuItem(contextMenu, cell, "Neighbor Joining", "ngsepfx.controller.NeighborJoiningController");
 	    } else if (fileInLower.contains(".fa") || fileInLower.contains(".fq")) {
 	    	if(!fileInLower.contains(".fastq") && !fileInLower.contains(".fq")  ) {
-	    		addSimpleMenuItem(contextMenu, cell, "Genome Indexer", "ngsepfx.controller.GenomeIndexerController");
+	    		addSimpleMenuItem(contextMenu, cell, "Genome Assembly Sort by Reference", "ngsepfx.controller.AssemblyReferenceSorterController");
+	    		addSimpleMenuItem(contextMenu, cell, "Circular Sequences Processor", "ngsepfx.controller.CircularSequencesProcessorController");
 	    		addSimpleMenuItem(contextMenu, cell, "Transposable Elements Finder", "ngsepfx.controller.TransposableElementsFinderController");
 		    	addSimpleMenuItem(contextMenu, cell, "Genome Assembly Mask", "ngsepfx.controller.GenomeAssemblyMaskController");
+		    	addSimpleMenuItem(contextMenu, cell, "Genome Indexer", "ngsepfx.controller.GenomeIndexerController");
 		    	addSimpleMenuItem(contextMenu, cell, "Individual Genome Builder", "ngsepfx.controller.VCFIndividualGenomeBuilderController");
 	    		addSimpleMenuItem(contextMenu, cell, "Single Reads Simulator", "ngsepfx.controller.SingleReadsSimulatorController");
 	    		addSimpleMenuItem(contextMenu, cell, "Single Individual Simulator", "ngsepfx.controller.SingleIndividualSimulatorController");
