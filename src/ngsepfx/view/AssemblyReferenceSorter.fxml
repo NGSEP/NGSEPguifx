@@ -18,17 +18,17 @@
 							validators="INPUT_FILE, MANDATORY"/>
 		<Button onAction="#changeInputFile" userData="$inputFileTextField" text="..." GridPane.rowIndex="0" GridPane.columnIndex="4"/>
 		
-		<Label fx:id="referenceFileLabel" GridPane.rowIndex="1" GridPane.columnIndex="0"> (*) Reference genome:</Label>
-		<ValidatedTextField fx:id="referenceFileTextField" label="$referenceFileLabel"
+		<Label fx:id="genomeLabel" GridPane.rowIndex="1" GridPane.columnIndex="0"> (*) Reference genome:</Label>
+		<ValidatedTextField fx:id="genomeTextField" label="$genomeLabel"
 							GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="input-file"
 							validators="INPUT_FILE, MANDATORY" />
-		<Button onAction="#changeInputFile" userData="$referenceFileTextField" text="..." GridPane.rowIndex="1" GridPane.columnIndex="4" />
+		<Button onAction="#changeInputFile" userData="$genomeTextField" text="..." GridPane.rowIndex="1" GridPane.columnIndex="4" />
 		
 		<Label fx:id="outputFileLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">(*) Output File:</Label>
 		<ValidatedTextField fx:id="outputFileTextField" label="$outputFileLabel"
 							GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3" styleClass="output-file"
 							validators="OUTPUT_FILE, MANDATORY"/>
-		<Button onAction="#changeOutput" userData="$outputFileTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />
+		<Button onAction="#changeOutputFile" userData="$outputFileTextField" text="..." GridPane.rowIndex="2" GridPane.columnIndex="4" />
 			
 	</GridPane>
 	

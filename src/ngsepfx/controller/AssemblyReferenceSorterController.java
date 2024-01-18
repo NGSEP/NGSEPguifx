@@ -51,7 +51,7 @@ public class AssemblyReferenceSorterController extends AnalysisAreaController {
 	private ValidatedTextField inputFileTextField;
 	
 	@FXML
-	private ValidatedTextField referenceFileTextField;
+	private ValidatedTextField genomeTextField;
 	
 	@FXML
 	private ValidatedTextField outputFileTextField;
@@ -80,7 +80,7 @@ public class AssemblyReferenceSorterController extends AnalysisAreaController {
 	public Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
 		Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
 		textFields.put("inputFile", inputFileTextField);
-		textFields.put("referenceFile", referenceFileTextField);
+		textFields.put("genome", genomeTextField);
 		textFields.put("outputFile", outputFileTextField);
 		textFields.put("kmerLength", kmerLengthTextField);
 		textFields.put("windowLength", windowLengthTextField);
@@ -88,22 +88,16 @@ public class AssemblyReferenceSorterController extends AnalysisAreaController {
 		return textFields;
 	}
 	
-	
-	@Override
-	protected Map<String, CheckBox> getCheckBoxComponents() {
-		Map<String, CheckBox> checkboxes = new HashMap<String, CheckBox>();
-		checkboxes.put("hardMask", hardMaskCheckBox);
-		return checkboxes;
-	}
 
 	@Override
 	public void handleActivationEvent(NGSEPEvent event) {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
 		setDefaultValues(AssemblyReferenceSorter.class.getName());
+		inputFileTextField.setText(file.getAbsolutePath());
+		renameContigsPolicyChoiceBox.getItems().add(AssemblyReferenceSorter.RENAME_CONTIGS_POLICY_KEEPNAMES, "Keep input sequence names");
 		renameContigsPolicyChoiceBox.getItems().add(AssemblyReferenceSorter.RENAME_CONTIGS_POLICY_REFNAMES,"By reference sequence names");
 		renameContigsPolicyChoiceBox.getItems().add(AssemblyReferenceSorter.RENAME_CONTIGS_POLICY_CONSECUTIVE, "Consecutive");
-		renameContigsPolicyChoiceBox.getItems().add(AssemblyReferenceSorter.RENAME_CONTIGS_POLICY_KEEPNAMES, "Keep input sequence names");
 		inputFileTextField.setText(file.getAbsolutePath());
 		suggestOutputFile(file, outputFileTextField, "_sortRef.fa");
 	}
