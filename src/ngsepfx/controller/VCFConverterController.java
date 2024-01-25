@@ -20,6 +20,7 @@
 package ngsepfx.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.FileHandler;
@@ -29,6 +30,7 @@ import java.util.logging.SimpleFormatter;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import ngsepfx.concurrent.NGSEPTask;
+import ngsepfx.controller.validator.ValidationReport;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
 import ngsepfx.view.component.ValidatedTextField;
@@ -166,6 +168,24 @@ public class VCFConverterController extends AnalysisAreaController{
 		inputFileTextField.setText(file.getAbsolutePath());
 		suggestOutputFile(file, outputPrefixTextField, "");
 
+	}
+
+	@Override
+	protected boolean validateFields() {
+		
+		boolean pass = super.validateFields();
+		if(!pass) return false;
+		ArrayList<ValidationReport> errorsArray = new ArrayList<>();
+		if(printTreeMixCheckBox.isSelected() && (populationFileTextField.getText()==null || populationFileTextField.getText().trim().length()==0)) {
+			ValidationReport validationError = new ValidationReport("TreeMix");
+			validationError.addError("A populations file is required for conversion to TreeMix");
+			errorsArray.add(validationError);
+		}
+		if(!errorsArray.isEmpty()) {
+			showValidationErrorDialog(errorsArray);
+			return false;
+		}
+		return true;
 	}
 
 	@Override

@@ -149,7 +149,7 @@ public class VCFWindowIntrogressionAnalysisController extends AnalysisAreaContro
     				fillAttributes(instance);
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
-    				logHandler = createLogHandler(instance.getOutputPrefix(), "_Introgression.log");
+    				logHandler = createLogHandler(instance.getOutputPrefix(), "Introgression");
     				log.addHandler(logHandler);
     				instance.setLog(log);
     				instance.setProgressNotifier(this);
