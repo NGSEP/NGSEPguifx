@@ -66,7 +66,7 @@ public class CircularSequencesProcessorController extends AnalysisAreaController
 	public Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
 		Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
 		textFields.put("inputFile", inputFileTextField);
-		textFields.put("regionsFile", startsTextField);
+		textFields.put("starts", startsTextField);
 		textFields.put("outputFile", outputFileTextField);
 		textFields.put("maxLength", maxLengthTextField);
 		return textFields;
