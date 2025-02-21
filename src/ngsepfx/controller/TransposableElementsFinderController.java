@@ -26,7 +26,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import ngsep.genome.TransposableElementsFinder;
+import ngsep.transposons.TransposableElementsFinder;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
