@@ -74,7 +74,11 @@ public final class ContextMenuFactory {
 	    	addSimpleMenuItem(contextMenu, cell, "Reads Demultiplex", "ngsepfx.controller.ReadsDemultiplexController");
 	    	addSimpleMenuItem(contextMenu, cell, "TILLING Simulator", "ngsepfx.controller.TillingPopulationSimulatorController");
 	    	if(fileInLower.endsWith(".txt")) addSimpleMenuItem(contextMenu, cell, "Hierarchical clustering", "ngsepfx.controller.HierarchicalClusteringController");
-	    } else if (fileInLower.contains(".fa") || fileInLower.contains(".fq")) {
+	    } else if (fileInLower.contains(".fa") || fileInLower.contains(".fastq") || fileInLower.contains(".fq")) {
+	    	addSimpleMenuItem(contextMenu, cell, "Assembler", "ngsepfx.controller.AssemblerController");
+	    	addSimpleMenuItem(contextMenu, cell, "Reads Aligner", "ngsepfx.controller.ReadsAlignerController");
+	    	addSimpleMenuItem(contextMenu, cell, "K-mers Extractor", "ngsepfx.controller.KmersExtractorController");
+	    	//addSimpleMenuItem(contextMenu, cell, "Reads File Errors Corrector", "ngsepfx.controller.ReadsFileErrorsCorrectorController");
 	    	if(!fileInLower.contains(".fastq") && !fileInLower.contains(".fq")  ) {
 	    		addSimpleMenuItem(contextMenu, cell, "Genome Assembly Sort by Reference", "ngsepfx.controller.AssemblyReferenceSorterController");
 	    		addSimpleMenuItem(contextMenu, cell, "Circular Sequences Processor", "ngsepfx.controller.CircularSequencesProcessorController");
@@ -84,12 +88,9 @@ public final class ContextMenuFactory {
 		    	addSimpleMenuItem(contextMenu, cell, "Individual Genome Builder", "ngsepfx.controller.VCFIndividualGenomeBuilderController");
 	    		addSimpleMenuItem(contextMenu, cell, "Single Reads Simulator", "ngsepfx.controller.SingleReadsSimulatorController");
 	    		addSimpleMenuItem(contextMenu, cell, "Single Individual Simulator", "ngsepfx.controller.SingleIndividualSimulatorController");
+	    	} else {
+	    		addSimpleMenuItem(contextMenu, cell, "FastqFileFilter", "ngsepfx.controller.FastqFileFilterController");
 	    	}
-	    	addSimpleMenuItem(contextMenu, cell, "Assembler", "ngsepfx.controller.AssemblerController");
-	    	addSimpleMenuItem(contextMenu, cell, "Reads Aligner", "ngsepfx.controller.ReadsAlignerController");
-	    	addSimpleMenuItem(contextMenu, cell, "K-mers Extractor", "ngsepfx.controller.KmersExtractorController");
-	    	//addSimpleMenuItem(contextMenu, cell, "Reads File Errors Corrector", "ngsepfx.controller.ReadsFileErrorsCorrectorController");
-
 	    } else if (fileInLower.endsWith(".bam") || file.getName().endsWith(".sam")|| file.getName().endsWith(".cram")) {
 	    	addSimpleMenuItem(contextMenu, cell, "Variants Detector", "ngsepfx.controller.VariantsDetectorController");
 	    	addSimpleMenuItem(contextMenu, cell, "Sort Alignments", "ngsepfx.controller.SortAlignmentController");
