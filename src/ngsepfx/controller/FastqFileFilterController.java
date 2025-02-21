@@ -75,7 +75,7 @@ public class FastqFileFilterController extends AnalysisAreaController {
 	protected Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
 		Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
 		textFields.put("inputFile", inputFileTextField);
-		textFields.put("outputPrefix", outputFileTextField);
+		textFields.put("outputFile", outputFileTextField);
 		textFields.put("minReadLength", minReadLengthTextField);
 		textFields.put("minReadAverageQuality", minReadAverageQualityTextField);
 		return textFields;
