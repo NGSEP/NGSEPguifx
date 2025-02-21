@@ -62,6 +62,9 @@ public class AssemblerController extends AnalysisAreaController {
 	private ValidatedTextField windowLengthTextField;
 	
 	@FXML
+	private ValidatedTextField minReadLengthTextField;
+	
+	@FXML
 	private ValidatedTextField minReadAverageQualityTextField;
 	
 	@FXML
@@ -109,6 +112,7 @@ public class AssemblerController extends AnalysisAreaController {
 		textFields.put("graphFile", graphFileTextField);
 		textFields.put("kmerLength", kmerLengthTextField);
 		textFields.put("windowLength", windowLengthTextField);
+		textFields.put("minReadLength", minReadLengthTextField);
 		textFields.put("minReadAverageQuality", minReadAverageQualityTextField);
 		textFields.put("minPathLength", minPathLengthTextField);
 		textFields.put("ploidy", ploidyTextField);

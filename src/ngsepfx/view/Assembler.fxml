@@ -67,29 +67,29 @@
 								GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 			
-			<Label fx:id="ploidyLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Ploidy of the sample:</Label>
+			<Label fx:id="ploidyLabel" GridPane.rowIndex="0" GridPane.columnIndex="2">Ploidy of the sample:</Label>
 			<ValidatedTextField fx:id="ploidyTextField" label="$ploidyLabel"
-								GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="small-number-input"
+								GridPane.rowIndex="0" GridPane.columnIndex="3" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 								
-			<Label fx:id="circularMoleculesMaxLengthLabel" GridPane.rowIndex="0" GridPane.columnIndex="2">Maximum length of circular molecules:</Label>
+			<Label fx:id="circularMoleculesMaxLengthLabel" GridPane.rowIndex="1" GridPane.columnIndex="2">Maximum length of circular molecules:</Label>
 			<ValidatedTextField fx:id="circularMoleculesMaxLengthTextField" label="$circularMoleculesMaxLengthLabel"
-								GridPane.rowIndex="0" GridPane.columnIndex="3" styleClass="medium-number-input"
+								GridPane.rowIndex="1" GridPane.columnIndex="3" styleClass="medium-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 			
-			<Label fx:id="errorCorrectionRoundsLabel" GridPane.rowIndex="1" GridPane.columnIndex="2">Rounds of error correction:</Label>
+			<Label fx:id="errorCorrectionRoundsLabel" GridPane.rowIndex="2" GridPane.columnIndex="2">Rounds of error correction:</Label>
 			<ValidatedTextField fx:id="errorCorrectionRoundsTextField" label="$errorCorrectionRoundsLabel"
-								GridPane.rowIndex="1" GridPane.columnIndex="3" styleClass="small-number-input"
-								validators="POSITIVE_NUMBER"/>
-			
-			<Label fx:id="weightIndelsLabel" GridPane.rowIndex="2" GridPane.columnIndex="2">Weight for small indels in the calculation of edge costs:</Label>
-			<ValidatedTextField fx:id="weightIndelsTextField" label="$weightIndelsLabel"
 								GridPane.rowIndex="2" GridPane.columnIndex="3" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER"/>
 			
-			<Label fx:id="numThreadsLabel" GridPane.rowIndex="3" GridPane.columnIndex="2">Number of threads:</Label>
-			<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel"
+			<Label fx:id="weightIndelsLabel" GridPane.rowIndex="3" GridPane.columnIndex="2">Weight for small indels in the calculation of edge costs:</Label>
+			<ValidatedTextField fx:id="weightIndelsTextField" label="$weightIndelsLabel"
 								GridPane.rowIndex="3" GridPane.columnIndex="3" styleClass="small-number-input"
+								validators="POSITIVE_NUMBER"/>
+			
+			<Label fx:id="numThreadsLabel" GridPane.rowIndex="4" GridPane.columnIndex="2">Number of threads:</Label>
+			<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel"
+								GridPane.rowIndex="4" GridPane.columnIndex="3" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 		</GridPane>
 	</HBox>
