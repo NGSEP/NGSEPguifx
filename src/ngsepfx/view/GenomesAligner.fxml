@@ -64,7 +64,7 @@
 								GridPane.rowIndex="6" GridPane.columnIndex="1" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 			<CheckBox fx:id="skipMCLCheckBox" text="Skip the MCL clustering phase" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
-			<CheckBox fx:id="skipSynteny" text="Skip the synteny analysis" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+			<CheckBox fx:id="skipSyntenyCheckBox" text="Skip the synteny analysis" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
 		</GridPane>
 	</HBox>
 	<HBox >

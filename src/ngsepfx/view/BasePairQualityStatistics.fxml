@@ -36,7 +36,7 @@
 	</GridPane>
 	
 	<HBox >
-		<Button onAction="#submitTask" text="Quality Statics" />
+		<Button onAction="#submitTask" text="Quality Statistics" />
 	</HBox>
 	
 </VBox>
