@@ -58,6 +58,9 @@ public class FastqFileFilterController extends AnalysisAreaController {
 	@FXML
 	private ValidatedTextField minReadAverageQualityTextField;
 	
+	@FXML
+	private ValidatedTextField selectReadIdsFileTextField;
+	
 	//AnalysisAreaController.
 
 	/* (non-Javadoc)
@@ -78,6 +81,7 @@ public class FastqFileFilterController extends AnalysisAreaController {
 		textFields.put("outputFile", outputFileTextField);
 		textFields.put("minReadLength", minReadLengthTextField);
 		textFields.put("minReadAverageQuality", minReadAverageQualityTextField);
+		textFields.put("selectReadIdsFile", selectReadIdsFileTextField);
 		return textFields;
 	}
 

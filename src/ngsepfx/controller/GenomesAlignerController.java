@@ -78,6 +78,8 @@ public class GenomesAlignerController extends AnalysisAreaController {
 	private ValidatedTextField numThreadsTextField;
 	@FXML
 	private CheckBox skipMCLCheckBox;
+	@FXML
+	private CheckBox skipSyntenyCheckBox;
 
 	
 	
@@ -105,6 +107,7 @@ public class GenomesAlignerController extends AnalysisAreaController {
 	protected Map<String, CheckBox> getCheckBoxComponents() {
 		Map<String, CheckBox> checkboxes = new HashMap<String, CheckBox>();
 		checkboxes.put("skipMCL", skipMCLCheckBox);
+		checkboxes.put("skipSynteny", skipSyntenyCheckBox);
 		return checkboxes;
 	}
 	

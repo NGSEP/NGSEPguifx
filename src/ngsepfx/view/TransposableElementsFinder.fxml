@@ -35,7 +35,7 @@
 			
 			<Label fx:id="minTELengthLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">Minimum TE length:</Label>
 			<ValidatedTextField fx:id="minTELengthTextField" label="$minTELengthLabel"
-								GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="small-number-input"
+								GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="medium-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 			
 			<Label fx:id="roundsLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Search rounds:</Label>
@@ -43,9 +43,14 @@
 								GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 			
-			<Label fx:id="numThreadsLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Number of threads:</Label>
+			<Label fx:id="limitGenomeLengthLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Maximum base pairs to process:</Label>
+			<ValidatedTextField fx:id="limitGenomeLengthTextField" label="$limitGenomeLengthLabel"
+								GridPane.rowIndex="0" GridPane.columnIndex="2" styleClass="medium-number-input"
+								validators="POSITIVE_NUMBER, INT"/>
+								
+			<Label fx:id="numThreadsLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Number of threads:</Label>
 			<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel"
-								GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="small-number-input"
+								GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 		</GridPane>
 	</HBox>
