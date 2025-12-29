@@ -106,7 +106,8 @@ public class MutatedPeptidesExtractorController extends AnalysisAreaController{
     				instance.loadTranscriptome(transcriptomeFileTextField.getText(), genome);
     				try (PrintStream out = new PrintStream(outputFileTextField.getText())) {
     					instance.findMutatedPeptides(inputFileTextField.getText(), out);
-    				}*/
+    				}
+    				*/
     			} catch (Exception e) {
     				e.printStackTrace();
     				showExecutionErrorDialog(Thread.currentThread().getName(), e);
