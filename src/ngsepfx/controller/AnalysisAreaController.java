@@ -64,7 +64,7 @@ import ngsepfx.event.NGSEPExecuteTaskEvent;
 import ngsepfx.view.component.ValidatedTextField;
 
 /**
- * Abstract class used to implement all NGSEP analysis. Gives the root node
+ * Abstract class used to implement NGSEP controllers. Gives the root node
  * to be loaded into the {@link Scene} and handles {@link NGSEPEvent}. The root 
  * is loaded from an .fxml.
  * @author Fernando Reyes
