@@ -34,7 +34,7 @@ import ngsepfx.event.NGSEPEvent;
 import ngsepfx.view.component.ValidatedTextField;
 
 /**
- * Controller for the genomes assembler
+ * Controller for the genomes assembler functionality
  * @author Jorge Duitama
  *
  */
