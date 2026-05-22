@@ -109,7 +109,7 @@ public class TransposableElementsFinderController extends AnalysisAreaController
     				fillAttributes(instance);
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
-    				logHandler = createLogHandler(instance.getOutputFile(), "");
+    				logHandler = createLogHandler(instance.getOutputPrefix(), "");
     				log.addHandler(logHandler);
     				instance.setLog(log);
     				instance.setProgressNotifier(this);
