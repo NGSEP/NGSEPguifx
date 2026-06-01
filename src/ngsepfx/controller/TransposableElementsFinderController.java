@@ -49,7 +49,7 @@ public class TransposableElementsFinderController extends AnalysisAreaController
 	private ValidatedTextField inputFileTextField;
 	
 	@FXML
-	private ValidatedTextField outputFileTextField;
+	private ValidatedTextField outputPrefixTextField;
 	
 	@FXML
 	private ValidatedTextField transposonsDatabaseFileTextField;
@@ -64,6 +64,15 @@ public class TransposableElementsFinderController extends AnalysisAreaController
 	private ValidatedTextField limitGenomeLengthTextField;
 	
 	@FXML
+	private ValidatedTextField kmerLengthDenovoTextField;
+	
+	@FXML
+	private ValidatedTextField kmerLengthSimilarityTextField;
+	
+	@FXML
+	private ValidatedTextField windowLengthSimilarityTextField;
+	
+	@FXML
 	private ValidatedTextField numThreadsTextField;
 
 	@Override
@@ -75,11 +84,14 @@ public class TransposableElementsFinderController extends AnalysisAreaController
 	public Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
 		Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
 		textFields.put("inputFile", inputFileTextField);
-		textFields.put("outputFile", outputFileTextField);
+		textFields.put("outputPrefix", outputPrefixTextField);
 		textFields.put("transposonsDatabaseFile", transposonsDatabaseFileTextField);
 		textFields.put("minTELength", minTELengthTextField);
 		textFields.put("rounds", roundsTextField);
 		textFields.put("limitGenomeLength", limitGenomeLengthTextField);
+		textFields.put("kmerLengthDenovo", kmerLengthDenovoTextField);
+		textFields.put("kmerLengthSimilarity", kmerLengthSimilarityTextField);
+		textFields.put("windowLengthSimilarity", windowLengthSimilarityTextField);
 		textFields.put("numThreads", numThreadsTextField);
 		return textFields;
 	}
@@ -90,7 +102,7 @@ public class TransposableElementsFinderController extends AnalysisAreaController
 		File file = analyzeEvent.file;
 		setDefaultValues(TransposableElementsFinder.class.getName());
 		inputFileTextField.setText(file.getAbsolutePath());
-		suggestOutputFile(file, outputFileTextField, "_TEFinder.txt");
+		suggestOutputFile(file, outputPrefixTextField, "_TEFinder");
 		// TODO Auto-generated method stub
 		
 	}

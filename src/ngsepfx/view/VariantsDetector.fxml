@@ -88,6 +88,11 @@
 									
 								<Label fx:id="sampleIdLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Sample id</Label>
 								<ValidatedTextField fx:id="sampleIdTextField" label="$sampleIdLabel" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+								
+								<Label fx:id="numThreadsLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Number of threads:</Label>
+								<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel"
+											GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="small-number-input"
+											validators="INT, POSITIVE_NUMBER"/>
 							</GridPane>
 						</HBox>
 					</VBox>

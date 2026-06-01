@@ -26,19 +26,24 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import ngsep.haplotyping.SingleIndividualHaplotyper;
+import ngsep.assembly.AssemblyReferenceSorter;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
 import ngsepfx.view.component.ValidatedTextField;
 
 /**
+ * 
  * @author Jorge Duitama
+ *
  */
-public class SingleIndividualHaplotyperController extends AnalysisAreaController{
-
-	public static final String TASK_NAME = "SIH";
+public class AssemblyStatisticsCalculatorController extends AnalysisAreaController {
+	
+	//constants.
+	public static final String TASK_NAME = "AssemblyStatisticsCalculator";
+	
+	//FXML parameters
+	
 	
 	@FXML
 	private ValidatedTextField inputFileTextField;
@@ -46,54 +51,32 @@ public class SingleIndividualHaplotyperController extends AnalysisAreaController
 	@FXML
 	private ValidatedTextField outputFileTextField;
 	
-	@FXML
-	private ValidatedTextField genomeTextField;
-	
-	@FXML
-	private ValidatedTextField alignmentsFileTextField;
-	
-	@FXML
-	private ValidatedTextField outputAlignmentsFileTextField;
-	
-	@FXML
-	private ValidatedTextField minMQTextField;
-	
-	@FXML
-	private ChoiceBox<String> algorithmNameChoiceBox;
-	
-	
 	@Override
 	public String getFXMLResourcePath() {
-		return "/ngsepfx/view/SingleIndividualHaplotyper.fxml";
+		return "/ngsepfx/view/AssemblyStatisticsCalculator.fxml";
 	}
 	
 	@Override
 	public Map<String, ValidatedTextField> getValidatedTextFieldComponents() {
 		Map<String, ValidatedTextField> textFields = new HashMap<String, ValidatedTextField>();
 		textFields.put("inputFile", inputFileTextField);
-		textFields.put("alignmentsFile", alignmentsFileTextField);
-		textFields.put("genome", genomeTextField);
 		textFields.put("outputFile", outputFileTextField);
-		textFields.put("outputAlignmentsFile", outputAlignmentsFileTextField);
-		textFields.put("minMQ", minMQTextField);
 		return textFields;
 	}
+	
 
 	@Override
 	public void handleActivationEvent(NGSEPEvent event) {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
-		setDefaultValues(SingleIndividualHaplotyper.class.getName());
+		setDefaultValues(AssemblyReferenceSorter.class.getName());
 		inputFileTextField.setText(file.getAbsolutePath());
-		algorithmNameChoiceBox.getItems().add(SingleIndividualHaplotyper.ALGORITHM_NAME_REFHAP);
-		algorithmNameChoiceBox.getItems().add(SingleIndividualHaplotyper.ALGORITHM_NAME_DGS);
-		algorithmNameChoiceBox.getSelectionModel().select(0);
-		suggestOutputFile(file, outputFileTextField, "_phased.vcf");
-		suggestOutputFile(file, outputAlignmentsFileTextField, "_phasedAlns.bam");
+		suggestOutputFile(file, outputFileTextField, "_stats.txt");
 	}
 
 	@Override
 	protected NGSEPTask<Void> getTask() {
+
 		return new NGSEPTask<Void>() {	
     		@Override 
     		public Void call() {
@@ -101,9 +84,8 @@ public class SingleIndividualHaplotyperController extends AnalysisAreaController
 				updateTitle(TASK_NAME);
     			FileHandler logHandler = null;
     			try {
-    				SingleIndividualHaplotyper instance = new SingleIndividualHaplotyper();
+    				AssemblyReferenceSorter instance = new AssemblyReferenceSorter();
     				fillAttributes(instance);
-    				instance.setAlgorithmName(algorithmNameChoiceBox.getValue());
     				//Log 
     				Logger log = Logger.getAnonymousLogger();
     				logHandler = createLogHandler(instance.getOutputFile(), "");

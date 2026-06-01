@@ -94,6 +94,9 @@ public class VariantsDetectorController extends AnalysisAreaController {
 	private ValidatedTextField sampleIdTextField;
 	
 	@FXML
+	private ValidatedTextField numThreadsTextField;
+	
+	@FXML
 	private ValidatedTextField normalPloidyTextField;
 	
 	@FXML
@@ -181,6 +184,7 @@ public class VariantsDetectorController extends AnalysisAreaController {
 		textFields.put("basesToIgnore5P", basesToIgnore5PTextField);
 		textFields.put("basesToIgnore3P", basesToIgnore3PTextField);
 		textFields.put("sampleId", sampleIdTextField);
+		textFields.put("numThreads", numThreadsTextField);
 		textFields.put("normalPloidy", normalPloidyTextField);
 		
 		textFields.put("heterozygosityRate", heterozygosityRateTextField);

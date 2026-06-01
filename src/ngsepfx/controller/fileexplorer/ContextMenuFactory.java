@@ -75,11 +75,9 @@ public final class ContextMenuFactory {
 	    	addSimpleMenuItem(contextMenu, cell, "TILLING Simulator", "ngsepfx.controller.TillingPopulationSimulatorController");
 	    	if(fileInLower.endsWith(".txt")) addSimpleMenuItem(contextMenu, cell, "Hierarchical clustering", "ngsepfx.controller.HierarchicalClusteringController");
 	    } else if (fileInLower.contains(".fa") || fileInLower.contains(".fastq") || fileInLower.contains(".fq")) {
-	    	addSimpleMenuItem(contextMenu, cell, "Assembler", "ngsepfx.controller.AssemblerController");
-	    	addSimpleMenuItem(contextMenu, cell, "Reads Aligner", "ngsepfx.controller.ReadsAlignerController");
-	    	addSimpleMenuItem(contextMenu, cell, "K-mers Extractor", "ngsepfx.controller.KmersExtractorController");
 	    	//addSimpleMenuItem(contextMenu, cell, "Reads File Errors Corrector", "ngsepfx.controller.ReadsFileErrorsCorrectorController");
 	    	if(!fileInLower.contains(".fastq") && !fileInLower.contains(".fq")  ) {
+	    		addSimpleMenuItem(contextMenu, cell, "Genome Assembly Statistics", "ngsepfx.controller.AssemblyStatisticsCalculatorController");
 	    		addSimpleMenuItem(contextMenu, cell, "Genome Assembly Sort by Reference", "ngsepfx.controller.AssemblyReferenceSorterController");
 	    		addSimpleMenuItem(contextMenu, cell, "Circular Sequences Processor", "ngsepfx.controller.CircularSequencesProcessorController");
 	    		addSimpleMenuItem(contextMenu, cell, "Transposable Elements Finder", "ngsepfx.controller.TransposableElementsFinderController");
@@ -91,6 +89,9 @@ public final class ContextMenuFactory {
 	    	} else {
 	    		addSimpleMenuItem(contextMenu, cell, "FastqFileFilter", "ngsepfx.controller.FastqFileFilterController");
 	    	}
+	    	addSimpleMenuItem(contextMenu, cell, "Assembler", "ngsepfx.controller.AssemblerController");
+	    	addSimpleMenuItem(contextMenu, cell, "Reads Aligner", "ngsepfx.controller.ReadsAlignerController");
+	    	addSimpleMenuItem(contextMenu, cell, "K-mers Extractor", "ngsepfx.controller.KmersExtractorController");
 	    } else if (fileInLower.endsWith(".bam") || file.getName().endsWith(".sam")|| file.getName().endsWith(".cram")) {
 	    	addSimpleMenuItem(contextMenu, cell, "Variants Detector", "ngsepfx.controller.VariantsDetectorController");
 	    	addSimpleMenuItem(contextMenu, cell, "Sort Alignments", "ngsepfx.controller.SortAlignmentController");
