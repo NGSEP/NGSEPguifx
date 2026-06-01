@@ -46,7 +46,7 @@
 			
 			<Label fx:id="limitGenomeLengthLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Maximum base pairs to process:</Label>
 			<ValidatedTextField fx:id="limitGenomeLengthTextField" label="$limitGenomeLengthLabel"
-								GridPane.rowIndex="2" GridPane.columnIndex="2" styleClass="medium-number-input"
+								GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="medium-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 			<CheckBox fx:id="runDeNovoCheckBox" text="Run de novo search of TEs" GridPane.rowIndex="3"/>
 		</GridPane>			
@@ -58,20 +58,19 @@
 								validators="POSITIVE_NUMBER, INT"/>
 								
 			<Label fx:id="similarityLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Similarity search parameters.</Label>
-			<HBox GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="hbox">
-			 	<Label>Kmer length:</Label>
-			 	<ValidatedTextField fx:id="kmerLengthSimilarityTextField" label="$similarityLabel"
- 							styleClass="small-number-input"
- 							validators="POSITIVE_NUMBER"/>
-			 	<Label>Window length:</Label>
-			 	<ValidatedTextField fx:id="windowLengthSimilarityTextField" label="$similarityLabel"
-	 						styleClass="small-number-input"
-	 						validators="POSITIVE_NUMBER"/>
-			</HBox>
-								
-			<Label fx:id="numThreadsLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Number of threads:</Label>
-			<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel"
+			<Label fx:id="kmerLengthSimilarityLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Kmer length:</Label>
+			<ValidatedTextField fx:id="kmerLengthSimilarityTextField" label="$kmerLengthSimilarityLabel"
 								GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="small-number-input"
+								validators="POSITIVE_NUMBER, INT"/>
+ 				
+			<Label fx:id="windowLengthSimilarityLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Window length:</Label>
+			<ValidatedTextField fx:id="windowLengthSimilarityTextField" label="$windowLengthSimilarityLabel"
+	 							GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="small-number-input"
+								validators="POSITIVE_NUMBER, INT"/>
+								
+			<Label fx:id="numThreadsLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">Number of threads:</Label>
+			<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel"
+								GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 		</GridPane>
 	</HBox>
