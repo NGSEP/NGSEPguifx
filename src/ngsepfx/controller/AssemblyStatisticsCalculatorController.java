@@ -26,7 +26,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import ngsep.assembly.AssemblyReferenceSorter;
+import ngsep.assembly.AssemblyStatisticsCalculator;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
 import ngsepfx.event.NGSEPEvent;
@@ -69,7 +69,7 @@ public class AssemblyStatisticsCalculatorController extends AnalysisAreaControll
 	public void handleActivationEvent(NGSEPEvent event) {
 		NGSEPAnalyzeFileEvent analyzeEvent = (NGSEPAnalyzeFileEvent) event;
 		File file = analyzeEvent.file;
-		setDefaultValues(AssemblyReferenceSorter.class.getName());
+		setDefaultValues(AssemblyStatisticsCalculator.class.getName());
 		inputFileTextField.setText(file.getAbsolutePath());
 		suggestOutputFile(file, outputFileTextField, "_stats.txt");
 	}
@@ -84,7 +84,7 @@ public class AssemblyStatisticsCalculatorController extends AnalysisAreaControll
 				updateTitle(TASK_NAME);
     			FileHandler logHandler = null;
     			try {
-    				AssemblyReferenceSorter instance = new AssemblyReferenceSorter();
+    				AssemblyStatisticsCalculator instance = new AssemblyStatisticsCalculator();
     				fillAttributes(instance);
     				//Log 
     				Logger log = Logger.getAnonymousLogger();

@@ -69,7 +69,7 @@
 								<CheckBox fx:id="runLongReadSVsCheckBox" text="Identify structural variants from alignments of long reads"/>
 							</VBox>
 							<GridPane styleClass="grid-pane" >
-								<Label fx:id="minMQLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">Minimum mapping quality unique alignments:</Label>
+								<Label fx:id="minMQLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">Min MQ unique alignments:</Label>
 								<ValidatedTextField fx:id="minMQTextField" label="$minMQLabel"
 											GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="small-number-input"
 											validators="INT, POSITIVE_NUMBER"/>

@@ -46,14 +46,15 @@
 			
 			<Label fx:id="limitGenomeLengthLabel" GridPane.rowIndex="2" GridPane.columnIndex="0">Maximum base pairs to process:</Label>
 			<ValidatedTextField fx:id="limitGenomeLengthTextField" label="$limitGenomeLengthLabel"
-								GridPane.rowIndex="0" GridPane.columnIndex="2" styleClass="medium-number-input"
+								GridPane.rowIndex="2" GridPane.columnIndex="2" styleClass="medium-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
+			<CheckBox fx:id="runDeNovoCheckBox" text="Run de novo search of TEs" GridPane.rowIndex="3"/>
 		</GridPane>			
-		<CheckBox fx:id="runDeNovoCheckBox" text="Run de novo search of TEs"/>
+		
 		<GridPane styleClass="grid-pane" >
 			<Label fx:id="kmerLengthDenovoLabel" GridPane.rowIndex="0" GridPane.columnIndex="0">Kmer length de novo search:</Label>
 			<ValidatedTextField fx:id="kmerLengthDenovoTextField" label="$kmerLengthDenovoLabel"
-								GridPane.rowIndex="0" GridPane.columnIndex="2" styleClass="small-number-input"
+								GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 								
 			<Label fx:id="similarityLabel" GridPane.rowIndex="1" GridPane.columnIndex="0">Similarity search parameters.</Label>
