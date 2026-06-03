@@ -26,6 +26,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import ngsep.transposons.TransposableElementsFinder;
 import ngsepfx.concurrent.NGSEPTask;
 import ngsepfx.event.NGSEPAnalyzeFileEvent;
@@ -74,6 +75,9 @@ public class TransposableElementsFinderController extends AnalysisAreaController
 	
 	@FXML
 	private ValidatedTextField numThreadsTextField;
+	
+	@FXML
+	private CheckBox runDeNovoCheckBox;
 
 	@Override
 	public String getFXMLResourcePath() {
@@ -94,6 +98,13 @@ public class TransposableElementsFinderController extends AnalysisAreaController
 		textFields.put("windowLengthSimilarity", windowLengthSimilarityTextField);
 		textFields.put("numThreads", numThreadsTextField);
 		return textFields;
+	}
+	
+	@Override
+	protected Map<String, CheckBox> getCheckBoxComponents() {
+		Map<String, CheckBox> checkboxes = new HashMap<String, CheckBox>();
+		checkboxes.put("runDeNovo", runDeNovoCheckBox);
+		return checkboxes;
 	}
 
 	@Override

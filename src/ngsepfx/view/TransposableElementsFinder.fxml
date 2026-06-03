@@ -63,14 +63,14 @@
 								GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
  				
-			<Label fx:id="windowLengthSimilarityLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Window length:</Label>
+			<Label fx:id="windowLengthSimilarityLabel" GridPane.rowIndex="2" GridPane.columnIndex="2">Window length:</Label>
 			<ValidatedTextField fx:id="windowLengthSimilarityTextField" label="$windowLengthSimilarityLabel"
-	 							GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="small-number-input"
+	 							GridPane.rowIndex="2" GridPane.columnIndex="3" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 								
-			<Label fx:id="numThreadsLabel" GridPane.rowIndex="4" GridPane.columnIndex="0">Number of threads:</Label>
+			<Label fx:id="numThreadsLabel" GridPane.rowIndex="3" GridPane.columnIndex="0">Number of threads:</Label>
 			<ValidatedTextField fx:id="numThreadsTextField" label="$numThreadsLabel"
-								GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="small-number-input"
+								GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="small-number-input"
 								validators="POSITIVE_NUMBER, INT"/>
 		</GridPane>
 	</HBox>
